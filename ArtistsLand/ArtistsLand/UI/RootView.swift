@@ -17,6 +17,7 @@ enum RootViewModelEvent {
 
 class RootViewModel: BaseViewModel {
     let eventSubject = PassthroughSubject<RootViewModelEvent, Never>()
+    var userDefaultsService = UserDefaultsService.shared
     
     private var binded = false
     
@@ -34,7 +35,12 @@ class RootViewModel: BaseViewModel {
         
         guard !binded else {return}
         binded = true
-        self.eventSubject.send(.goToTabBar)
+        
+        if userDefaultsService.getOnboardingStatus() {
+            self.eventSubject.send(.goToLogin)
+        } else {
+            self.eventSubject.send(.goToOnboarding)
+        }
 //        loadSubject(publisher: userService.userReactiveData.getStateSubject()) { [weak self] state in
 //            guard let self else {return}
 //            switch state {
@@ -66,12 +72,12 @@ class RootViewModel: BaseViewModel {
     }
     
     func setupErrorHandling() {
-//        noInternetInterceptor.errors()
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] errorEvent in
-//                self?.showBlockingError = true
-//            }
-//            .store(in: &bag)
+        noInternetInterceptor.errors()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorEvent in
+                self?.showBlockingError = true
+            }
+            .store(in: &bag)
     }
     
     func retryBinding() {
@@ -82,20 +88,20 @@ class RootViewModel: BaseViewModel {
     }
     
     func applyTheme() {
-//        let key: Key<String> = Key(value: StorageKeys.appTheme)
-//        if let themeString = propertyStorage.getValue(key: key),
-//           let theme = SchemeType(rawValue: themeString) {
-//            switch theme {
-//            case .light:
-//                applyUserInterfaceStyle(.light)
-//            case .dark:
-//                applyUserInterfaceStyle(.dark)
-//            case .system:
-//                applyUserInterfaceStyle(.unspecified)
-//            }
-//        } else {
-//            applyUserInterfaceStyle(.unspecified)
-//        }
+        let key: Key<String> = Key(value: UserDefaultsKeys.appTheme)
+        if let themeString = userDefaultsService.getValue(key: key),
+           let theme = SchemeType(rawValue: themeString) {
+            switch theme {
+            case .light:
+                applyUserInterfaceStyle(.light)
+            case .dark:
+                applyUserInterfaceStyle(.dark)
+            case .system:
+                applyUserInterfaceStyle(.unspecified)
+            }
+        } else {
+            applyUserInterfaceStyle(.unspecified)
+        }
     }
     
     private func applyUserInterfaceStyle(_ style: UIUserInterfaceStyle) {
@@ -124,11 +130,9 @@ struct RootView: View {
                     TabBarCoordinator.instance.tabBarNavigation = .home
                     navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
                 case .goToLogin:
-                    break
-//                    navigation.replaceNavigationStack([LoginScreen().asDestination(tag: "login")], animated: true)
+                    navigation.replaceNavigationStack([LoginScreen().asDestination(tag: "login")], animated: true)
                 case .goToOnboarding:
-                    break
-//                    navigation.push(OnboardingScreen().asDestination(), animated: true)
+                    navigation.push(OnboardingScreen().asDestination(), animated: true)
                 }
             }).onAppear {
                 viewModel.bind()
@@ -156,9 +160,9 @@ struct RootView: View {
             .overlay {
                 VStack {
                     if viewModel.showBlockingError {
-//                        BlockingErrorScreen(isLoading: viewModel.isLoadingBinding) {
-//                            viewModel.retryBinding()
-//                        }
+                        BlockingErrorScreen(isLoading: viewModel.isLoadingBinding) {
+                            viewModel.retryBinding()
+                        }
                     }
                 }
             }

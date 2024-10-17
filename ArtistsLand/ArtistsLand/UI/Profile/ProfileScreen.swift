@@ -13,6 +13,9 @@ struct ProfileScreen: View {
     
     var body: some View {
         Text("Profile screen")
+            .onTapGesture {
+                navigation.push(ThemeSettingsScreen().asDestination(), animated: true)
+            }
     }
 }
 

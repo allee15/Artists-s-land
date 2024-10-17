@@ -93,7 +93,7 @@ struct TabBarView: View {
             .padding(.top, 8)
             .cornerRadius(8, corners: [.topLeft, .topRight])
             .background(
-                Color.white
+                Color.mainWhite
                     .cornerRadius(8, corners: [.topLeft, .topRight])
             )
             

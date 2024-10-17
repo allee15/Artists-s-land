@@ -33,6 +33,24 @@
 		0F24D5CE2CC1AB0800A833E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */; };
 		0F24D5D02CC1AB2900A833E1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */; };
 		0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5D12CC1ABD400A833E1 /* ToastManager.swift */; };
+		0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5D42CC1B47000A833E1 /* OnboardingScreen.swift */; };
+		0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5D62CC1B4B900A833E1 /* OnboardingViewModel.swift */; };
+		0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5D92CC1B4F900A833E1 /* OnboardingData.swift */; };
+		0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */; };
+		0F24D5E22CC1B74C00A833E1 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5E12CC1B74C00A833E1 /* CloseButton.swift */; };
+		0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5E32CC1B7E400A833E1 /* BackButton.swift */; };
+		0F24D5E92CC1B88300A833E1 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5E82CC1B88300A833E1 /* LoginScreen.swift */; };
+		0F24D5EB2CC1B8A300A833E1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5EA2CC1B8A300A833E1 /* LoginViewModel.swift */; };
+		0F24D5EE2CC1B8C000A833E1 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5ED2CC1B8C000A833E1 /* RegisterViewModel.swift */; };
+		0F24D5F02CC1B8CD00A833E1 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5EF2CC1B8CD00A833E1 /* RegisterScreen.swift */; };
+		0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5F22CC1BBE500A833E1 /* LeftNavBar.swift */; };
+		0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5F42CC1BC3B00A833E1 /* RightNavBar.swift */; };
+		0F24D5F72CC1BC6200A833E1 /* TitleNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5F62CC1BC6200A833E1 /* TitleNavBarView.swift */; };
+		0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5F82CC1BC9D00A833E1 /* SideButtonView.swift */; };
+		0F24D5FC2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5FB2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift */; };
+		0F24D5FE2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5FD2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift */; };
+		0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5FF2CC1BE4B00A833E1 /* ErrorInterceptor.swift */; };
+		0F24D6022CC1BE7100A833E1 /* BlockingErrorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6012CC1BE7100A833E1 /* BlockingErrorScreen.swift */; };
 		9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */; };
 		9B1A69702CC041AA00B19BF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696F2CC041AA00B19BF1 /* ContentView.swift */; };
 		9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69712CC041AC00B19BF1 /* Assets.xcassets */; };
@@ -63,6 +81,24 @@
 		0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0F24D5D12CC1ABD400A833E1 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		0F24D5D42CC1B47000A833E1 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		0F24D5D62CC1B4B900A833E1 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		0F24D5D92CC1B4F900A833E1 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
+		0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		0F24D5E12CC1B74C00A833E1 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		0F24D5E32CC1B7E400A833E1 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		0F24D5E82CC1B88300A833E1 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		0F24D5EA2CC1B8A300A833E1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0F24D5ED2CC1B8C000A833E1 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		0F24D5EF2CC1B8CD00A833E1 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		0F24D5F22CC1BBE500A833E1 /* LeftNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftNavBar.swift; sourceTree = "<group>"; };
+		0F24D5F42CC1BC3B00A833E1 /* RightNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightNavBar.swift; sourceTree = "<group>"; };
+		0F24D5F62CC1BC6200A833E1 /* TitleNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNavBarView.swift; sourceTree = "<group>"; };
+		0F24D5F82CC1BC9D00A833E1 /* SideButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideButtonView.swift; sourceTree = "<group>"; };
+		0F24D5FB2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
+		0F24D5FD2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
+		0F24D5FF2CC1BE4B00A833E1 /* ErrorInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInterceptor.swift; sourceTree = "<group>"; };
+		0F24D6012CC1BE7100A833E1 /* BlockingErrorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingErrorScreen.swift; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A696F2CC041AA00B19BF1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +126,9 @@
 		0F24D5972CC0F8B100A833E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0F24D5DF2CC1B73500A833E1 /* ReusableViews */,
+				0F24D5D32CC1B44100A833E1 /* Onboarding */,
+				0F24D5E62CC1B86D00A833E1 /* Auth */,
 				0F24D5BD2CC1A9F800A833E1 /* Home */,
 				0F24D5BE2CC1A9FC00A833E1 /* Search */,
 				0F24D5BF2CC1AA0500A833E1 /* Chats */,
@@ -164,10 +203,110 @@
 		0F24D5C02CC1AA1000A833E1 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0F24D5FA2CC1BD2E00A833E1 /* ThemeSettingsScreen */,
 				0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */,
 				0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		0F24D5D32CC1B44100A833E1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5D42CC1B47000A833E1 /* OnboardingScreen.swift */,
+				0F24D5D62CC1B4B900A833E1 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0F24D5D82CC1B4EC00A833E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5D92CC1B4F900A833E1 /* OnboardingData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F24D5DB2CC1B58C00A833E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0F24D5DC2CC1B59400A833E1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5FF2CC1BE4B00A833E1 /* ErrorInterceptor.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0F24D5DF2CC1B73500A833E1 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5F12CC1BBDA00A833E1 /* NavBar */,
+				0F24D5E02CC1B73F00A833E1 /* Buttons */,
+				0F24D6012CC1BE7100A833E1 /* BlockingErrorScreen.swift */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		0F24D5E02CC1B73F00A833E1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5E12CC1B74C00A833E1 /* CloseButton.swift */,
+				0F24D5E32CC1B7E400A833E1 /* BackButton.swift */,
+				0F24D5F82CC1BC9D00A833E1 /* SideButtonView.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		0F24D5E62CC1B86D00A833E1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5E72CC1B87900A833E1 /* Login */,
+				0F24D5EC2CC1B8B400A833E1 /* Register */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		0F24D5E72CC1B87900A833E1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5E82CC1B88300A833E1 /* LoginScreen.swift */,
+				0F24D5EA2CC1B8A300A833E1 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0F24D5EC2CC1B8B400A833E1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5EF2CC1B8CD00A833E1 /* RegisterScreen.swift */,
+				0F24D5ED2CC1B8C000A833E1 /* RegisterViewModel.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		0F24D5F12CC1BBDA00A833E1 /* NavBar */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5F22CC1BBE500A833E1 /* LeftNavBar.swift */,
+				0F24D5F42CC1BC3B00A833E1 /* RightNavBar.swift */,
+				0F24D5F62CC1BC6200A833E1 /* TitleNavBarView.swift */,
+			);
+			path = NavBar;
+			sourceTree = "<group>";
+		};
+		0F24D5FA2CC1BD2E00A833E1 /* ThemeSettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5FB2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift */,
+				0F24D5FD2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift */,
+			);
+			path = ThemeSettingsScreen;
 			sourceTree = "<group>";
 		};
 		9B1A69612CC041A900B19BF1 = {
@@ -194,6 +333,9 @@
 				9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */,
 				0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */,
 				9B1A69712CC041AC00B19BF1 /* Assets.xcassets */,
+				0F24D5DC2CC1B59400A833E1 /* API */,
+				0F24D5DB2CC1B58C00A833E1 /* Service */,
+				0F24D5D82CC1B4EC00A833E1 /* Model */,
 				0F24D5AC2CC1A54C00A833E1 /* Resourcess */,
 				0F24D59F2CC0F95100A833E1 /* Util */,
 				0F24D5972CC0F8B100A833E1 /* UI */,
@@ -296,27 +438,45 @@
 				0F24D5C42CC1AA3100A833E1 /* HomeViewModel.swift in Sources */,
 				0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */,
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
+				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
+				0F24D6022CC1BE7100A833E1 /* BlockingErrorScreen.swift in Sources */,
+				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
+				0F24D5F02CC1B8CD00A833E1 /* RegisterScreen.swift in Sources */,
+				0F24D5EE2CC1B8C000A833E1 /* RegisterViewModel.swift in Sources */,
 				9B1A69702CC041AA00B19BF1 /* ContentView.swift in Sources */,
 				0F24D5C82CC1AA9B00A833E1 /* SearchViewModel.swift in Sources */,
+				0F24D5FC2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
 				0F24D5C62CC1AA8700A833E1 /* SearchScreen.swift in Sources */,
+				0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */,
+				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
 				0F24D5C22CC1AA2000A833E1 /* HomeScreen.swift in Sources */,
 				0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */,
+				0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
+				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
+				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */,
 				0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
+				0F24D5EB2CC1B8A300A833E1 /* LoginViewModel.swift in Sources */,
 				0F24D5D02CC1AB2900A833E1 /* ProfileViewModel.swift in Sources */,
 				0F24D5CE2CC1AB0800A833E1 /* ProfileScreen.swift in Sources */,
+				0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */,
+				0F24D5F72CC1BC6200A833E1 /* TitleNavBarView.swift in Sources */,
+				0F24D5E22CC1B74C00A833E1 /* CloseButton.swift in Sources */,
+				0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
+				0F24D5E92CC1B88300A833E1 /* LoginScreen.swift in Sources */,
+				0F24D5FE2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
