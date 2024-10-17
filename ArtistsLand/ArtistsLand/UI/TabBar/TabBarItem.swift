@@ -30,19 +30,19 @@ let homeTabBarItem = TabBarItem(
 let searchTabBarItem = TabBarItem(
     type: .search,
     title: "Search",
-    imageName: .icHome
+    imageName: .icSearch
 )
 
 let chatsTabBarItem = TabBarItem(
     type: .chats,
     title: "Chats",
-    imageName: .icHome
+    imageName: .icChats
 )
 
 let profileNewsTabBarItem = TabBarItem(
     type: .profile,
     title: "Profile",
-    imageName: .icHome
+    imageName: .icProfile
 )
 
 struct TabBarItemView: View {
@@ -57,13 +57,14 @@ struct TabBarItemView: View {
             VStack(spacing: 4) {
                 Image(tabBarItem.imageName)
                     .resizable()
-                    .foregroundStyle(isSelected ? Color.red : Color.gray)
+                    .renderingMode(.template)
+                    .foregroundStyle(isSelected ? Color.red : Color.mainBlack)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 18, height: 18)
                 
                 Text(tabBarItem.title)
                     .font(.system(size: 10))
-                    .foregroundColor(isSelected ? .red : .gray)
+                    .foregroundColor(isSelected ? .red : Color.mainBlack)
                     .frame(height: 14)
             }
         }

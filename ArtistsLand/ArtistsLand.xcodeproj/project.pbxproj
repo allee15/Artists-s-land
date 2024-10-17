@@ -18,6 +18,21 @@
 		0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5A62CC0F9A200A833E1 /* Navigation.swift */; };
 		0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5A82CC0F9C500A833E1 /* SafeAreaInsets.swift */; };
 		0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5AA2CC0F9D700A833E1 /* View+.swift */; };
+		0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5AD2CC1A71C00A833E1 /* Font.swift */; };
+		0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5AF2CC1A7CA00A833E1 /* Colors.swift */; };
+		0F24D5B32CC1A97C00A833E1 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D5B22CC1A97C00A833E1 /* netfox */; };
+		0F24D5B62CC1A9B000A833E1 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D5B52CC1A9B000A833E1 /* SwiftyJSON */; };
+		0F24D5B92CC1A9C900A833E1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D5B82CC1A9C900A833E1 /* Kingfisher */; };
+		0F24D5BC2CC1A9D600A833E1 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D5BB2CC1A9D600A833E1 /* AlertToast */; };
+		0F24D5C22CC1AA2000A833E1 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5C12CC1AA2000A833E1 /* HomeScreen.swift */; };
+		0F24D5C42CC1AA3100A833E1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5C32CC1AA3100A833E1 /* HomeViewModel.swift */; };
+		0F24D5C62CC1AA8700A833E1 /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5C52CC1AA8700A833E1 /* SearchScreen.swift */; };
+		0F24D5C82CC1AA9B00A833E1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5C72CC1AA9B00A833E1 /* SearchViewModel.swift */; };
+		0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5C92CC1AACA00A833E1 /* ChatsViewModel.swift */; };
+		0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5CB2CC1AADB00A833E1 /* ChatsScreen.swift */; };
+		0F24D5CE2CC1AB0800A833E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */; };
+		0F24D5D02CC1AB2900A833E1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */; };
+		0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5D12CC1ABD400A833E1 /* ToastManager.swift */; };
 		9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */; };
 		9B1A69702CC041AA00B19BF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696F2CC041AA00B19BF1 /* ContentView.swift */; };
 		9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69712CC041AC00B19BF1 /* Assets.xcassets */; };
@@ -37,6 +52,17 @@
 		0F24D5A62CC0F9A200A833E1 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0F24D5A82CC0F9C500A833E1 /* SafeAreaInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInsets.swift; sourceTree = "<group>"; };
 		0F24D5AA2CC0F9D700A833E1 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		0F24D5AD2CC1A71C00A833E1 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		0F24D5AF2CC1A7CA00A833E1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0F24D5C12CC1AA2000A833E1 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		0F24D5C32CC1AA3100A833E1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0F24D5C52CC1AA8700A833E1 /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
+		0F24D5C72CC1AA9B00A833E1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		0F24D5C92CC1AACA00A833E1 /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
+		0F24D5CB2CC1AADB00A833E1 /* ChatsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsScreen.swift; sourceTree = "<group>"; };
+		0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		0F24D5D12CC1ABD400A833E1 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A696F2CC041AA00B19BF1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +77,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F24D5B92CC1A9C900A833E1 /* Kingfisher in Frameworks */,
+				0F24D5BC2CC1A9D600A833E1 /* AlertToast in Frameworks */,
+				0F24D5B62CC1A9B000A833E1 /* SwiftyJSON in Frameworks */,
+				0F24D5B32CC1A97C00A833E1 /* netfox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,8 +90,12 @@
 		0F24D5972CC0F8B100A833E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0F24D5982CC0F8CD00A833E1 /* TabBar */,
+				0F24D5BD2CC1A9F800A833E1 /* Home */,
+				0F24D5BE2CC1A9FC00A833E1 /* Search */,
+				0F24D5BF2CC1AA0500A833E1 /* Chats */,
+				0F24D5C02CC1AA1000A833E1 /* Profile */,
 				9B1A696F2CC041AA00B19BF1 /* ContentView.swift */,
+				0F24D5982CC0F8CD00A833E1 /* TabBar */,
 				0F24D5952CC0F89A00A833E1 /* RootView.swift */,
 			);
 			path = UI;
@@ -86,8 +120,54 @@
 				0F24D5A62CC0F9A200A833E1 /* Navigation.swift */,
 				0F24D5A82CC0F9C500A833E1 /* SafeAreaInsets.swift */,
 				0F24D5AA2CC0F9D700A833E1 /* View+.swift */,
+				0F24D5D12CC1ABD400A833E1 /* ToastManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		0F24D5AC2CC1A54C00A833E1 /* Resourcess */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5AD2CC1A71C00A833E1 /* Font.swift */,
+				0F24D5AF2CC1A7CA00A833E1 /* Colors.swift */,
+			);
+			path = Resourcess;
+			sourceTree = "<group>";
+		};
+		0F24D5BD2CC1A9F800A833E1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5C12CC1AA2000A833E1 /* HomeScreen.swift */,
+				0F24D5C32CC1AA3100A833E1 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0F24D5BE2CC1A9FC00A833E1 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5C52CC1AA8700A833E1 /* SearchScreen.swift */,
+				0F24D5C72CC1AA9B00A833E1 /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		0F24D5BF2CC1AA0500A833E1 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5CB2CC1AADB00A833E1 /* ChatsScreen.swift */,
+				0F24D5C92CC1AACA00A833E1 /* ChatsViewModel.swift */,
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		0F24D5C02CC1AA1000A833E1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */,
+				0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		9B1A69612CC041A900B19BF1 = {
@@ -114,6 +194,7 @@
 				9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */,
 				0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */,
 				9B1A69712CC041AC00B19BF1 /* Assets.xcassets */,
+				0F24D5AC2CC1A54C00A833E1 /* Resourcess */,
 				0F24D59F2CC0F95100A833E1 /* Util */,
 				0F24D5972CC0F8B100A833E1 /* UI */,
 				9B1A69732CC041AC00B19BF1 /* Preview Content */,
@@ -145,6 +226,12 @@
 			dependencies = (
 			);
 			name = ArtistsLand;
+			packageProductDependencies = (
+				0F24D5B22CC1A97C00A833E1 /* netfox */,
+				0F24D5B52CC1A9B000A833E1 /* SwiftyJSON */,
+				0F24D5B82CC1A9C900A833E1 /* Kingfisher */,
+				0F24D5BB2CC1A9D600A833E1 /* AlertToast */,
+			);
 			productName = ArtistsLand;
 			productReference = 9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +260,12 @@
 				Base,
 			);
 			mainGroup = 9B1A69612CC041A900B19BF1;
+			packageReferences = (
+				0F24D5B12CC1A97C00A833E1 /* XCRemoteSwiftPackageReference "netfox" */,
+				0F24D5B42CC1A9B000A833E1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				0F24D5B72CC1A9C800A833E1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0F24D5BA2CC1A9D600A833E1 /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = 9B1A696B2CC041AA00B19BF1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,13 +293,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F24D5C42CC1AA3100A833E1 /* HomeViewModel.swift in Sources */,
 				0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */,
+				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
+				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				9B1A69702CC041AA00B19BF1 /* ContentView.swift in Sources */,
+				0F24D5C82CC1AA9B00A833E1 /* SearchViewModel.swift in Sources */,
+				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
+				0F24D5C62CC1AA8700A833E1 /* SearchScreen.swift in Sources */,
+				0F24D5C22CC1AA2000A833E1 /* HomeScreen.swift in Sources */,
 				0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
+				0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */,
+				0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
+				0F24D5D02CC1AB2900A833E1 /* ProfileViewModel.swift in Sources */,
+				0F24D5CE2CC1AB0800A833E1 /* ProfileScreen.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
@@ -418,6 +522,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F24D5B12CC1A97C00A833E1 /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kasketis/netfox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.21.0;
+			};
+		};
+		0F24D5B42CC1A9B000A833E1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		0F24D5B72CC1A9C800A833E1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
+		0F24D5BA2CC1A9D600A833E1 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F24D5B22CC1A97C00A833E1 /* netfox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F24D5B12CC1A97C00A833E1 /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = netfox;
+		};
+		0F24D5B52CC1A9B000A833E1 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F24D5B42CC1A9B000A833E1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		0F24D5B82CC1A9C900A833E1 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F24D5B72CC1A9C800A833E1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		0F24D5BB2CC1A9D600A833E1 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F24D5BA2CC1A9D600A833E1 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B1A69622CC041A900B19BF1 /* Project object */;
 }

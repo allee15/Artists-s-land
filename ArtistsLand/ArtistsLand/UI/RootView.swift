@@ -113,7 +113,7 @@ struct RootView: View {
     
     @StateObject private var viewModel = RootViewModel()
     
-//    @ObservedObject private var toastManager = ToastManager.instance
+    @ObservedObject private var toastManager = ToastManager.instance
     
     var body: some View {
         ControllerRepresentable(controller: navigation.navigationController)
@@ -133,26 +133,26 @@ struct RootView: View {
             }).onAppear {
                 viewModel.bind()
             }
-//            .overlay(
-//                VStack {
-//                    if let toast = toastManager.toast {
-//                        ToastView(toast: toast)
-//                            .padding(SafeAreaInsets)
-//                            .transition(.move(edge: .top))
-//                            .onTapGesture {
-//                                toastManager.hideToast()
-//                            }.gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                                .onEnded({ value in
-//                                    if value.translation.height < 0 {
-//                                        toastManager.hideToast()
-//                                    }
-//                                }))
-//                    }
-//                    Spacer()
-//                }
-//                    .ignoresSafeArea()
-//                    .animation(.easeIn(duration: 0.25), value: toastManager.toast)
-//            )
+            .overlay(
+                VStack {
+                    if let toast = toastManager.toast {
+                        ToastView(toast: toast)
+                            .padding(SafeAreaInsets)
+                            .transition(.move(edge: .top))
+                            .onTapGesture {
+                                toastManager.hideToast()
+                            }.gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                .onEnded({ value in
+                                    if value.translation.height < 0 {
+                                        toastManager.hideToast()
+                                    }
+                                }))
+                    }
+                    Spacer()
+                }
+                    .ignoresSafeArea()
+                    .animation(.easeIn(duration: 0.25), value: toastManager.toast)
+            )
             .overlay {
                 VStack {
                     if viewModel.showBlockingError {

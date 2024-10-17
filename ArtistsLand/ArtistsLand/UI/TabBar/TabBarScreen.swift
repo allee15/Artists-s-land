@@ -26,10 +26,10 @@ struct TabBarScreen: View {
     @ObservedObject private var tabBarCoordinator = TabBarCoordinator.instance
     @StateObject private var viewModel = TabBarViewModel()
     
-    @StateObject private var homeNavigation = Navigation(root: ContentView().asDestination())
-    @StateObject private var searchNavigation = Navigation(root: ContentView().asDestination())
-    @StateObject private var chatsNavigation = Navigation(root: ContentView().asDestination())
-    @StateObject private var profileNavigation = Navigation(root: ContentView().asDestination())
+    @StateObject private var homeNavigation = Navigation(root: HomeScreen().asDestination())
+    @StateObject private var searchNavigation = Navigation(root: SearchScreen().asDestination())
+    @StateObject private var chatsNavigation = Navigation(root: ChatsScreen().asDestination())
+    @StateObject private var profileNavigation = Navigation(root: ProfileScreen().asDestination())
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -92,6 +92,6 @@ struct TabBarScreen: View {
             .background(Color.white)
             .ignoresSafeArea(.container)
             .ignoresSafeArea(.keyboard)
-            .shadow(color: Color.gray.opacity(0.2), radius: 1, x: 0, y: 0)
+            .shadow(color: Color.mainBlack.opacity(0.2), radius: 1, x: 0, y: 0)
     }
 }
