@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct NavBarView: View {
-    @EnvironmentObject private var navigation: Navigation
-    
     var isCloseButton: Bool = false
     
     var body: some View {
         HStack {
             if isCloseButton {
-                CloseButton() {
-                    navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
-                }
+                CloseButton()
             } else {
                 BackButton()
             }

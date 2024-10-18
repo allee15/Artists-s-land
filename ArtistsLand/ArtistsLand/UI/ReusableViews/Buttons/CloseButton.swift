@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CloseButton: View {
     @EnvironmentObject private var navigation: Navigation
-    let action: (() -> ())?
+    var action: (() -> ())?
     
     var body: some View {
         Button {

@@ -57,9 +57,10 @@ struct FloatingField: View {
                     if let leftIcon = leftIcon {
                         Image(leftIcon)
                             .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
                             .scaledToFit()
                             .frame(height: 28)
-                            .foregroundColor(.black)
                             .padding(.trailing, 4)
                             .opacity(0)
                     }
@@ -91,7 +92,7 @@ struct FloatingField: View {
                             Image(systemName: self.secure ? "eye" : "eye.slash")
                                 .resizable()
                                 .renderingMode(.template)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.black)
                                 .frame(width: 24, height: 16)
                                 .padding(.trailing, 16)
                         }
@@ -102,7 +103,7 @@ struct FloatingField: View {
                             Image(icon)
                                 .resizable()
                                 .renderingMode(.template)
-                                .foregroundStyle(Color.mainBlack)
+                                .foregroundColor(.black)
                                 .frame(width: 24, height: 24)
                                 .padding(.trailing, 16)
                         }
@@ -112,7 +113,7 @@ struct FloatingField: View {
             .frame(height: 54)
             .background(!isEditing ? colors.bgColor : isDisabled ? colors.bgColor.opacity(0.5) : .white)
             .cornerRadius(4, corners: .allCorners)
-            .border((errorMessage ?? "").isEmpty ? (!isEditing ? colors.borderColor :  isDisabled ? colors.borderColor.opacity(0.5) : .black) : Color.red,
+            .border((errorMessage ?? "").isEmpty ? (!isEditing ? colors.borderColor :  isDisabled ? colors.borderColor.opacity(0.5) : .black) : Color.lightRed,
                     width: 1,
                     cornerRadius: 4)
             .onTapGesture {
@@ -129,7 +130,7 @@ struct FloatingField: View {
                 HStack {
                     Text(errorMessage)
                         .font(.poppinsRegular(size: 12))
-                        .foregroundColor(Color.red)
+                        .foregroundColor(Color.lightRed)
                     Spacer()
                 }
                 .padding(.top, 4)
@@ -152,10 +153,9 @@ struct SelectAccountTypeView: View {
                         Image(.icFieldUserType)
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundStyle(Color.mainBlack)
+                            .foregroundStyle(Color.black)
                             .scaledToFit()
                             .frame(height: 28)
-                            .foregroundColor(.black)
                             .padding(.trailing, 4)
                     
                     if $gender.wrappedValue.isEmpty {
@@ -184,7 +184,7 @@ struct SelectAccountTypeView: View {
                         Image(.icFieldUserType)
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundStyle(Color.mainBlack)
+                            .foregroundStyle(Color.black)
                             .scaledToFit()
                             .frame(height: 28)
                             .padding(.trailing, 4)
@@ -202,7 +202,7 @@ struct SelectAccountTypeView: View {
             .frame(height: 54)
             .background(colors.bgColor)
             .cornerRadius(4, corners: .allCorners)
-            .border((errorMessage ?? "").isEmpty ? colors.borderColor : Color.red,
+            .border((errorMessage ?? "").isEmpty ? colors.borderColor : Color.lightRed,
                     width: 1,
                     cornerRadius: 4)
             
@@ -210,7 +210,8 @@ struct SelectAccountTypeView: View {
                 Picker("Gender", selection: $gender) {
                     ForEach(gendersList, id: \.self) {
                         Text($0)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.mainBlack)
+                            .font(.poppinsRegular(size: 18))
                     }
                 }
                 .pickerStyle(WheelPickerStyle())
@@ -224,7 +225,7 @@ struct SelectAccountTypeView: View {
                 HStack {
                     Text(errorMessage)
                         .font(.poppinsRegular(size: 12))
-                        .foregroundColor(Color.red)
+                        .foregroundColor(Color.lightRed)
                     Spacer()
                 }
                 .padding(.top, 4)

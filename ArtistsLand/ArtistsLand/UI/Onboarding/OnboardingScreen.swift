@@ -19,7 +19,8 @@ struct OnboardingScreen: View {
                         viewModel.goToLogin()
                     }
                     Spacer()
-                }
+                }.padding(.horizontal, 20)
+                
                 TabView(selection: $viewModel.pageIndex) {
                     ForEach(0..<3) { index in
                         OnboardingPageView(page: viewModel.onboardingPages[index])
@@ -27,14 +28,13 @@ struct OnboardingScreen: View {
                 }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
                 VStack(spacing: 0) {
-                    Spacer()
                     NavSliderView(currentStep: viewModel.pageIndex) {
                         viewModel.nextPage()
                     }
-                }.padding(.horizontal, 24)
-                    .padding(.bottom, 24)
-            }
-        }.background(Color.mainWhite)
+                }.padding(.horizontal, 20)
+                    .padding(.top, 20)
+            }.padding(.bottom, 32)
+        }.background(Color.simpleBlue)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(viewModel.eventSubject) { event in
@@ -42,7 +42,7 @@ struct OnboardingScreen: View {
                 case .completed:
                     navigation.push(LoginScreen().asDestination(), animated: true)
                 case .goToTabBar:
-                    navigation.replaceNavigationStack([TabBarScreen().asDestination(tag: "home")], animated: true)
+                    navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
                 
                 }
             }
@@ -52,39 +52,30 @@ struct OnboardingScreen: View {
 fileprivate struct OnboardingPageView: View {
     let page: OnboardingData
     
-    @EnvironmentObject private var navigation: Navigation
-    
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
-                let smallScreen = UIScreen.main.bounds.height <= 667
-                
+            VStack(alignment: .leading, spacing: 20) {
                 HStack {
                     Spacer()
                     Image(page.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.main.bounds.height * (1/(smallScreen ? 3.5 : 3)))
-                        .padding(.bottom, 40)
-                        .padding(.top, 64)
+                        .frame(height: UIScreen.main.bounds.height / 2 )
                     Spacer()
                 }
                 
                 Text(page.title)
                     .font(.poppinsBold(size: 28))
-                    .foregroundStyle(Color.mainBlack)
-                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color(hex: "#84BABF"))
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, 20)
                 
                 Text(page.description)
                     .font(.poppinsRegular(size: 14))
-                    .tint(Color.mainBlack)
-                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(Color(hex: "#84BABF"))
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Spacer()
-            }.padding(.horizontal, 24)
+            }.padding(.horizontal, 20)
         }
     }
 }
@@ -94,28 +85,43 @@ fileprivate struct NavSliderView: View {
     let buttonAction: () -> ()
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack {
+            if currentStep == 2 {
+                Button {
+                    buttonAction()
+                } label: {
+                    Text("Login")
+                        .font(.poppinsBold(size: 16))
+                        .foregroundStyle(Color(hex: "#84BABF"))
+                }.opacity(0)
+            }
+            
+            Spacer()
+            
             HStack(spacing: 8) {
                 ForEach(0..<3) { step in
                     Button {
                         buttonAction()
                     } label: {
                         Circle()
-                            .fill(step == currentStep ? Color.red : Color.gray)
+                            .fill(step == currentStep ? Color(hex: "#085558") : Color(hex: "#84BABF"))
                             .frame(height: 12)
                             .aspectRatio(1, contentMode: .fit)
                     }
                 }
             }
             
+            Spacer()
+            
             if currentStep == 2 {
                 Button {
                     buttonAction()
                 } label: {
-                    Text("Intra in app")
-                        .foregroundStyle(Color.mainBlack)
+                    Text("Login")
+                        .font(.poppinsBold(size: 16))
+                        .foregroundStyle(Color(hex: "#84BABF"))
                 }
             }
-        }.background(Color.mainWhite)
+        }
     }
 }

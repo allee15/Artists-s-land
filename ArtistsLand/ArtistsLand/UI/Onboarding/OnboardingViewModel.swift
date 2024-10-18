@@ -20,15 +20,15 @@ class OnboardingViewModel: BaseViewModel {
     let eventSubject = PassthroughSubject<OnboardingState, Never>()
     
     let onboardingPages: [OnboardingData] = [
-        OnboardingData(image: .icHome,
-                       title: "Titlu",
-                       description: "Descriere"),
-        OnboardingData(image: .icHome,
-                       title: "Titlu2",
-                       description: "Descriere"),
-        OnboardingData(image: .icHome,
-                       title: "Titlu3",
-                       description: "Descriere")
+        OnboardingData(image: .imgOnboarding1,
+                       title: "Welcome to Artists's land!",
+                       description: "The best community for artists all over the world!"),
+        OnboardingData(image: .imgOnboarding2,
+                       title: "Discover new ways of art",
+                       description: "Search, scroll and discover the creations of other artists!"),
+        OnboardingData(image: .imgOnboarding3,
+                       title: "Connect with other artists",
+                       description: "Discuss with them, ask questions, exchange experiences and maybe even help them grow as artists!")
     ]
     
     override init() {
