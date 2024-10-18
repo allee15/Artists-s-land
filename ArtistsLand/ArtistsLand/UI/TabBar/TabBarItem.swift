@@ -63,7 +63,7 @@ struct TabBarItemView: View {
                     .frame(width: 18, height: 18)
                 
                 Text(tabBarItem.title)
-                    .font(.system(size: 10))
+                    .font(.system(size: 12))
                     .foregroundColor(isSelected ? .red : Color.mainBlack)
                     .frame(height: 14)
             }

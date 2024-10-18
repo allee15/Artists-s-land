@@ -11,6 +11,13 @@ import SwiftUI
 extension Color {
     static let mainWhite = Color(.mainWhiteCustom)
     static let mainBlack = Color(.mainBlackCustom)
+    static let mainBlue = Color(.mainBlueCustom)
+    static let secondaryBlue = Color(.secondaryBlueCustom)
+    static let mainBlueButton = Color(.mainBlueLightCustom)
+    
+    static let simpleBlue = Color(hex: "#0D6F73")
+    static let lightGreen = Color(hex: "#1B998B")
+    static let lightRed = Color(hex: "#D8263E")
 }
 
 extension Color {

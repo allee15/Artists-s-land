@@ -8,13 +8,84 @@
 import SwiftUI
 
 struct LoginScreen: View {
+    @StateObject var viewModel = LoginViewModel()
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = LoginViewModel()
+    
+    @FocusState var focusedField: Field?
     
     var body: some View {
-        Text("Login")
-            .onTapGesture {
-                navigation.push(RegisterScreen().asDestination(), animated: true)
+        VStack(alignment: .leading, spacing: 0) {
+            NavBarView(isCloseButton: true)
+            
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Access your Artist's land account")
+                        .font(.poppinsBold(size: 28))
+                        .foregroundStyle(Color.mainBlueButton)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
+                        .padding(.bottom, 20)
+                    
+                    Text("Glad to see you! 👋 Enter your details below and access your account.")
+                        .font(.poppinsRegular(size: 14))
+                        .foregroundStyle(Color.mainBlueButton)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
+                        .padding(.bottom, 24)
+                    
+                    FloatingField(text: $viewModel.email,
+                                  placeHolder: "Email address",
+                                  leftIcon: .icFieldEmail,
+                                  errorMessage: viewModel.errorMessageEmail)
+                    .submitLabel(.next)
+                    .focused($focusedField, equals: .email)
+                    .onSubmit {
+                        focusedField = .password
+                    }
+                    
+                    FloatingField(text: $viewModel.password,
+                                  placeHolder: "Password",
+                                  secureField: true,
+                                  leftIcon: .icFieldPassword,
+                                  errorMessage: viewModel.errorMessagePassword)
+                        .padding(.top, 12)
+                        .submitLabel(.done)
+                        .focused($focusedField, equals: .password)
+                    
+                    BlueButtonView(text: "Log in") {
+                        viewModel.login()
+                    }.padding(.top, 12)
+                }.padding(.top, 24)
+                    .padding(.horizontal, 16)
             }
+            
+        }.background(Color.mainBlue)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: [.horizontal, .bottom])
+            .safeAreaInset(edge: .bottom, content: {
+                MainBlueButtonView(text: "Create an Account") {
+                    navigation.push(RegisterScreen().asDestination(), animated: true)
+                }.padding(.bottom, 16)
+                    .padding(.horizontal, 16)
+            })
+            .onChange(of: viewModel.email) { newValue in
+                viewModel.errorMessageEmail = nil
+            }
+            .onChange(of: viewModel.password) { newValue in
+                viewModel.errorMessagePassword = nil
+            }
+            .onReceive(viewModel.loginCompletion) { loginCompletion in
+            switch loginCompletion {
+            case .failure(_):
+                let modal = ModalChooseOptionView(title: "Error",
+                                      description: "An error has occured. Please try again.",
+                                                  topButtonText: "Try again") {
+                    navigation.dismissModal(animated: true, completion: nil)
+                }
+                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+            case .login:
+                navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+            }
+        }
     }
 }
