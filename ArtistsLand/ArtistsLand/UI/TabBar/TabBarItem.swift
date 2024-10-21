@@ -13,6 +13,7 @@ enum TabBarItemType: Equatable {
     case search
     case chats
     case profile
+    case coins
 }
 
 struct TabBarItem {
@@ -44,6 +45,11 @@ let profileNewsTabBarItem = TabBarItem(
     title: "Profile",
     imageName: .icProfile
 )
+
+let coinsTabBarItem = TabBarItem(
+    type: .coins,
+    title: "Wallet",
+    imageName: .icWallet)
 
 struct TabBarItemView: View {
     let tabBarItem: TabBarItem

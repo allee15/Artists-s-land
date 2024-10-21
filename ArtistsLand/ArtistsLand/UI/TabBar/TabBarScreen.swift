@@ -12,6 +12,7 @@ enum TabBarNavigation {
     case search
     case chats
     case profile
+    case coins
 }
 
 class TabBarCoordinator: ObservableObject {
@@ -30,6 +31,7 @@ struct TabBarScreen: View {
     @StateObject private var searchNavigation = Navigation(root: SearchScreen().asDestination())
     @StateObject private var chatsNavigation = Navigation(root: ChatsScreen().asDestination())
     @StateObject private var profileNavigation = Navigation(root: ProfileScreen().asDestination())
+    @StateObject private var coinsNavigation = Navigation(root: WalletScreen().asDestination())
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -45,6 +47,8 @@ struct TabBarScreen: View {
                             NavigationHostView(navigation: chatsNavigation)
                         case .profile:
                             NavigationHostView(navigation: profileNavigation)
+                        case .coins:
+                            NavigationHostView(navigation: coinsNavigation)
                         }
                     }.frame(width: proxy.size.width, height: proxy.size.height)
                 }.onReceive(viewModel.$selectedTabItem) { newValue in
@@ -52,6 +56,7 @@ struct TabBarScreen: View {
                     searchNavigation.popToRoot(animated: false)
                     chatsNavigation.popToRoot(animated: false)
                     profileNavigation.popToRoot(animated: false)
+                    coinsNavigation.popToRoot(animated: false)
                     self.viewModel.oldSelectedTab = newValue
                 }.onReceive(tabBarCoordinator.$tabBarNavigation, perform: { value in
                     if let value {
@@ -76,6 +81,11 @@ struct TabBarScreen: View {
                                 viewModel.selectedTabItem = .profile
                             }
                             profileNavigation.popToRoot(animated: true)
+                        case .coins:
+                            if viewModel.selectedTabItem != .coins {
+                                viewModel.selectedTabItem = .coins
+                            }
+                            coinsNavigation.popToRoot(animated: true)
                         }
                     }
                 })
