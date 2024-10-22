@@ -75,6 +75,10 @@
 		0F24D6362CC6FA4F00A833E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F24D6352CC6FA4F00A833E1 /* GoogleService-Info.plist */; };
 		0F24D6392CC701F400A833E1 /* WalletScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6382CC701F400A833E1 /* WalletScreen.swift */; };
 		0F24D63B2CC7020B00A833E1 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D63A2CC7020B00A833E1 /* WalletViewModel.swift */; };
+		0F24D6462CC81ED000A833E1 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6452CC81ED000A833E1 /* PushNotifications.swift */; };
+		0F24D6482CC81F0F00A833E1 /* NotificationsSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */; };
+		0F24D64B2CC8223E00A833E1 /* NotificationSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */; };
+		0F24D64D2CC8226200A833E1 /* NotificationsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */; };
 		9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */; };
 		9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69712CC041AC00B19BF1 /* Assets.xcassets */; };
 		9B1A69752CC041AC00B19BF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69742CC041AC00B19BF1 /* Preview Assets.xcassets */; };
@@ -140,6 +144,10 @@
 		0F24D6352CC6FA4F00A833E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F24D6382CC701F400A833E1 /* WalletScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreen.swift; sourceTree = "<group>"; };
 		0F24D63A2CC7020B00A833E1 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		0F24D6452CC81ED000A833E1 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
+		0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsService.swift; sourceTree = "<group>"; };
+		0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsScreen.swift; sourceTree = "<group>"; };
+		0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewModel.swift; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A69712CC041AC00B19BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -251,6 +259,7 @@
 		0F24D5C02CC1AA1000A833E1 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0F24D6492CC8223000A833E1 /* NotificationsSettings */,
 				0F24D5FA2CC1BD2E00A833E1 /* ThemeSettingsScreen */,
 				0F24D5CD2CC1AB0800A833E1 /* ProfileScreen.swift */,
 				0F24D5CF2CC1AB2900A833E1 /* ProfileViewModel.swift */,
@@ -281,6 +290,8 @@
 			children = (
 				0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */,
 				0F24D6092CC298D700A833E1 /* UserService.swift */,
+				0F24D6452CC81ED000A833E1 /* PushNotifications.swift */,
+				0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -385,6 +396,15 @@
 				0F24D63A2CC7020B00A833E1 /* WalletViewModel.swift */,
 			);
 			path = Wallet;
+			sourceTree = "<group>";
+		};
+		0F24D6492CC8223000A833E1 /* NotificationsSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */,
+				0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */,
+			);
+			path = NotificationsSettings;
 			sourceTree = "<group>";
 		};
 		9B1A69612CC041A900B19BF1 = {
@@ -536,6 +556,7 @@
 				0F24D6082CC2986C00A833E1 /* UserApi.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0F24D5F02CC1B8CD00A833E1 /* RegisterScreen.swift in Sources */,
+				0F24D6482CC81F0F00A833E1 /* NotificationsSettingsService.swift in Sources */,
 				0F24D5EE2CC1B8C000A833E1 /* RegisterViewModel.swift in Sources */,
 				0F24D63B2CC7020B00A833E1 /* WalletViewModel.swift in Sources */,
 				0F24D5C82CC1AA9B00A833E1 /* SearchViewModel.swift in Sources */,
@@ -553,12 +574,14 @@
 				0F24D6062CC297A100A833E1 /* Model.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
 				0F24D60E2CC29A2D00A833E1 /* FloatingField.swift in Sources */,
+				0F24D6462CC81ED000A833E1 /* PushNotifications.swift in Sources */,
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */,
 				0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
+				0F24D64D2CC8226200A833E1 /* NotificationsSettingsViewModel.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0F24D5EB2CC1B8A300A833E1 /* LoginViewModel.swift in Sources */,
 				0F24D60A2CC298D700A833E1 /* UserService.swift in Sources */,
@@ -579,6 +602,7 @@
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D5E92CC1B88300A833E1 /* LoginScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
+				0F24D64B2CC8223E00A833E1 /* NotificationSettingsScreen.swift in Sources */,
 				0F24D5FE2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

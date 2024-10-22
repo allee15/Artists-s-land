@@ -16,6 +16,10 @@ struct ProfileScreen: View {
             .onTapGesture {
                 navigation.push(ThemeSettingsScreen().asDestination(), animated: true)
             }
+        Text("notifications")
+            .onTapGesture {
+                navigation.push(NotificationsSettingsScreen().asDestination(), animated: true)
+            }
     }
 }
 

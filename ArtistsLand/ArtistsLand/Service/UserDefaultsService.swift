@@ -10,6 +10,7 @@ import Foundation
 enum UserDefaultsKeys {
     static let hasOnboardingCompleted = "onboardingIsOver"
     static let appTheme = "appTheme"
+    static let notificationsSubscribed = "notificationsSubscribed"
 }
 
 public struct Key<T> {
@@ -39,5 +40,13 @@ class UserDefaultsService {
     
     func getValue<T>(key: Key<T>) -> Optional<T> {
         return defaults.object(forKey: key.value) as? T
+    }
+    
+    func setBooleanValue(key: Key<String>, value: Bool) {
+        defaults.set(value, forKey: key.value)
+    }
+    
+    func getBooleanValue(key: Key<String>) -> Bool {
+        return defaults.bool(forKey: key.value)
     }
 }
