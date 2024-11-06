@@ -14,8 +14,6 @@ class JSONParsers {
             id: json["id"].intValue,
             email: json["email"].stringValue,
             nickname: json["username"].stringValue,
-            firstName: json["first_name"].stringValue,
-            lastName: json["last_name"].stringValue,
             avatarUrl: json["avatar"].stringValue,
             isArtist: json["isArtist"].boolValue
         )

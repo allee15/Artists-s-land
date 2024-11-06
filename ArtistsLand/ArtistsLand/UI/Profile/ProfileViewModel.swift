@@ -6,7 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 class ProfileViewModel: BaseViewModel {
+    let userInfo: User? = user
+    @Published var profileImage: UIImage?
     
+    func updateProfileImage(id: Int, shouldDeleteAvatar: Bool? = nil) {
+        
+    }
 }

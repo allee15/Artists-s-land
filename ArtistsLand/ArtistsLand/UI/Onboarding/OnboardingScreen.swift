@@ -12,7 +12,6 @@ struct OnboardingScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-        ZStack(alignment: .top) {
             VStack(spacing: 16) {
                 HStack {
                     CloseButton() {
@@ -34,7 +33,7 @@ struct OnboardingScreen: View {
                 }.padding(.horizontal, 20)
                     .padding(.top, 20)
             }.padding(.bottom, 32)
-        }.background(Color.simpleBlue)
+            .background(Color.simpleBlue)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(viewModel.eventSubject) { event in
@@ -61,6 +60,7 @@ fileprivate struct OnboardingPageView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: UIScreen.main.bounds.height / 2 )
+                        .cornerRadius(8, corners: .allCorners)
                     Spacer()
                 }
                 

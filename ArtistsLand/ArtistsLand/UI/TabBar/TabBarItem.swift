@@ -13,7 +13,6 @@ enum TabBarItemType: Equatable {
     case search
     case chats
     case profile
-    case coins
 }
 
 struct TabBarItem {
@@ -46,11 +45,6 @@ let profileNewsTabBarItem = TabBarItem(
     imageName: .icProfile
 )
 
-let coinsTabBarItem = TabBarItem(
-    type: .coins,
-    title: "Wallet",
-    imageName: .icWallet)
-
 struct TabBarItemView: View {
     let tabBarItem: TabBarItem
     let isSelected: Bool
@@ -64,13 +58,13 @@ struct TabBarItemView: View {
                 Image(tabBarItem.imageName)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(isSelected ? Color.red : Color.mainBlack)
+                    .foregroundStyle(isSelected ? Color.secondaryBlueInversat : Color.mainBlack)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 18, height: 18)
                 
                 Text(tabBarItem.title)
                     .font(.system(size: 12))
-                    .foregroundColor(isSelected ? .red : Color.mainBlack)
+                    .foregroundColor(isSelected ? .secondaryBlueInversat : Color.mainBlack)
                     .frame(height: 14)
             }
         }

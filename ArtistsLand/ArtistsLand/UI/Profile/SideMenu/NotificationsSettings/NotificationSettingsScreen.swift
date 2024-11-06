@@ -13,28 +13,22 @@ struct NotificationsSettingsScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Setări notificări") {
+            LeftNavBarView(title: "Notifications Settings") {
                 navigation.pop(animated: true)
             }
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
                     if viewModel.pushNotificationsStatus != .denied {
-                        HStack {
-                            Text("da subscribe")
-                            Spacer()
-                            Button {
-                                viewModel.handleNotificationToggle()
-                            } label: {
-                                Image(viewModel.isOn ? .icCheckedOn : .icCheckedOff)
-                            }.frame(width: 44, height: 24)
+                        NotificationTopicView(isOn: $viewModel.isOn) {
+                            viewModel.handleNotificationToggle()
                         }
                     } else {
                         AskForPushNotificationsView() {
                             viewModel.goToSettings()
                         }
                     }
-                }.padding(.horizontal, 16)
+                }.padding(.horizontal, 24)
                     .padding(.top, 32)
             }
         }.background(Color.mainWhite)
@@ -46,7 +40,7 @@ struct NotificationsSettingsScreen: View {
             .onReceive(viewModel.notificationSettingsEvent) { event in
                 switch event {
                 case .completed:
-                    let toast = Toast(text: "da", textColor: Color.lightGreen)
+                    let toast = Toast(text: "Edit successful!", textColor: Color.lightGreen)
                     ToastManager.instance.show(toast)
                 case .notificationsDenied:
                     break
@@ -60,26 +54,40 @@ struct AskForPushNotificationsView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-//            Image(.icFooterCampaign)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(height: 80)
-            
-            Text("Activează notificările")
+            Text("Allow notifications")
                 .font(.poppinsBold(size: 16))
                 .foregroundStyle(Color.mainBlack)
             
-            Text("Aplicația nu are permisiunea de a trimite notificări. Te rugăm să mergi la setările aplicației pentru a activa notificările.")
+            Text("This app does not have permission to send notifications. Please go to settings and activate notifications for this app.")
                 .font(.poppinsRegular(size: 12))
                 .foregroundStyle(Color.mainBlack)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 8)
                 
-            BlueButtonView(text: "Mergi la setări") {
+            BlueButtonView(text: "Go to settings") {
                 action()
             }
         }.padding(.all, 20)
-            .background(Color.gray)
+            .background(Color.mainGray)
             .cornerRadius(8, corners: .allCorners)
+    }
+}
+
+struct NotificationTopicView: View {
+    @Binding var isOn: Bool
+    let action: () -> ()
+    
+    var body: some View {
+        HStack {
+            Text("Notifications")
+                .font(.poppinsSemiBold(size: 20))
+                .foregroundStyle(Color.mainBlack)
+            
+            Spacer()
+            
+            ToggleView(isOn: $isOn) {
+                action()
+            }
+        }
     }
 }

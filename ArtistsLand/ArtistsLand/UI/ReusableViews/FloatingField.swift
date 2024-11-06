@@ -12,7 +12,7 @@ struct FloatingField: View {
     var placeHolder: String
     var secureField: Bool = false
     var keyboardType: UIKeyboardType = .default
-    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.white, .white, .gray)
+    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.white, .black.opacity(0.5), .black)
     var icon: String?
     var leftIcon: ImageResource?
     var errorMessage: String? = nil
@@ -119,7 +119,7 @@ struct FloatingField: View {
             .onTapGesture {
                 self.isEditing = true
             }
-            .onChange(of: text) { _ in
+            .onChange(of: text) { _, _ in
                 self.isEditing = true
             }
             .onSubmit {

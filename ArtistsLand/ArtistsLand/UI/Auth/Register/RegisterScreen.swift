@@ -34,7 +34,7 @@ struct RegisterScreen: View {
                     
                     VStack(spacing: 12) {
                         FloatingField(text: $viewModel.name,
-                                      placeHolder: "Name",
+                                      placeHolder: "Username",
                                       leftIcon: .icFieldAccount,
                                       errorMessage: viewModel.errorMessageName)
                         .submitLabel(.next)
@@ -102,19 +102,19 @@ struct RegisterScreen: View {
             }
         }.background(Color.mainBlue)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onChange(of: viewModel.name) { newValue in
+            .onChange(of: viewModel.name) { _, newValue in
                 viewModel.errorMessageName = nil
             }
-            .onChange(of: viewModel.selectedUserType) { newValue in
+            .onChange(of: viewModel.selectedUserType) { _, newValue in
                 viewModel.errorMessageUserType = nil
             }
-            .onChange(of: viewModel.email) { newValue in
+            .onChange(of: viewModel.email) { _, newValue in
                 viewModel.errorMessageEmail = nil
             }
-            .onChange(of: viewModel.password) { newValue in
+            .onChange(of: viewModel.password) { _, newValue in
                 viewModel.errorMessagePassword = nil
             }
-            .onChange(of: viewModel.showGreeting) { newValue in
+            .onChange(of: viewModel.showGreeting) { _, newValue in
                 viewModel.errorMessageToggle = nil
             }
             .onReceive(viewModel.registerCompletion) { registerCompletion in

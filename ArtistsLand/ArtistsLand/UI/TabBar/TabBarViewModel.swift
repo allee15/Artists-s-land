@@ -22,8 +22,7 @@ class TabBarViewModel: ObservableObject {
             homeTabBarItem,
             searchTabBarItem,
             chatsTabBarItem,
-            profileNewsTabBarItem,
-            coinsTabBarItem
+            profileNewsTabBarItem
         ]
     }
 }

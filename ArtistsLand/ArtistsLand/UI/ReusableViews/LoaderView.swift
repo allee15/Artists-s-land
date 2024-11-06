@@ -47,4 +47,3 @@ struct LoaderViewWithBg: View {
            .ignoresSafeArea(.all)
    }
 }
-

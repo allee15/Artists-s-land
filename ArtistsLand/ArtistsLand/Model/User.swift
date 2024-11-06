@@ -11,8 +11,13 @@ struct User {
     let id: Int
     let email: String
     let nickname: String
-    let firstName: String
-    let lastName: String
     let avatarUrl: String
     let isArtist: Bool
 }
+
+let user = User(id: 1,
+                email: "alexia.elena.aldea@gmail.com",
+                nickname: "Allee",
+                avatarUrl: "",
+                isArtist: true)
+

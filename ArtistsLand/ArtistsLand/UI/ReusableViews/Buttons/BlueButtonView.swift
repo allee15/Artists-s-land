@@ -9,7 +9,9 @@ import SwiftUI
 
 struct BlueButtonView: View {
     let text: String
+    var isDisabled: Bool = false
     var action: () -> ()
+    
     var body: some View {
         Button {
             action()
@@ -21,6 +23,6 @@ struct BlueButtonView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.simpleBlue)
                 .cornerRadius(4, corners: .allCorners)
-        }
+        }.disabled(isDisabled)
     }
 }

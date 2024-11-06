@@ -68,10 +68,10 @@ struct LoginScreen: View {
                 }.padding(.bottom, 16)
                     .padding(.horizontal, 16)
             })
-            .onChange(of: viewModel.email) { newValue in
+            .onChange(of: viewModel.email) { _, newValue in
                 viewModel.errorMessageEmail = nil
             }
-            .onChange(of: viewModel.password) { newValue in
+            .onChange(of: viewModel.password) { _, newValue in
                 viewModel.errorMessagePassword = nil
             }
             .onReceive(viewModel.loginCompletion) { loginCompletion in
