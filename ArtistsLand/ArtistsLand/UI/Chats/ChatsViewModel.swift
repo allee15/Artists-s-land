@@ -8,5 +8,17 @@
 import Foundation
 
 class ChatsViewModel: BaseViewModel {
+    @Published var user: User?
+    @Published var userChats: [Chat] = []
     
+    var userService = UserService.shared
+    
+    override init() {
+        super.init()
+    }
+}
+
+struct Chat: Codable, Identifiable, Hashable {
+    var id: String = UUID().uuidString
+    var name: String
 }

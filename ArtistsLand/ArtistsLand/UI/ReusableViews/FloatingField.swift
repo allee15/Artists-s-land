@@ -13,8 +13,9 @@ struct FloatingField: View {
     var secureField: Bool = false
     var keyboardType: UIKeyboardType = .default
     var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.white, .black.opacity(0.5), .black)
-    var icon: String?
+    var icon: ImageResource?
     var leftIcon: ImageResource?
+    var leftIconHeight: CGFloat? = 28
     var errorMessage: String? = nil
     var isDisabled: Bool = false
     
@@ -28,8 +29,9 @@ struct FloatingField: View {
                     if let leftIcon = leftIcon {
                         Image(leftIcon)
                             .resizable()
+                            .renderingMode(.template)
                             .scaledToFit()
-                            .frame(height: 28)
+                            .frame(height: leftIconHeight)
                             .foregroundColor(.black)
                             .padding(.trailing, 4)
                     }
@@ -60,7 +62,7 @@ struct FloatingField: View {
                             .renderingMode(.template)
                             .foregroundColor(.black)
                             .scaledToFit()
-                            .frame(height: 28)
+                            .frame(height: leftIconHeight)
                             .padding(.trailing, 4)
                             .opacity(0)
                     }
