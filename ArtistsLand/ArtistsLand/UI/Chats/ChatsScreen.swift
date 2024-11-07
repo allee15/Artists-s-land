@@ -12,17 +12,10 @@ struct ChatsScreen: View {
     private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
-        if true {//viewModel.user != nil {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("Your chats")
-                    .font(.poppinsBold(size: 24))
-                    .foregroundColor(.black)
-                    .padding(.top, 20)
-                    .padding(.horizontal, 20)
-                
-                Color.mainBlueInversat.frame(height: 1)
-                    .padding(.top, 12)
-                
+        VStack(alignment: .leading, spacing: 0) {
+            LeftNavBarView(title: "Chats", hasBackButton: false) {}
+            
+            if true {//viewModel.user != nil {
                 if viewModel.userChats.isEmpty {
                     HStack {
                         Spacer()
@@ -51,11 +44,11 @@ struct ChatsScreen: View {
                         }
                     }.padding(.vertical, 20)
                 }
-            }.background(Color.mainWhite)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else {
-            UnloggedUserView()
-        }
+            } else {
+                UnloggedUserView()
+            }
+        }.background(Color.mainWhite)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -82,6 +75,6 @@ fileprivate struct ChatCardView: View {
         }.padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(.white)
-        .padding(.horizontal, 16)
+            .padding(.horizontal, 16)
     }
 }

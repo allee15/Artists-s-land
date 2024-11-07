@@ -13,12 +13,7 @@ struct SearchScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Search", hasBackButton: false) {
-                hideKeyboard()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    navigation.pop(animated: true)
-                }
-            }
+            LeftNavBarView(title: "Search", hasBackButton: false) {}
             
             VStack(spacing: 24) {
                 FloatingField(text: $viewModel.searchText,
