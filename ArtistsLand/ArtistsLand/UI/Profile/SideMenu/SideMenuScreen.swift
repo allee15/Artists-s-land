@@ -143,7 +143,7 @@ struct SideMenuScreen: View {
                     navigation.dismissModal(animated: true, completion: nil)
                     navigation.push(LoginScreen().asDestination(), animated: true)
                     
-                case .failure(_):
+                case .failure:
                     let modal = ModalChooseOptionView(title: "Something went wrong",
                                                       description: "An error has occured and we couldn't complete the action. Please try again later.",
                                                       topButtonText: "Back") {

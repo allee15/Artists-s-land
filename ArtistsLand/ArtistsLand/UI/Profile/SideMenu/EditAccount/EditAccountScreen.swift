@@ -33,27 +33,33 @@ struct EditAccountScreen: View {
                 }
             }
             
-            VStack(spacing: 12) {
-                FloatingField(text: $viewModel.email,
-                              placeHolder: "Email",
-                              leftIcon: .icFieldEmail,
-                              isDisabled: true)
+            if !viewModel.isLoading {
+                VStack(spacing: 12) {
+                    FloatingField(text: $viewModel.email,
+                                  placeHolder: "Email",
+                                  leftIcon: .icFieldEmail,
+                                  isDisabled: true)
+                    
+                    FloatingField(text: $viewModel.nickname,
+                                  placeHolder: "Username",
+                                  leftIcon: .icFieldAccount,
+                                  errorMessage: viewModel.errorMessageName)
+                    
+                    
+                }.padding(.horizontal, 16)
+                    .padding(.top, 20)
                 
-                FloatingField(text: $viewModel.nickname,
-                              placeHolder: "Username",
-                              leftIcon: .icFieldAccount,
-                              errorMessage: viewModel.errorMessageName)
-              
+                Spacer(minLength: 80)
                 
-            }.padding(.horizontal, 16)
-                .padding(.top, 20)
-            
-            Spacer(minLength: 80)
-            
-            MainBlueButtonView(text: "Save Changes", isDisabled: changesMade ? false : true) {
-                viewModel.editInfo()
-            }.padding(.horizontal, 16)
-                .padding(.bottom, 32)
+                MainBlueButtonView(text: "Save Changes", isDisabled: changesMade ? false : true) {
+                    viewModel.editInfo()
+                }.padding(.horizontal, 16)
+                    .padding(.bottom, 32)
+            } else {
+                Spacer()
+                LoaderView()
+                Spacer()
+            }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])

@@ -18,11 +18,13 @@ enum RootViewModelEvent {
 class RootViewModel: BaseViewModel {
     let eventSubject = PassthroughSubject<RootViewModelEvent, Never>()
     var userDefaultsService = UserDefaultsService.shared
+    var userService = UserService.shared
     
     private var binded = false
     
     @Published var showBlockingError: Bool = false
     @Published var isLoadingBinding: Bool = false
+    var lastUserState: UserState = .anonymous
     
     override init() {
         super.init()
@@ -36,39 +38,41 @@ class RootViewModel: BaseViewModel {
         guard !binded else {return}
         binded = true
         
-        if userDefaultsService.getOnboardingStatus() {
-            self.eventSubject.send(.goToLogin)
-        } else {
-            self.eventSubject.send(.goToOnboarding)
-        }
-//        loadSubject(publisher: userService.userReactiveData.getStateSubject()) { [weak self] state in
-//            guard let self else {return}
-//            switch state {
-//            case .failure:
-//                self.isLoadingBinding = false
-//                self.showBlockingError = true
-//                self.binded = false
-//            case .loading:
-//                self.isLoadingBinding = true
-//            case .ready(let userState):
-//                self.isLoadingBinding = false
-//                self.showBlockingError = false
-//                switch userState {
-//                case .anonymous:
-//                    if self.propertyStorage.getOnboardingStatus() {
-//                        self.emitEvent(.goToTabBar)
-//                    } else {
-//                        self.emitEvent(.goToOnboarding)
-//                    }
-//                case .loggedIn(_):
-//                    if case .anonymous = self.lastUserState {
-//                        self.emitEvent(.goToTabBar)
-//                    }
-//                }
-//
-//                self.lastUserState = userState
-//            }
-//        }
+        userService.userReactiveData.getStateSubject()
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure = completion {
+                    self?.showBlockingError = true
+                    self?.isLoadingBinding = false
+                    self?.binded = false
+                }
+            }, receiveValue: { [weak self] userState in
+                guard let self = self else { return }
+                switch userState {
+                case .failure(_):
+                    self.isLoadingBinding = false
+                    self.showBlockingError = true
+                    self.binded = false
+                case .loading:
+                    self.isLoadingBinding = true
+                case .ready(let userState):
+                    self.isLoadingBinding = false
+                    self.showBlockingError = false
+                    switch userState {
+                    case .anonymous:
+                        if self.userDefaultsService.getOnboardingStatus() {
+                            self.eventSubject.send(.goToTabBar)
+                        } else {
+                            self.eventSubject.send(.goToOnboarding)
+                        }
+                    case .loggedIn(_):
+                        if case .anonymous = self.lastUserState {
+                            self.eventSubject.send(.goToTabBar)
+                        }
+                    }
+                    
+                    self.lastUserState = userState
+                }
+            }).store(in: &bag)
     }
     
     func setupErrorHandling() {

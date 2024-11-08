@@ -14,10 +14,11 @@ enum EditAccountCompletion {
 }
 
 class EditAccountViewModel: BaseViewModel {
-    let userInfo: User
+    @Published var userInfo: User
     @Published var nickname: String
     @Published var email: String
     @Published var errorMessageName: String?
+    @Published var isLoading: Bool = false
     let eventSubject = PassthroughSubject<EditAccountCompletion, Never>()
     
     var userService = UserService.shared
@@ -26,20 +27,24 @@ class EditAccountViewModel: BaseViewModel {
         self.userInfo = userInfo
         self.nickname = userInfo.nickname
         self.email = userInfo.email
-        super.init()
-        getUserInfo()
-    }
-    
-    func getUserInfo() {
-        
     }
     
     func editInfo() {
         if nickname.isEmpty {
             self.errorMessageName = "This field can't be empty."
         } else {
-            //userService.editAccount()
             self.eventSubject.send(.completed)
+            userService.editAccount(nickname: nickname)
+                .sink { _ in
+                    
+                } receiveValue: { [weak self] response in
+                    guard let self else {return}
+                    if response {
+                        self.eventSubject.send(.completed)
+                    } else {
+                        self.eventSubject.send(.error)
+                    }
+                }.store(in: &bag)
         }
     }
 }

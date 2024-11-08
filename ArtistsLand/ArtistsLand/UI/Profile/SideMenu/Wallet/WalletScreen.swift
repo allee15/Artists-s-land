@@ -72,7 +72,7 @@ struct WalletScreen: View {
 }
 
 fileprivate struct TokenCardTypeView: View {
-    let amount: Int
+    let amount: Int64
     let action: () -> ()
     
     var body: some View {

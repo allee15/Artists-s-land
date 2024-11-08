@@ -65,22 +65,20 @@ class RegisterViewModel: BaseViewModel {
     }
     
     private func register() {
-        self.registerCompletion.send(.register)
-//        userService.register(email: email, password: password)
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] completion in
-//                guard let self = self else { return }
-//                switch completion {
-//                case .failure(let error):
-//                    self.registerCompletion.send(.failure(error))
-//                case .finished:
-//                    self.firestoreService.createUser()
-//                    self.firestoreService.addUserDetails(name: self.name, gender: self.selectedGender)
-//                }
-//            } receiveValue: { [weak self] user in
-//                guard let self else { return }
-//                self.registerCompletion.send(.register)
-//            }
-//            .store(in: &bag)
+        userService.register(nickname: name, email: email, password: password, userType: selectedUserType)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.registerCompletion.send(.failure(error))
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] user in
+                guard let self else { return }
+                self.registerCompletion.send(.register)
+            }
+            .store(in: &bag)
     }
 }

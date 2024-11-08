@@ -15,7 +15,7 @@ struct User {
     let isArtist: Bool
 }
 
-let user = User(id: 1,
+let userMocked = User(id: 1,
                 email: "alexia.elena.aldea@gmail.com",
                 nickname: "Allee",
                 avatarUrl: "",

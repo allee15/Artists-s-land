@@ -29,22 +29,21 @@ class LoginViewModel: BaseViewModel {
     
     func login() {
         if email.isValidEmail() {
-            self.loginCompletion.send(.login)
-//            userService.login(email: email, password: password)
-//                .receive(on: DispatchQueue.main)
-//                .sink { [weak self] completion in
-//                    guard let self else { return }
-//                    switch completion {
-//                    case .failure(let error):
-//                        self.loginCompletion.send(.failure(error))
-//                    case .finished:
-//                        break
-//                    }
-//                } receiveValue: { [weak self] user in
-//                    guard let self else { return }
-//                    self.loginCompletion.send(.login)
-//                }
-//                .store(in: &bag)
+            userService.login(email: email, password: password)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] completion in
+                    guard let self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        self.loginCompletion.send(.failure(error))
+                    case .finished:
+                        break
+                    }
+                } receiveValue: { [weak self] user in
+                    guard let self else { return }
+                    self.loginCompletion.send(.login)
+                }
+                .store(in: &bag)
         } else {
             if password.isEmpty {
                 self.errorMessagePassword = "Please enter a valid password."
