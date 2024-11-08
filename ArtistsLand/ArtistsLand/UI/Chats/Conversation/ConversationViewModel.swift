@@ -10,31 +10,29 @@ import Combine
 import UIKit
 
 class ConversationViewModel: BaseViewModel {
-    @Published var user: User?
+    @Published var user: User
     @Published var message = ""
     @Published var messages: [Message] = []
     @Published var image: UIImage?
     
-    var userService = UserService.shared
+    var chatService = ChatService.shared
     
-    override init() {
+    init(user: User) {
+        self.user = user
         super.init()
+        getMessages()
+    }
+    
+    private func getMessages() {
+        self.messages = messagesMocked
+        chatService.getMessages()
     }
     
     func sendMessage() {
-        
+        chatService.sendMessage()
     }
     
     func deleteChat() {
-        
+        chatService.deleteChat()
     }
-}
-
-struct Message: Codable, Identifiable {
-    var id: String = UUID().uuidString
-    var date: Date
-    var message: String
-    var email: String
-    var name: String
-    var imageUrl: String?
 }

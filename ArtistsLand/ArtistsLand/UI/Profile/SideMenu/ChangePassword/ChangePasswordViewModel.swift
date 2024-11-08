@@ -36,17 +36,17 @@ class ChangePasswordViewModel: BaseViewModel {
             self.errorMessageConfirmNewPassword = "Passwords do not match!"
         } else {
             self.eventSubject.send(.completed)
-            userService.changePassword(newPassword: newPassword)
-                .sink { _ in
-                    
-                } receiveValue: { [weak self] response in
-                    guard let self else {return}
-                    if response {
-                        self.eventSubject.send(.completed)
-                    } else {
-                        self.eventSubject.send(.error)
-                    }
-                }.store(in: &bag)
+//            userService.changePassword(newPassword: newPassword)
+//                .sink { _ in
+//                    
+//                } receiveValue: { [weak self] response in
+//                    guard let self else {return}
+//                    if response {
+//                        self.eventSubject.send(.completed)
+//                    } else {
+//                        self.eventSubject.send(.error)
+//                    }
+//                }.store(in: &bag)
         }
     }
 }

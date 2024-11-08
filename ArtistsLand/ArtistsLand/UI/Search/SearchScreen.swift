@@ -24,7 +24,7 @@ struct SearchScreen: View {
                 .padding(.horizontal, 16)
                 .submitLabel(.search)
                 .onSubmit {
-                    viewModel.loadArticles(removePastResults: true)
+                    viewModel.loadPosts(removePastResults: true)
                 }
                 
                 if viewModel.isLoadingFirstTime {
@@ -43,7 +43,14 @@ struct SearchScreen: View {
                     case .results:
                         if !viewModel.results.isEmpty {
                             ScrollView(showsIndicators: false) {
-                                //Posts
+                                //todo fix me according to object
+                                VStack(alignment: .leading, spacing: 16) {
+                                    ForEach(viewModel.results, id: \.self) { result in
+                                        Text(result)
+                                            .foregroundStyle(Color.mainBlack)
+                                            .font(.poppinsRegular(size: 12))
+                                    }
+                                }
                             }
                         } else {
                             Spacer()
@@ -62,7 +69,7 @@ struct SearchScreen: View {
             .onChange(of: viewModel.searchText) { _, _ in
                 viewModel.resetForNewSearch()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    viewModel.loadArticles(removePastResults: true)
+                    viewModel.loadPosts(removePastResults: true)
                 }
             }
     }

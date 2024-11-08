@@ -16,6 +16,7 @@ enum SearchScreenState {
 }
 
 class SearchViewModel: BaseViewModel {
+    var postsService = PostsService.shared
     @Published var searchText: String = ""
     @Published var searchScreenState: SearchScreenState = .emptyQuery
     @Published var results: [String] = []
@@ -37,7 +38,7 @@ class SearchViewModel: BaseViewModel {
         }
     }
     
-    func loadArticles(removePastResults: Bool = false) {
+    func loadPosts(removePastResults: Bool = false) {
         searchPostsCancellable?.cancel()
         guard searchText.count > 2 else {
             self.searchScreenState = .notEnoughCharacters
@@ -55,29 +56,27 @@ class SearchViewModel: BaseViewModel {
             self.isLoading = true
         }
         
-//        searchPostsCancellable = articlesService.getSearchArticles(perPage: articlesPerPage,
-//                                                                      page: page,
-//                                                                      searchItem: searchText)
-//        .sink(receiveCompletion: { [weak self] completion in
-//            guard let self else {return}
-//            self.isLoadingFirstTime = false
-//            self.hasLoadedInitially = true
-//            self.isLoading = false
-//            switch completion {
-//            case .finished:
-//                break
-//            case .failure(let failure):
-//                self.emitError(error: failure)
-//            }
-//        }, receiveValue: {[weak self] articles in
-//            guard let self else {return}
-//            if page == 1 && articles.isEmpty {
-//                self.searchScreenState = .noResults
-//            } else {
-//                self.searchScreenState = .results
-//                self.results.append(contentsOf: articles)
-//            }
-//        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isLoadingFirstTime = false
+            self.hasLoadedInitially = true
+            self.results = resultsMocked
+            self.searchScreenState = .results
+        }
+//        searchPostsCancellable = postsService.getSearchPosts(searchItem: searchText)
+//            .sink(receiveCompletion: { [weak self] _ in
+//                guard let self else {return}
+//                self.isLoadingFirstTime = false
+//                self.hasLoadedInitially = true
+//                self.isLoading = false
+//            }, receiveValue: { [weak self] posts in
+//                guard let self = self else { return }
+//                if posts.isEmpty {
+//                    self.searchScreenState = .noResults
+//                } else {
+//                    self.searchScreenState = .results
+//                    self.results = [posts]
+//                }
+//            })
         
         self.searchPostsCancellable?.store(in: &bag)
     }

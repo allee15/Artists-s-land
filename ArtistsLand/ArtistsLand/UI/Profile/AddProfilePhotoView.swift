@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddProfilePhotoView: View {
-    
+    var title: String = "Add profile photo"
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
     @State private var pickPhoto = false
     
@@ -22,7 +22,7 @@ struct AddProfilePhotoView: View {
                 BottomSheetLineView()
                 
                 HStack {
-                    Text("Add profile photo")
+                    Text(title)
                         .font(.poppinsBold(size: 28))
                         .foregroundStyle(Color.mainBlack)
                         .padding(.horizontal, 20)

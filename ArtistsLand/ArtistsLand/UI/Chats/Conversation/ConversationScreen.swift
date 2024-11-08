@@ -8,78 +8,55 @@
 import SwiftUI
 
 struct ConversationScreen: View {
-    @ObservedObject var viewModel = ConversationViewModel()
+    @ObservedObject var viewModel: ConversationViewModel
     @EnvironmentObject private var navigation: Navigation
     
     @State private var showSheet: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                BackButton()
-               
-                ChatPicPlaceHolder(name: "") {
-                    
+            LeftRightNavBarView(chatName: viewModel.messages.first?.name ?? "Allee") {
+                let modal = ModalChooseOptionView(title: "Are you sure you want to delete this chat?",
+                                                  description: "This action will take you out of this chat and you will have to search again this person.",
+                                                  topButtonText: "Delete chat",
+                                                  bottomButtonText: "Stay") {
+                    viewModel.deleteChat()
+                    navigation.dismissModal(animated: true, completion: nil)
+                    navigation.popToRoot(animated: true)
+                } onBottomButtonTapped: {
+                    navigation.dismissModal(animated: true, completion: nil)
                 }
                 
-                Spacer()
+                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 
-                Button {
-                    let modal = ModalChooseOptionView(title: "Are you sure you want to delete this chat?",
-                                                      description: "This action will take you out of this chat and you will have to search again this person.",
-                                                      topButtonText: "Delete chat",
-                                                      bottomButtonText: "Stay") {
-                        viewModel.deleteChat()
-                        navigation.dismissModal(animated: true, completion: nil)
-                        navigation.popToRoot(animated: true)
-                    } onBottomButtonTapped: {
-                        navigation.dismissModal(animated: true, completion: nil)
-                    }
-                    
-                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                    
-                } label: {
-                    Image(.icNavbarDelete)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundStyle(Color.mainBlack)
-                        .frame(width: 32, height: 32)
-                        .padding(.trailing, 8)
-                }
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 12)
+            }.padding(.horizontal, 16)
             
             ScrollViewReader { scrollProxy in
                 ScrollView(showsIndicators: false) {
-                    
                     ForEach(viewModel.messages) { message in
-                        let wasSentByMe = message.email == viewModel.user?.email
-                        VStack(spacing: 0) {
-                            HStack(spacing: 8) {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("\(message.message)")
-                                        .font(.poppinsRegular(size: 16))
-                                        .foregroundColor(.black)
-                                        .multilineTextAlignment(.leading)
-                                    
-                                    Text("\(message.date.formatted(.dateTime))")
-                                        .font(.poppinsSemiBold(size: 10))
-                                        .foregroundColor(Color.contentSecondary)
-                                }.padding(.all, 12)
-                                    .background(wasSentByMe ? Color.simpleBlue.opacity(0.3) : Color.mainGray.opacity(0.5))
-                                    .cornerRadius(10)
-                                    .frame(width: UIScreen.main.bounds.width * 0.8, alignment: wasSentByMe ? .trailing : .leading)
-                                    .id(message.id)
-                                    .onChange(of: viewModel.messages.count, perform: { _ in
-                                        scrollProxy.scrollTo(viewModel.messages.last?.id)
-                                    })
-                            }
-                        }.padding(.horizontal, 8)
-                            .padding(.bottom, 12)
+                        
+                        let wasSentByMe = message.email == viewModel.user.email
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("\(message.message)")
+                                .font(.poppinsRegular(size: 16))
+                                .foregroundColor(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("\(message.date.formatted(.dateTime))")
+                                .font(.poppinsSemiBold(size: 10))
+                                .foregroundColor(Color.contentSecondary)
+                        }.padding(.all, 12)
+                            .background(wasSentByMe ? Color.simpleBlue.opacity(0.3) : Color.mainGray)
+                            .cornerRadius(10)
+                            .frame(width: UIScreen.main.bounds.width * 0.8, alignment: wasSentByMe ? .trailing : .leading)
+                            .id(message.id)
+                            .onChange(of: viewModel.messages.count) { _, _ in
+                                scrollProxy.scrollTo(viewModel.messages.last?.id)
+                            }.padding(.bottom, 12)
                     }
                     
-                }
+                }.padding(.vertical, 12)
             }
             
             Rectangle()
@@ -94,50 +71,19 @@ struct ConversationScreen: View {
                 viewModel.sendMessage()
             } actionSecond: {
                 self.showSheet = true
-            }
-                .padding(.bottom, 20)
-        }.background(.white)
+            }.padding(.bottom, 28)
+                .padding(.horizontal, 12)
+            
+        }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.horizontal, .bottom])
             .sheet(isPresented: $showSheet) {
-                AddProfilePhotoView(selectedImage: $viewModel.image,
+                AddProfilePhotoView(title: "Send image in chat",
+                                    selectedImage: $viewModel.image,
                                     hideBottomSheet: $showSheet) { deleteAvatar in
-                    //TODO send image to database
+                    viewModel.sendMessage()
                 }
             }
-    }
-}
-
-fileprivate struct ChatPicPlaceHolder: View {
-    let name: String
-    var fontSize: CGFloat = 12
-    var width: CGFloat = 36
-    let action: () -> ()
-    
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            VStack(spacing: 8) {
-                ZStack {
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: width, height: width)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.black, lineWidth: 2)
-                        )
-                    
-                    Text(name.first?.uppercased() ?? "A")
-                        .font(.poppinsSemiBold(size: fontSize))
-                        .foregroundColor(.black)
-                }
-                
-                Text(name)
-                    .font(.poppinsSemiBold(size: fontSize))
-                    .foregroundColor(.black)
-            }
-        }
     }
 }
 
@@ -180,7 +126,7 @@ fileprivate struct SendMessageField: View {
                     .offset(y: $text.wrappedValue.isEmpty ? 0 : 4 )
                     .padding(.trailing, 16)
                 
-                HStack(spacing: 12) {
+                HStack(spacing: 16) {
                     Spacer()
                     Button {
                         if !text.isEmpty {
@@ -203,7 +149,7 @@ fileprivate struct SendMessageField: View {
                             .foregroundStyle(Color.mainBlack)
                             .frame(width: 24, height: 24)
                     }
-                } .padding(.horizontal, 16)
+                } .padding(.horizontal, 20)
             }
             .frame(height: 54)
             .background(Color.mainWhite)

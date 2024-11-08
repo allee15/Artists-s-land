@@ -34,17 +34,17 @@ class EditAccountViewModel: BaseViewModel {
             self.errorMessageName = "This field can't be empty."
         } else {
             self.eventSubject.send(.completed)
-            userService.editAccount(nickname: nickname)
-                .sink { _ in
-                    
-                } receiveValue: { [weak self] response in
-                    guard let self else {return}
-                    if response {
-                        self.eventSubject.send(.completed)
-                    } else {
-                        self.eventSubject.send(.error)
-                    }
-                }.store(in: &bag)
+//            userService.editAccount(nickname: nickname)
+//                .sink { _ in
+//                    
+//                } receiveValue: { [weak self] response in
+//                    guard let self else {return}
+//                    if response {
+//                        self.eventSubject.send(.completed)
+//                    } else {
+//                        self.eventSubject.send(.error)
+//                    }
+//                }.store(in: &bag)
         }
     }
 }

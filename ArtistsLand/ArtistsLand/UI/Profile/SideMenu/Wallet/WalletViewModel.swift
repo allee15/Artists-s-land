@@ -22,14 +22,14 @@ class WalletViewModel: BaseViewModel {
     private func getBalance() {
         self.balance = 400
         self.level = balance / 50
-        userService.getBalance()
-            .sink { _ in
-                
-            } receiveValue: { [weak self] balance in
-                guard let self else {return}
-                self.balance = balance
-                self.level = balance / 50
-            }.store(in: &bag)
+//        userService.getBalance()
+//            .sink { _ in
+//                
+//            } receiveValue: { [weak self] balance in
+//                guard let self else {return}
+//                self.balance = balance
+//                self.level = balance / 50
+//            }.store(in: &bag)
     }
     
     func startStripe() {

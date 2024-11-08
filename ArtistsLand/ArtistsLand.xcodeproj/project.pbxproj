@@ -92,6 +92,13 @@
 		0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */; };
 		0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */; };
 		0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */; };
+		0F327EE22CDEB4F900EDF536 /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE12CDEB4F900EDF536 /* PostsService.swift */; };
+		0F327EE42CDEB52900EDF536 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE32CDEB52900EDF536 /* PostsApi.swift */; };
+		0F327EE62CDEB73200EDF536 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE52CDEB73200EDF536 /* Post.swift */; };
+		0F327EE82CDEB91B00EDF536 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE72CDEB91B00EDF536 /* ChatService.swift */; };
+		0F327EEA2CDEB94600EDF536 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE92CDEB94600EDF536 /* ChatApi.swift */; };
+		0F327EEC2CDEBA0800EDF536 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EEB2CDEBA0800EDF536 /* Chat.swift */; };
+		0F327EEE2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */; };
 		0FD38F162CDBAF2900338FAC /* AddProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
@@ -179,6 +186,13 @@
 		0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedUserView.swift; sourceTree = "<group>"; };
 		0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveData.swift; sourceTree = "<group>"; };
 		0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEnvironment.swift; sourceTree = "<group>"; };
+		0F327EE12CDEB4F900EDF536 /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
+		0F327EE32CDEB52900EDF536 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
+		0F327EE52CDEB73200EDF536 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		0F327EE72CDEB91B00EDF536 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		0F327EE92CDEB94600EDF536 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
+		0F327EEB2CDEBA0800EDF536 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPicPlaceHolder.swift; sourceTree = "<group>"; };
 		0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfilePhotoView.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
@@ -320,6 +334,8 @@
 			children = (
 				0F24D5D92CC1B4F900A833E1 /* OnboardingData.swift */,
 				0F24D6052CC297A100A833E1 /* User.swift */,
+				0F327EE52CDEB73200EDF536 /* Post.swift */,
+				0F327EEB2CDEBA0800EDF536 /* Chat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +347,8 @@
 				0F24D6092CC298D700A833E1 /* UserService.swift */,
 				0F24D6452CC81ED000A833E1 /* PushNotifications.swift */,
 				0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */,
+				0F327EE12CDEB4F900EDF536 /* PostsService.swift */,
+				0F327EE72CDEB91B00EDF536 /* ChatService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -342,6 +360,8 @@
 				0F24D6032CC2978600A833E1 /* JSONParsers.swift */,
 				0F24D6072CC2986C00A833E1 /* UserApi.swift */,
 				0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */,
+				0F327EE32CDEB52900EDF536 /* PostsApi.swift */,
+				0F327EE92CDEB94600EDF536 /* ChatApi.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -360,6 +380,7 @@
 				0FD38F1D2CDBB0BD00338FAC /* AccountSummeryView.swift */,
 				0F327ED22CDC055500EDF536 /* ToggleView.swift */,
 				0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */,
+				0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -631,11 +652,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F327EE42CDEB52900EDF536 /* PostsApi.swift in Sources */,
 				0F24D5C42CC1AA3100A833E1 /* HomeViewModel.swift in Sources */,
 				0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */,
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
+				0F327EE22CDEB4F900EDF536 /* PostsService.swift in Sources */,
 				0F327ECF2CDBCAC900EDF536 /* WalletScreen.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				0F24D6172CC2A6CD00A833E1 /* String+.swift in Sources */,
@@ -643,6 +666,7 @@
 				0F24D6082CC2986C00A833E1 /* UserApi.swift in Sources */,
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
+				0F327EE82CDEB91B00EDF536 /* ChatService.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0F327ED62CDCD69400EDF536 /* ConversationScreen.swift in Sources */,
 				0F24D5F02CC1B8CD00A833E1 /* RegisterScreen.swift in Sources */,
@@ -674,6 +698,7 @@
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */,
 				0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */,
+				0F327EEC2CDEBA0800EDF536 /* Chat.swift in Sources */,
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
@@ -686,8 +711,10 @@
 				0F24D5CE2CC1AB0800A833E1 /* ProfileScreen.swift in Sources */,
 				0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */,
 				0F327ECA2CDBC8C800EDF536 /* EditAccountViewModel.swift in Sources */,
+				0F327EEA2CDEB94600EDF536 /* ChatApi.swift in Sources */,
 				0F24D5F72CC1BC6200A833E1 /* TitleNavBarView.swift in Sources */,
 				0F24D5E22CC1B74C00A833E1 /* CloseButton.swift in Sources */,
+				0F327EE62CDEB73200EDF536 /* Post.swift in Sources */,
 				0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */,
 				0F327EC82CDBC79900EDF536 /* ChangePasswordScreen.swift in Sources */,
 				0F327EC52CDBC4C300EDF536 /* EditAccountScreen.swift in Sources */,
@@ -698,6 +725,7 @@
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0F327ECD2CDBCAC100EDF536 /* WalletViewModel.swift in Sources */,
+				0F327EEE2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,

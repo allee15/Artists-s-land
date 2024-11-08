@@ -61,16 +61,17 @@ class SideMenuViewModel: BaseViewModel {
     }
     
     func deleteAccount() {
-        userService.deleteAccount()
-            .sink { _ in
-                
-            } receiveValue: { [weak self] response in
-                guard let self else {return}
-                if response {
-                    self.eventSubject.send(.delete)
-                } else {
-                    self.eventSubject.send(.failure)
-                }
-            }.store(in: &bag)
+        self.eventSubject.send(.delete)
+//        userService.deleteAccount()
+//            .sink { _ in
+//                
+//            } receiveValue: { [weak self] response in
+//                guard let self else {return}
+//                if response {
+//                    self.eventSubject.send(.delete)
+//                } else {
+//                    self.eventSubject.send(.failure)
+//                }
+//            }.store(in: &bag)
     }
 }
