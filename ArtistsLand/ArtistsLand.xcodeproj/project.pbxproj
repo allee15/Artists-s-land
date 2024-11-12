@@ -73,10 +73,6 @@
 		0F24D6322CC6FA3100A833E1 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D6312CC6FA3100A833E1 /* FirebaseMessaging */; };
 		0F24D6342CC6FA3100A833E1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D6332CC6FA3100A833E1 /* FirebasePerformance */; };
 		0F24D6362CC6FA4F00A833E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F24D6352CC6FA4F00A833E1 /* GoogleService-Info.plist */; };
-		0F24D6462CC81ED000A833E1 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6452CC81ED000A833E1 /* PushNotifications.swift */; };
-		0F24D6482CC81F0F00A833E1 /* NotificationsSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */; };
-		0F24D64B2CC8223E00A833E1 /* NotificationSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */; };
-		0F24D64D2CC8226200A833E1 /* NotificationsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */; };
 		0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */; };
 		0F327EC02CDBB3B700EDF536 /* SideMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EBF2CDBB3B700EDF536 /* SideMenuScreen.swift */; };
 		0F327EC22CDBB5E800EDF536 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EC12CDBB5E800EDF536 /* SideMenuViewModel.swift */; };
@@ -173,10 +169,6 @@
 		0F24D6242CC2AD1E00A833E1 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		0F24D6262CC2AD2600A833E1 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		0F24D6352CC6FA4F00A833E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0F24D6452CC81ED000A833E1 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
-		0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsService.swift; sourceTree = "<group>"; };
-		0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsScreen.swift; sourceTree = "<group>"; };
-		0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewModel.swift; sourceTree = "<group>"; };
 		0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KFImage+.swift"; sourceTree = "<group>"; };
 		0F327EBF2CDBB3B700EDF536 /* SideMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuScreen.swift; sourceTree = "<group>"; };
 		0F327EC12CDBB5E800EDF536 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
@@ -359,8 +351,6 @@
 			children = (
 				0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */,
 				0F24D6092CC298D700A833E1 /* UserService.swift */,
-				0F24D6452CC81ED000A833E1 /* PushNotifications.swift */,
-				0F24D6472CC81F0F00A833E1 /* NotificationsSettingsService.swift */,
 				0F327EE12CDEB4F900EDF536 /* PostsService.swift */,
 				0F327EE72CDEB91B00EDF536 /* ChatService.swift */,
 			);
@@ -472,15 +462,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		0F24D6492CC8223000A833E1 /* NotificationsSettings */ = {
-			isa = PBXGroup;
-			children = (
-				0F24D64A2CC8223E00A833E1 /* NotificationSettingsScreen.swift */,
-				0F24D64C2CC8226200A833E1 /* NotificationsSettingsViewModel.swift */,
-			);
-			path = NotificationsSettings;
-			sourceTree = "<group>";
-		};
 		0F327EBE2CDBB3AC00EDF536 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,7 +469,6 @@
 				0F327EC12CDBB5E800EDF536 /* SideMenuViewModel.swift */,
 				0F327EC62CDBC78B00EDF536 /* ChangePassword */,
 				0F327EC32CDBC4B600EDF536 /* EditAccount */,
-				0F24D6492CC8223000A833E1 /* NotificationsSettings */,
 				0F24D5FA2CC1BD2E00A833E1 /* ThemeSettingsScreen */,
 				0F327ECB2CDBCAB200EDF536 /* Wallet */,
 			);
@@ -696,7 +676,6 @@
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0F327ED62CDCD69400EDF536 /* ConversationScreen.swift in Sources */,
 				0F24D5F02CC1B8CD00A833E1 /* RegisterScreen.swift in Sources */,
-				0F24D6482CC81F0F00A833E1 /* NotificationsSettingsService.swift in Sources */,
 				0FD38F1E2CDBB0BD00338FAC /* AccountSummeryView.swift in Sources */,
 				0F24D5EE2CC1B8C000A833E1 /* RegisterViewModel.swift in Sources */,
 				0F327EC02CDBB3B700EDF536 /* SideMenuScreen.swift in Sources */,
@@ -724,7 +703,6 @@
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
 				0F24D60E2CC29A2D00A833E1 /* FloatingField.swift in Sources */,
 				0F327ED82CDCD6BB00EDF536 /* ConversationViewModel.swift in Sources */,
-				0F24D6462CC81ED000A833E1 /* PushNotifications.swift in Sources */,
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
 				0F327EF02CE250DE00EDF536 /* PostView.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
@@ -734,7 +712,6 @@
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
-				0F24D64D2CC8226200A833E1 /* NotificationsSettingsViewModel.swift in Sources */,
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0F24D5EB2CC1B8A300A833E1 /* LoginViewModel.swift in Sources */,
@@ -765,7 +742,6 @@
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D5E92CC1B88300A833E1 /* LoginScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
-				0F24D64B2CC8223E00A833E1 /* NotificationSettingsScreen.swift in Sources */,
 				0F24D5FE2CC1BD5000A833E1 /* ThemeSettingsViewModel.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,
 			);

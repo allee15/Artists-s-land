@@ -80,10 +80,6 @@ struct SideMenuScreen: View {
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
-                        WidgetView(title: "Notifications Settings", icon: .icNotifSettings) {
-                            navigation.push(NotificationsSettingsScreen().asDestination(), animated: true)
-                        }
-                        
                         WidgetView(title: "App settings", icon: .icAppSettings) {
                             navigation.push(ThemeSettingsScreen().asDestination(), animated: true)
                         }
