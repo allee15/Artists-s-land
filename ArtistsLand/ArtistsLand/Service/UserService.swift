@@ -89,4 +89,8 @@ class UserService {
         return userApi.updateProfileImage(id: id, avatar: avatar, shouldDeleteAvatar: shouldDeleteAvatar)
             .eraseToAnyPublisher()
     }
+    
+    func getArtistInfo(artistId: Int64) {
+        userApi.getArtistInfo(artistId: artistId)
+    }
 }

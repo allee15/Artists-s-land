@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BackButton: View {
     @EnvironmentObject private var navigation: Navigation
+    var imageColor: Color = .mainBlack
     var action: (()->())?
     
     var body: some View {
@@ -22,7 +23,7 @@ struct BackButton: View {
             Image(.icNavUp)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundStyle(Color.mainBlack)
+                .foregroundStyle(imageColor)
                 .frame(width: 32, height: 32)
         }
     }

@@ -15,8 +15,23 @@ class PostsService {
     
     private init() { }
     
-    func getSearchPosts(searchItem: String) -> AnyPublisher<String, Error> {
-        return postsApi.getSearchPosts(searchItem: searchItem)
-            .eraseToAnyPublisher()
+    func getPosts() {
+        postsApi.getPosts()
+    }
+    
+    func getPostsForArtist(id: Int64) {
+        postsApi.getPostsForArtist(id: id)
+    }
+    
+    func getSearchPosts(searchItem: String) {
+        postsApi.getSearchPosts(searchItem: searchItem)
+    }
+    
+    func likePost(postId: Int64) {
+        postsApi.likePost(postId: postId)
+    }
+    
+    func addCommentToPost(comment: Comment, postId: Int64) {
+        postsApi.addCommentToPost(comment: comment, postId: postId)
     }
 }

@@ -35,7 +35,7 @@ struct ChatsScreen: View {
                         VStack(spacing: 16) {
                             ForEach(viewModel.userChats, id: \.name) { chat in
                                 Button {
-                                    let vm = ConversationViewModel(user: user)
+                                    let vm = ConversationViewModel(user: user, chat: chat)
                                     mainNavigation?.push(ConversationScreen(viewModel: vm).asDestination(),
                                                          animated: true)
                                 } label: {

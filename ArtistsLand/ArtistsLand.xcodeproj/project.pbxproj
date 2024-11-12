@@ -99,6 +99,12 @@
 		0F327EEA2CDEB94600EDF536 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EE92CDEB94600EDF536 /* ChatApi.swift */; };
 		0F327EEC2CDEBA0800EDF536 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EEB2CDEBA0800EDF536 /* Chat.swift */; };
 		0F327EEE2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */; };
+		0F327EF02CE250DE00EDF536 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EEF2CE250DE00EDF536 /* PostView.swift */; };
+		0F327EF32CE262CE00EDF536 /* ArtistProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF22CE262CE00EDF536 /* ArtistProfileScreen.swift */; };
+		0F327EF52CE262E600EDF536 /* ArtistProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF42CE262E600EDF536 /* ArtistProfileViewModel.swift */; };
+		0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF62CE3DA0F00EDF536 /* DividerView.swift */; };
+		0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */; };
+		0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */; };
 		0FD38F162CDBAF2900338FAC /* AddProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
@@ -193,6 +199,12 @@
 		0F327EE92CDEB94600EDF536 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
 		0F327EEB2CDEBA0800EDF536 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPicPlaceHolder.swift; sourceTree = "<group>"; };
+		0F327EEF2CE250DE00EDF536 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		0F327EF22CE262CE00EDF536 /* ArtistProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileScreen.swift; sourceTree = "<group>"; };
+		0F327EF42CE262E600EDF536 /* ArtistProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileViewModel.swift; sourceTree = "<group>"; };
+		0F327EF62CE3DA0F00EDF536 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
+		0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfilePhotoView.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
@@ -267,6 +279,7 @@
 				0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */,
 				0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */,
 				0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */,
+				0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -284,6 +297,7 @@
 		0F24D5BD2CC1A9F800A833E1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0F327EF12CE262C100EDF536 /* ArtistProfile */,
 				0F24D5C12CC1AA2000A833E1 /* HomeScreen.swift */,
 				0F24D5C32CC1AA3100A833E1 /* HomeViewModel.swift */,
 			);
@@ -381,6 +395,9 @@
 				0F327ED22CDC055500EDF536 /* ToggleView.swift */,
 				0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */,
 				0F327EED2CDEBEF100EDF536 /* ChatPicPlaceHolder.swift */,
+				0F327EEF2CE250DE00EDF536 /* PostView.swift */,
+				0F327EF62CE3DA0F00EDF536 /* DividerView.swift */,
+				0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -512,6 +529,15 @@
 				0F327ED72CDCD6BB00EDF536 /* ConversationViewModel.swift */,
 			);
 			path = Conversation;
+			sourceTree = "<group>";
+		};
+		0F327EF12CE262C100EDF536 /* ArtistProfile */ = {
+			isa = PBXGroup;
+			children = (
+				0F327EF22CE262CE00EDF536 /* ArtistProfileScreen.swift */,
+				0F327EF42CE262E600EDF536 /* ArtistProfileViewModel.swift */,
+			);
+			path = ArtistProfile;
 			sourceTree = "<group>";
 		};
 		9B1A69612CC041A900B19BF1 = {
@@ -674,6 +700,7 @@
 				0FD38F1E2CDBB0BD00338FAC /* AccountSummeryView.swift in Sources */,
 				0F24D5EE2CC1B8C000A833E1 /* RegisterViewModel.swift in Sources */,
 				0F327EC02CDBB3B700EDF536 /* SideMenuScreen.swift in Sources */,
+				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
 				0F327ED32CDC055500EDF536 /* ToggleView.swift in Sources */,
 				0F24D5C82CC1AA9B00A833E1 /* SearchViewModel.swift in Sources */,
 				0F24D5FC2CC1BD3D00A833E1 /* ThemeSettingsScreen.swift in Sources */,
@@ -688,6 +715,10 @@
 				0FD38F162CDBAF2900338FAC /* AddProfilePhotoView.swift in Sources */,
 				0F24D6192CC2A7BD00A833E1 /* BlueButtonView.swift in Sources */,
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
+				0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */,
+				0F327EF52CE262E600EDF536 /* ArtistProfileViewModel.swift in Sources */,
+				0F327EF32CE262CE00EDF536 /* ArtistProfileScreen.swift in Sources */,
+				0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */,
 				0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */,
 				0F24D6062CC297A100A833E1 /* User.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
@@ -695,6 +726,7 @@
 				0F327ED82CDCD6BB00EDF536 /* ConversationViewModel.swift in Sources */,
 				0F24D6462CC81ED000A833E1 /* PushNotifications.swift in Sources */,
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
+				0F327EF02CE250DE00EDF536 /* PostView.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0F24D5CC2CC1AADB00A833E1 /* ChatsScreen.swift in Sources */,
 				0F24D5CA2CC1AACA00A833E1 /* ChatsViewModel.swift in Sources */,

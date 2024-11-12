@@ -282,4 +282,8 @@ class UserApi {
             dataTask.resume()
         }
     }
+    
+    func getArtistInfo(artistId: Int64) {
+        
+    }
 }

@@ -19,7 +19,7 @@ class SearchViewModel: BaseViewModel {
     var postsService = PostsService.shared
     @Published var searchText: String = ""
     @Published var searchScreenState: SearchScreenState = .emptyQuery
-    @Published var results: [String] = []
+    @Published var results: [User] = []
     @Published var page: Int = 1
     @Published var isLoadingFirstTime: Bool = false
     @Published var isLoading: Bool = false
@@ -59,7 +59,7 @@ class SearchViewModel: BaseViewModel {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.isLoadingFirstTime = false
             self.hasLoadedInitially = true
-            self.results = resultsMocked
+            self.results = [userMocked, userMocked, userMocked]
             self.searchScreenState = .results
         }
 //        searchPostsCancellable = postsService.getSearchPosts(searchItem: searchText)

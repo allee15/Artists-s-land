@@ -12,6 +12,50 @@ struct HomeScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-        Text("Home screen")
+        VStack(spacing: 0) {
+            TitleNavBarView(title: "Artists land")
+            
+            switch viewModel.postsState {
+            case .loading:
+                VStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }
+            case .failure:
+                VStack {
+                    Spacer()
+                    Text("An error has occured. Please try again!")
+                        .font(.poppinsSemiBold(size: 20))
+                        .foregroundStyle(Color.mainBlack)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 12)
+                    
+                    ClearButton(text: "Try again") {
+                        viewModel.loadPosts()
+                    }
+                    Spacer()
+                }
+            case .value(let posts):
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        ForEach(posts, id: \.id) { post in
+                            PostView(post: post) { postLiked in
+                                viewModel.likePost(postId: post.id)
+                            } commentsAction: { comment in
+                                viewModel.addCommentToPost(comment: comment, postId: post.id)
+                            } nameAction: { id in
+                                let vm = ArtistProfileViewModel(artistId: id)
+                                navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
+                            }
+
+                        }
+                    }.padding(.vertical, 20)
+                        .padding(.horizontal, 16)
+                }
+            }
+        }.ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.mainWhite)
     }
 }

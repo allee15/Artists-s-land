@@ -15,7 +15,7 @@ struct ConversationScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftRightNavBarView(chatName: viewModel.messages.first?.name ?? "Allee") {
+            LeftRightNavBarView(chat: viewModel.chat) {
                 let modal = ModalChooseOptionView(title: "Are you sure you want to delete this chat?",
                                                   description: "This action will take you out of this chat and you will have to search again this person.",
                                                   topButtonText: "Delete chat",
@@ -48,7 +48,7 @@ struct ConversationScreen: View {
                                 .foregroundColor(Color.contentSecondary)
                         }.padding(.all, 12)
                             .background(wasSentByMe ? Color.simpleBlue.opacity(0.3) : Color.mainGray)
-                            .cornerRadius(10)
+                            .cornerRadius(8, corners: .allCorners)
                             .frame(width: UIScreen.main.bounds.width * 0.8, alignment: wasSentByMe ? .trailing : .leading)
                             .id(message.id)
                             .onChange(of: viewModel.messages.count) { _, _ in
@@ -87,14 +87,14 @@ struct ConversationScreen: View {
     }
 }
 
-fileprivate struct SendMessageField: View {
+struct SendMessageField: View {
     @Binding var text: String
     let placeHolder: String
     var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.mainWhite, .mainWhite, .mainBlack)
     let icon: ImageResource
-    let iconSecond: ImageResource
+    var iconSecond: ImageResource?
     let action: () -> ()
-    let actionSecond: () -> ()
+    var actionSecond: (() -> ())?
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -140,14 +140,16 @@ fileprivate struct SendMessageField: View {
                             .frame(width: 24, height: 24)
                     }
                     
-                    Button {
-                        actionSecond()
-                    } label: {
-                        Image(iconSecond)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.mainBlack)
-                            .frame(width: 24, height: 24)
+                    if let actionSecond = actionSecond, let iconSecond = iconSecond {
+                        Button {
+                            actionSecond()
+                        } label: {
+                            Image(iconSecond)
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundStyle(Color.mainBlack)
+                                .frame(width: 24, height: 24)
+                        }
                     }
                 } .padding(.horizontal, 20)
             }

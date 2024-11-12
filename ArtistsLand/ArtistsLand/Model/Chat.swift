@@ -10,11 +10,12 @@ import Foundation
 struct Chat: Codable, Identifiable, Hashable {
     var id: String = UUID().uuidString
     var name: String
+    var artistAvatarUrl: String
 }
 
 let chatsMocked: [Chat] = [
-    Chat(name: "Alexia"),
-    Chat(name: "Allee")
+    Chat(name: "Alexia", artistAvatarUrl: "https://recorder.ro/wp-content/uploads/2024/10/IMG_1181-1920x1081.jpg"),
+    Chat(name: "Allee", artistAvatarUrl: "https://recorder.ro/wp-content/uploads/2024/10/IMG_1181-1920x1081.jpg")
 ]
 
 struct Message: Codable, Identifiable {

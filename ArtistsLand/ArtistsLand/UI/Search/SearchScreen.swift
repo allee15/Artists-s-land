@@ -15,7 +15,7 @@ struct SearchScreen: View {
         VStack(spacing: 0) {
             LeftNavBarView(title: "Search", hasBackButton: false) {}
             
-            VStack(spacing: 24) {
+            VStack(spacing: 0) {
                 FloatingField(text: $viewModel.searchText,
                               placeHolder: "Search in app users",
                               icon: .icNavClose,
@@ -43,22 +43,28 @@ struct SearchScreen: View {
                     case .results:
                         if !viewModel.results.isEmpty {
                             ScrollView(showsIndicators: false) {
-                                //todo fix me according to object
                                 VStack(alignment: .leading, spacing: 16) {
-                                    ForEach(viewModel.results, id: \.self) { result in
-                                        Text(result)
-                                            .foregroundStyle(Color.mainBlack)
-                                            .font(.poppinsRegular(size: 12))
+                                    ForEach(viewModel.results, id: \.id) { result in
+                                        HStack {
+                                            Button {
+                                                let vm = ArtistProfileViewModel(artistId: Int64(result.id))
+                                                navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
+                                            } label: {
+                                                ChatPicPlaceHolder(name: result.nickname, fontSize: 24, avatarUrl: result.avatarUrl, width: 64)
+                                            }
+                                            Spacer()
+                                        }
                                     }
-                                }
+                                }.padding(.top, 24)
+                                    .padding([.horizontal, .bottom], 16)
                             }
                         } else {
                             Spacer()
                         }
                     case .noResults:
-                        NoSearchResultsView(title: "No results from your search")
+                        NoSearchResultsView(title: "No results according to your search")
                     case .notEnoughCharacters:
-                        NoSearchResultsView(title: "You must enter at least 3 characters")
+                        NoSearchResultsView(title: "You must type at least 3 characters")
                     }
                 }
             }

@@ -14,11 +14,13 @@ class ConversationViewModel: BaseViewModel {
     @Published var message = ""
     @Published var messages: [Message] = []
     @Published var image: UIImage?
+    @Published var chat: Chat
     
     var chatService = ChatService.shared
     
-    init(user: User) {
+    init(user: User, chat: Chat) {
         self.user = user
+        self.chat = chat
         super.init()
         getMessages()
     }
