@@ -12,6 +12,7 @@ struct PostView: View {
     private let mainNavigation = EnvironmentObjects.navigation
     
     let post: Post
+    var showName: Bool = true
     let action: (Bool) -> ()
     let commentsAction: (String) -> ()
     let nameAction: (Int64) -> ()
@@ -21,10 +22,12 @@ struct PostView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 12) {
-                Button {
-                    nameAction(post.artistId)
-                } label: {
-                    ChatPicPlaceHolder(name: post.artistName, avatarUrl: post.artistAvatarUrl)
+                if showName {
+                    Button {
+                        nameAction(post.artistId)
+                    } label: {
+                        ChatPicPlaceHolder(name: post.artistName, avatarUrl: post.artistAvatarUrl)
+                    }
                 }
                 
                 Button {

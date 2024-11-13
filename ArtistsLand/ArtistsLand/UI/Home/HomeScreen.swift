@@ -13,7 +13,7 @@ struct HomeScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TitleNavBarView(title: "Artists land")
+            LeftNavBarView(title: "Artists land", hasBackButton: false) {}
             
             switch viewModel.postsState {
             case .loading:

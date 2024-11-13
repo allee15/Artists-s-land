@@ -79,9 +79,25 @@ struct ConversationScreen: View {
             .ignoresSafeArea(.container, edges: [.horizontal, .bottom])
             .sheet(isPresented: $showSheet) {
                 AddProfilePhotoView(title: "Send image in chat",
+                                    buttonText: "Send image",
                                     selectedImage: $viewModel.image,
                                     hideBottomSheet: $showSheet) { deleteAvatar in
                     viewModel.sendMessage()
+                    self.showSheet = false
+                }
+            }
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .sent:
+                    ToastManager.instance.show(
+                        Toast(
+                            text: "Edit successful!",
+                            textColor: Color.lightGreen
+                        ))
+                    
+                case .failed:
+                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    ToastManager.instance.show(toast)
                 }
             }
     }

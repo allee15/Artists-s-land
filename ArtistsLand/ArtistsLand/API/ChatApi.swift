@@ -25,4 +25,8 @@ class ChatApi {
     func getChats() {
         
     }
+    
+    func createChat(artistId: Int) {
+        
+    }
 }

@@ -29,4 +29,8 @@ class PostsApi {
     func addCommentToPost(comment: Comment, postId: Int64) {
         
     }
+    
+    func postImage() {
+        
+    }
 }

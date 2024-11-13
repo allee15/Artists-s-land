@@ -11,10 +11,14 @@ import Combine
 
 class ProfileViewModel: BaseViewModel {
     var userService = UserService.shared
+    var postsService = PostsService.shared
+    
     @Published var userInfo: User?
     @Published var profileImage: UIImage?
+    @Published var newPostImage: UIImage?
     @Published var isLoading: Bool = false
     let eventSubject = PassthroughSubject<EditAccountCompletion, Never>()
+    let eventSubjectForImages = PassthroughSubject<SendImageCompletion, Never>()
     
     override init() {
         super.init()
@@ -58,5 +62,19 @@ class ProfileViewModel: BaseViewModel {
                     self.eventSubject.send(.error)
                 }
             }).store(in: &bag)
+    }
+    
+    func addCommentToPost(comment: String, postId: Int64) {
+        let commentToSend = Comment(id: 3, name: userMocked.nickname, description: comment)
+        postsService.addCommentToPost(comment: commentToSend, postId: postId)
+    }
+    
+    func likePost(postId: Int64) {
+        postsService.likePost(postId: postId)
+    }
+    
+    func postImage() {
+        postsService.postImage()
+        self.eventSubjectForImages.send(.sent)
     }
 }

@@ -9,9 +9,13 @@ import SwiftUI
 
 struct ArtistProfileScreen: View {
     @StateObject var viewModel: ArtistProfileViewModel
+    @EnvironmentObject private var navigation: Navigation
+    
     var body: some View {
         VStack(spacing: 0) {
-            TitleNavBarView(title: "Artists land")
+            LeftNavBarView(title: "Posts") {
+                navigation.pop(animated: true)
+            }
             
             switch viewModel.artistInfoState {
             case .loading:
@@ -35,7 +39,38 @@ struct ArtistProfileScreen: View {
                     Spacer()
                 }
             case .value(let artistInfo):
-                EmptyView()
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        AccountSummaryView(profileImage: artistInfo.avatarUrl,
+                                           name: artistInfo.nickname) { }
+                        
+                        BlueButtonView(text: "Send message to artist") {
+                            viewModel.createChat(artistId: artistInfo.id)
+                        }.padding(.vertical, 8)
+                        
+                        ForEach(artistInfo.posts, id: \.id) { post in
+                            PostView(post: post, showName: false) { postLiked in
+                                viewModel.likePost(postId: post.id)
+                            } commentsAction: { comment in
+                                viewModel.addCommentToPost(comment: comment, postId: post.id)
+                            } nameAction: { id in
+                                
+                            }
+
+                        }
+                    }.padding(.vertical, 20)
+                        .padding(.horizontal, 16)
+                }
+            }
+        }.onReceive(viewModel.eventSubject) { event in
+            switch event {
+            case .created:
+                navigation.popToRoot(animated: true)
+                TabBarCoordinator.instance.tabBarNavigation = .chats
+                
+            case .failed:
+                let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                ToastManager.instance.show(toast)
             }
         }
     }

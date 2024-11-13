@@ -126,7 +126,14 @@ struct SideMenuScreen: View {
                         }
                     }
                     
-                    WidgetView(title: "App version \(viewModel.appVersion)", icon: .icAppVersion, showToggle: false) {}
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Version")
+                            .font(.poppinsSemiBold(size: 16))
+                            .foregroundStyle(Color.mainBlack)
+                            .padding(.horizontal, 16)
+                        
+                        WidgetView(title: "App version \(viewModel.appVersion)", icon: .icAppVersion, showToggle: false) {}
+                    }
                 }.padding(.top, 20)
                     .padding(.bottom, 32)
             }

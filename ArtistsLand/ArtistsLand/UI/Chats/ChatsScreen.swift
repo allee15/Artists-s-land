@@ -39,7 +39,7 @@ struct ChatsScreen: View {
                                     mainNavigation?.push(ConversationScreen(viewModel: vm).asDestination(),
                                                          animated: true)
                                 } label: {
-                                    ChatCardView(name: chat.name)
+                                    ChatCardView(chat: chat)
                                 }
                             }
                         }
@@ -54,13 +54,11 @@ struct ChatsScreen: View {
 }
 
 fileprivate struct ChatCardView: View {
-    let name: String
+    let chat: Chat
     
     var body: some View {
         HStack {
-            Text(name)
-                .font(.poppinsSemiBold(size: 16))
-                .foregroundColor(Color.mainBlack)
+            ChatPicPlaceHolder(name: chat.name, avatarUrl: chat.artistAvatarUrl)
             
             Spacer()
             

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AddProfilePhotoView: View {
-    var title: String = "Add profile photo"
+    let title: String
+    let buttonText: String
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
     @State private var pickPhoto = false
     
@@ -47,7 +48,7 @@ struct AddProfilePhotoView: View {
             Spacer()
             
             VStack(spacing: 8) {
-                BlueButtonView(text: "Delete avatar") {
+                BlueButtonView(text: buttonText) {
                     self.deleteAvatarAction(true)
                 }
                 

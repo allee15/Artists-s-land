@@ -30,4 +30,8 @@ class ChatService {
     func getChats() {
         chatApi.getChats()
     }
+    
+    func createChat(artistId: Int) {
+        chatApi.createChat(artistId: artistId)
+    }
 }

@@ -34,4 +34,8 @@ class PostsService {
     func addCommentToPost(comment: Comment, postId: Int64) {
         postsApi.addCommentToPost(comment: comment, postId: postId)
     }
+    
+    func postImage() {
+        postsApi.postImage()
+    }
 }
