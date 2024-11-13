@@ -38,4 +38,12 @@ class PostsService {
     func postImage() {
         postsApi.postImage()
     }
+    
+    func deletePost(postId: Int64) {
+        postsApi.deletePost(postId: postId)
+    }
+    
+    func reportPost(postId: Int64) {
+        postsApi.reportPost(postId: postId)
+    }
 }

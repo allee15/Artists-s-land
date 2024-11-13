@@ -77,4 +77,9 @@ class ProfileViewModel: BaseViewModel {
         postsService.postImage()
         self.eventSubjectForImages.send(.sent)
     }
+    
+    func deletePost(postId: Int64) {
+        postsService.deletePost(postId: postId)
+        self.getUserInfo()
+    }
 }

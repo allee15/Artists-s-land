@@ -56,4 +56,12 @@ class ArtistProfileViewModel: BaseViewModel {
             self.eventSubject.send(.created)
         }
     }
+    
+    func deletePost(postId: Int64) {
+        postsService.deletePost(postId: postId)
+    }
+    
+    func reportPost(postId: Int64) {
+        postsService.reportPost(postId: postId)
+    }
 }

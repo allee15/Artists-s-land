@@ -55,6 +55,12 @@ struct ArtistProfileScreen: View {
                                 viewModel.addCommentToPost(comment: comment, postId: post.id)
                             } nameAction: { id in
                                 
+                            } deleteAction: { canDelete, post in
+                                if canDelete {
+                                    viewModel.deletePost(postId: post.id)
+                                } else {
+                                    viewModel.reportPost(postId: post.id)
+                                }
                             }
 
                         }

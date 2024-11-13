@@ -33,4 +33,12 @@ class PostsApi {
     func postImage() {
         
     }
+    
+    func deletePost(postId: Int64) {
+        
+    }
+    
+    func reportPost(postId: Int64) {
+        
+    }
 }

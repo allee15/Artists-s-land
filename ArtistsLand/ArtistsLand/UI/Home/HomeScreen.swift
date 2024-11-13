@@ -47,6 +47,12 @@ struct HomeScreen: View {
                             } nameAction: { id in
                                 let vm = ArtistProfileViewModel(artistId: id)
                                 navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
+                            } deleteAction: { canDelete, post in
+                                if canDelete {
+                                    viewModel.deletePost(postId: post.id)
+                                } else {
+                                    viewModel.reportPost(postId: post.id)
+                                }
                             }
 
                         }

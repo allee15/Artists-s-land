@@ -65,4 +65,12 @@ class HomeViewModel: BaseViewModel {
         let commentToSend = Comment(id: 3, name: user?.nickname ?? "", description: comment)
         postsService.addCommentToPost(comment: commentToSend, postId: postId)
     }
+    
+    func deletePost(postId: Int64) {
+        postsService.deletePost(postId: postId)
+    }
+    
+    func reportPost(postId: Int64) {
+        postsService.reportPost(postId: postId)
+    }
 }

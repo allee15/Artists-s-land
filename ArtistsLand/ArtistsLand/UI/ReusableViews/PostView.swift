@@ -13,20 +13,45 @@ struct PostView: View {
     
     let post: Post
     var showName: Bool = true
+    var canDeletePost: Bool = false
     let action: (Bool) -> ()
     let commentsAction: (String) -> ()
     let nameAction: (Int64) -> ()
+    let deleteAction: (Bool, Post) -> ()
     @State private var isLiked: Bool = false
     @State private var showComments: Bool = false
+    @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 12) {
-                if showName {
+                HStack {
+                    if showName {
+                        Button {
+                            nameAction(post.artistId)
+                        } label: {
+                            ChatPicPlaceHolder(name: post.artistName, avatarUrl: post.artistAvatarUrl)
+                        }
+                    }
+                    Spacer()
                     Button {
-                        nameAction(post.artistId)
+                        let modal = ModalChooseOptionView(title: "Manage post",
+                                                          description: canDeletePost ? "As an author of this post, you can delete it." : "You can report this post if you consider that it voilates our terms.",
+                                                          topButtonText: canDeletePost ? "Delete post" : "Report",
+                                                          bottomButtonText: "Close") {
+                            deleteAction(canDeletePost, post)
+                            navigation.dismissModal(animated: true, completion: nil)
+                        } onBottomButtonTapped: {
+                            navigation.dismissModal(animated: true, completion: nil)
+                        }
+                        
+                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                     } label: {
-                        ChatPicPlaceHolder(name: post.artistName, avatarUrl: post.artistAvatarUrl)
+                        Image(.icReport)
+                            .resizable()
+                            .renderingMode(.template)
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(Color.mainBlack)
                     }
                 }
                 

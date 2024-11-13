@@ -77,12 +77,16 @@ struct ProfileScreen: View {
                                 }
                                 
                                 ForEach(user.posts, id: \.id) { post in
-                                    PostView(post: post, showName: false) { postLiked in
+                                    PostView(post: post, showName: false, canDeletePost: true) { postLiked in
                                         viewModel.likePost(postId: post.id)
                                     } commentsAction: { comment in
                                         viewModel.addCommentToPost(comment: comment, postId: post.id)
                                     } nameAction: { id in
                                         
+                                    } deleteAction: { canDelete, post in
+                                        if canDelete {
+                                            viewModel.deletePost(postId: post.id)
+                                        }
                                     }
                                 }
                             }.padding(.bottom, 20)
