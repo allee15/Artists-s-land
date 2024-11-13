@@ -101,6 +101,7 @@
 		0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF62CE3DA0F00EDF536 /* DividerView.swift */; };
 		0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */; };
 		0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */; };
+		0FD122412CE4BC8500C3F9E5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0FD122402CE4BC8500C3F9E5 /* Localizable.xcstrings */; };
 		0FD38F162CDBAF2900338FAC /* AddProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
@@ -197,6 +198,7 @@
 		0F327EF62CE3DA0F00EDF536 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 		0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		0FD122402CE4BC8500C3F9E5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0FD38F152CDBAF2900338FAC /* AddProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfilePhotoView.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 		9B1A69612CC041A900B19BF1 = {
 			isa = PBXGroup;
 			children = (
+				0FD122402CE4BC8500C3F9E5 /* Localizable.xcstrings */,
 				9B1A696C2CC041AA00B19BF1 /* ArtistsLand */,
 				9B1A696B2CC041AA00B19BF1 /* Products */,
 			);
@@ -618,6 +621,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ro,
 			);
 			mainGroup = 9B1A69612CC041A900B19BF1;
 			packageReferences = (
@@ -643,6 +647,7 @@
 			files = (
 				0F24D5942CC0F85500A833E1 /* LaunchScreen.storyboard in Resources */,
 				9B1A69752CC041AC00B19BF1 /* Preview Assets.xcassets in Resources */,
+				0FD122412CE4BC8500C3F9E5 /* Localizable.xcstrings in Resources */,
 				9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */,
 				0F24D6272CC2AD2600A833E1 /* Poppins-SemiBold.ttf in Resources */,
 				0F24D6232CC2AD1600A833E1 /* Poppins-Bold.ttf in Resources */,

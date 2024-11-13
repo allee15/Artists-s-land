@@ -227,7 +227,7 @@ class UserApi {
     
     func updateProfileImage(id: Int, avatar: Data?, shouldDeleteAvatar: Bool?) -> Future<Bool, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
