@@ -1,0 +1,33 @@
+{
+  "name": "artist-s-land-backend",
+  "version": "1.0.0",
+  "description": "Backend for an Instagram-like application designed for artists, built with Express.js.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "test": "echo \"No tests specified\" && exit 1"
+  },
+  "keywords": [
+    "instagram",
+    "artists",
+    "express",
+    "backend",
+    "nodejs"
+  ],
+  "author": "Cristea Bianca-Stefania",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.1",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
