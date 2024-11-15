@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 
 const authorize = async (req, res, next) => {
   try {
@@ -30,3 +30,5 @@ const authorize = async (req, res, next) => {
     res.status(500).json({ error: "Internal server error." });
   }
 };
+
+export default authorize;
