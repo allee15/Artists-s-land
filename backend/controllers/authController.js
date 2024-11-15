@@ -36,3 +36,30 @@ export const register = async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 };
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user?.password || ""
+    );
+
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    generateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      accType: user.accType,
+      email: user.email,
+    });
+  } catch (error) {
+    console.log("Error in login controller.");
+    res.status(500).json({ error: "Internal Server Error." });
+  }
+};
