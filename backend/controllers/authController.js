@@ -57,6 +57,7 @@ export const login = async (req, res) => {
       username: user.username,
       accType: user.accType,
       email: user.email,
+      token: user.jwt,
     });
   } catch (error) {
     console.log("Error in login controller.");

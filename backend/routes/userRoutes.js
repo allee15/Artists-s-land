@@ -1,10 +1,22 @@
 import express from "express";
 import authorize from "../middleware/authorization.js";
-import { changePassword, editAccount } from "../controllers/userController.js";
+import upload from "../middleware/multer.js";
+import {
+  changePassword,
+  editAccount,
+  addProfilePicture,
+} from "../controllers/userController.js";
 
 const router = express.Router();
 
 router.put("/edit-acc", authorize, editAccount);
 router.put("/change-password", authorize, changePassword);
+
+router.post(
+  "/profile-pic",
+  authorize,
+  upload.single("profilePic"),
+  addProfilePicture
+);
 
 export default router;

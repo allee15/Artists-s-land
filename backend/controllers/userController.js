@@ -55,3 +55,29 @@ export const changePassword = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const addProfilePicture = async (req, res) => {
+  console.log("File received:", req.file);
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    user.profilePic = req.file.path;
+    await user.save();
+
+    res.status(200).json({
+      message: "Profile photo updated successfully",
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log("Error in Add Profile Picture controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
