@@ -1,5 +1,8 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
 
 export const editAccount = async (req, res) => {
   try {
@@ -78,6 +81,49 @@ export const addProfilePicture = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in Add Profile Picture controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const deleteProfilePicture = async (req, res) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (user.profilePic === "") {
+      return res.status(400).json({ message: "No profile picture to delete" });
+    }
+
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "uploads",
+      "profilePics",
+      path.basename(user.profilePic)
+    );
+
+    console.log("File path: ", filePath);
+    try {
+      await fs.promises.access(filePath);
+      await fs.promises.unlink(filePath);
+
+      user.profilePic = "";
+      await user.save();
+      res.status(200).json({ message: "Profile picture deleted succesfully" });
+    } catch (error) {
+      console.log("Error deleting file", error);
+      return res
+        .status(400)
+        .json({ error: "File does not exist or error deleting" });
+    }
+  } catch (error) {
+    console.log("Error in deleteProfilePicture controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

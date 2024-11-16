@@ -5,6 +5,7 @@ import {
   changePassword,
   editAccount,
   addProfilePicture,
+  deleteProfilePicture,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -18,5 +19,5 @@ router.post(
   upload.single("profilePic"),
   addProfilePicture
 );
-
+router.delete("/profile-pic", authorize, deleteProfilePicture);
 export default router;
