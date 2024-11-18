@@ -27,7 +27,7 @@ struct Message: Codable, Identifiable {
 }
 
 let messagesMocked: [Message] = [
-    Message(date: Date(), message: "Buna", email: "alexia.elena.aldea@gmail.com", name: "Eu"),
-    Message(date: Date(), message: "Hola", email: "tu@gmail.com", name: "Tu"),
-    Message(date: Date(), message: "Hello", email: "el@gmail.com", name: "El")
+    Message(date: Date(), message: "Buna ziua", email: "alexia.elena.aldea@gmail.com", name: "Allee"),
+    Message(date: Date(), message: "Hola", email: "tu@gmail.com", name: "Anonymous"),
+    Message(date: Date(), message: "Hello", email: "tu@gmail.com", name: "Anonymous")
 ]
