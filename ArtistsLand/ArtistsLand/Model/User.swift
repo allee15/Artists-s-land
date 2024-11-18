@@ -19,7 +19,7 @@ struct User {
 let userMocked = User(id: 1,
                 email: "alexia.elena.aldea@gmail.com",
                 nickname: "Allee",
-                avatarUrl: "https://recorder.ro/wp-content/uploads/2024/10/IMG_1181-1920x1081.jpg",
+                avatarUrl: "https://media.istockphoto.com/id/1368424494/photo/studio-portrait-of-a-cheerful-woman.jpg?s=612x612&w=0&k=20&c=ISNDV3ZXeNU6VvDhR7KXFd6y0saq4Eji15cep_Gj8Eg=",
                 isArtist: true,
                 posts: postsMocked)
 

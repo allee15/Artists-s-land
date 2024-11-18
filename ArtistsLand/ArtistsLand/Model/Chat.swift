@@ -14,8 +14,8 @@ struct Chat: Codable, Identifiable, Hashable {
 }
 
 let chatsMocked: [Chat] = [
-    Chat(name: "Alexia", artistAvatarUrl: "https://recorder.ro/wp-content/uploads/2024/10/IMG_1181-1920x1081.jpg"),
-    Chat(name: "Allee", artistAvatarUrl: "https://recorder.ro/wp-content/uploads/2024/10/IMG_1181-1920x1081.jpg")
+    Chat(name: "Alexia", artistAvatarUrl: "https://media.istockphoto.com/id/638756792/photo/beautiful-woman-posing-against-dark-background.jpg?s=612x612&w=0&k=20&c=AanwEr0pmrS-zhkVJEgAwxHKwnx14ywNh5dmzwbpyLk="),
+    Chat(name: "Allee", artistAvatarUrl: "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=")
 ]
 
 struct Message: Codable, Identifiable {
@@ -28,7 +28,7 @@ struct Message: Codable, Identifiable {
 }
 
 let messagesMocked: [Message] = [
-    Message(date: Date(), message: "Buna", email: "alexia.elena.aldea@gmail.com", name: "Eu"),
-    Message(date: Date(), message: "Hola", email: "tu@gmail.com", name: "Tu"),
-    Message(date: Date(), message: "Hello", email: "el@gmail.com", name: "El")
+    Message(date: Date(), message: "Buna", email: "alexia.elena.aldea@gmail.com", name: "Allee"),
+    Message(date: Date(), message: "Hola", email: "ana@gmail.com", name: "Ana"),
+    Message(date: Date(), message: "Hello", email: "michael@gmail.com", name: "Michael")
 ]
