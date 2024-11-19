@@ -3,6 +3,7 @@ import authorize from "../middleware/authorization.js";
 import upload from "../middleware/multer.js";
 import {
   changePassword,
+  getUsers,
   editAccount,
   addProfilePicture,
   deleteProfilePicture,
@@ -11,6 +12,7 @@ import {
 
 const router = express.Router();
 
+router.get("/get-users", authorize, getUsers);
 router.put("/edit-acc", authorize, editAccount);
 router.put("/change-password", authorize, changePassword);
 
