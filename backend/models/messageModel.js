@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema(
+const messageSchema = mongoose.Schema(
   {
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +15,10 @@ const messageSchema = new mongoose.Schema(
     message: {
       type: String,
       required: true,
+    },
+    fileUrl: {
+      type: String,
+      default: "",
     },
   },
   { timestamps: true }
