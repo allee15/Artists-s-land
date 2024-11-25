@@ -4,6 +4,19 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
 
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.log("Error in getUser controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 export const getUsers = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
