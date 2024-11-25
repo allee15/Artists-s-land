@@ -8,7 +8,7 @@
 import Foundation
 
 enum DefaultAPIEnvironment {
-    static private let stage = ""
+    static private let stage = "http://localhost:5001"
     
     static var basePath: URL {
         let selectedEnvironment: String = {

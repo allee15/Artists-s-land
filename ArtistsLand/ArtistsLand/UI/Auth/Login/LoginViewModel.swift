@@ -27,30 +27,37 @@ class LoginViewModel: BaseViewModel {
     let loginCompletion = PassthroughSubject<LoginCompletion, Never>()
     var userService = UserService.shared
     
-    func login() {
-        if email.isValidEmail() {
-            userService.login(email: email, password: password)
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] completion in
-                    guard let self else { return }
-                    switch completion {
-                    case .failure(let error):
-                        self.loginCompletion.send(.failure(error))
-                    case .finished:
-                        break
-                    }
-                } receiveValue: { [weak self] user in
-                    guard let self else { return }
-                    self.loginCompletion.send(.login)
-                }
-                .store(in: &bag)
-        } else {
-            if password.isEmpty {
-                self.errorMessagePassword = "Please enter a valid password."
-            } else if password.count < 6 {
-                self.errorMessagePassword = "Password must contain at least 6 characters."
-            }
+    func allFieldAreCompleted() {
+        if !email.isValidEmail() {
             self.errorMessageEmail = "Please enter a valid email address."
         }
+        
+        if password.isEmpty {
+            self.errorMessagePassword = "This field is required."
+        } else if password.count < 6 {
+            self.errorMessagePassword = "Password must contain at least 6 characters."
+        }
+        
+        if errorMessageEmail == nil && errorMessagePassword == nil {
+            self.login()
+        }
+    }
+    
+    func login() {
+        userService.login(email: email, password: password)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.loginCompletion.send(.failure(error))
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] user in
+                guard let self else { return }
+                self.loginCompletion.send(.login)
+            }
+            .store(in: &bag)
     }
 }

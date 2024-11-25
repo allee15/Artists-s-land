@@ -31,32 +31,48 @@ class ProfileViewModel: BaseViewModel {
                 
             }, receiveValue: { [weak self] userState in
                 guard let self = self else { return }
-                self.userInfo = userMocked
-//                switch userState {
-//                case .failure(_):
-//                    self.isLoading = false
-//                case .loading:
-//                    self.isLoading = true
-//                case .ready(let userState):
-//                    self.isLoading = false
-//                    switch userState {
-//                    case .anonymous:
-//                        self.userInfo = nil
-//                    case .loggedIn(let user):
-//                        self.userInfo = user
-//                    }
-//                }
+                switch userState {
+                case .failure(_):
+                    self.isLoading = false
+                case .loading:
+                    self.isLoading = true
+                case .ready(let userState):
+                    self.isLoading = false
+                    switch userState {
+                    case .anonymous:
+                        self.userInfo = nil
+                    case .loggedIn(let user):
+                        self.userInfo = user
+                    }
+                }
             }).store(in: &bag)
     }
     
-    func updateProfileImage(id: Int, shouldDeleteAvatar: Bool? = nil) {
-        userService.updateProfileImage(id: id, shouldDeleteAvatar: shouldDeleteAvatar)
+    func updateProfileImage() {
+        if let imageToSend = profileImage?.jpegData(compressionQuality: 0.8) {
+            userService.uploadProfilePicture(imageData: imageToSend)
+                .sink(receiveCompletion: { _ in
+                    
+                }, receiveValue: { [weak self] response in
+                    guard let self else {return}
+                    if response {
+                        self.eventSubject.send(.completed)
+                    } else {
+                        self.eventSubject.send(.error)
+                    }
+                }).store(in: &bag)
+        } else {
+            self.eventSubject.send(.error)
+        }
+    }
+    
+    func deleteProfileImage() {
+        userService.deleteProfilePicture()
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] response in
                 guard let self else {return}
                 if response {
-                    
                     self.eventSubject.send(.completed)
                 } else {
                     self.eventSubject.send(.error)

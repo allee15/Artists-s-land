@@ -35,6 +35,7 @@ struct LoginScreen: View {
                     
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email address",
+                                  keyboardType: .emailAddress,
                                   leftIcon: .icFieldEmail,
                                   errorMessage: viewModel.errorMessageEmail)
                     .submitLabel(.next)
@@ -84,7 +85,7 @@ struct LoginScreen: View {
                 }
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
             case .login:
-                navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+                break
             }
         }
     }

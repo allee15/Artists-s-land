@@ -17,6 +17,7 @@ class HomeViewModel: BaseViewModel {
     var postsService = PostsService.shared
     var userService = UserService.shared
     
+    @Published var isLoading: Bool = false
     @Published var user: User?
     @Published var postsState = PostsState.loading
     
@@ -32,21 +33,20 @@ class HomeViewModel: BaseViewModel {
                 
             }, receiveValue: { [weak self] userState in
                 guard let self = self else { return }
-                self.user = userMocked
-//                switch userState {
-//                case .failure(_):
-//                    self.isLoading = false
-//                case .loading:
-//                    self.isLoading = true
-//                case .ready(let userState):
-//                    self.isLoading = false
-//                    switch userState {
-//                    case .anonymous:
-//                        self.userInfo = nil
-//                    case .loggedIn(let user):
-//                        self.userInfo = user
-//                    }
-//                }
+                switch userState {
+                case .failure(_):
+                    self.isLoading = false
+                case .loading:
+                    self.isLoading = true
+                case .ready(let userState):
+                    self.isLoading = false
+                    switch userState {
+                    case .anonymous:
+                        self.user = nil
+                    case .loggedIn(let user):
+                        self.user = user
+                    }
+                }
             }).store(in: &bag)
     }
     

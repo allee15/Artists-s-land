@@ -37,41 +37,48 @@ class SideMenuViewModel: BaseViewModel {
                 
             }, receiveValue: { [weak self] userState in
                 guard let self = self else { return }
-                self.userInfo = userMocked
-//                switch userState {
-//                case .failure(_):
-//                    self.isLoading = false
-//                case .loading:
-//                    self.isLoading = true
-//                case .ready(let userState):
-//                    self.isLoading = false
-//                    switch userState {
-//                    case .anonymous:
-//                        self.userInfo = nil
-//                    case .loggedIn(let user):
-//                        self.userInfo = user
-//                    }
-//                }
+                switch userState {
+                case .failure(_):
+                    self.isLoading = false
+                case .loading:
+                    self.isLoading = true
+                case .ready(let userState):
+                    self.isLoading = false
+                    switch userState {
+                    case .anonymous:
+                        self.userInfo = nil
+                    case .loggedIn(let user):
+                        self.userInfo = user
+                    }
+                }
             }).store(in: &bag)
     }
     
     func logOut() {
         userService.logout()
-        self.eventSubject.send(.logout)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] response in
+                guard let self else {return}
+                if response {
+                    self.eventSubject.send(.logout)
+                } else {
+                    self.eventSubject.send(.failure)
+                }
+            }.store(in: &bag)
     }
     
     func deleteAccount() {
-        self.eventSubject.send(.delete)
-//        userService.deleteAccount()
-//            .sink { _ in
-//                
-//            } receiveValue: { [weak self] response in
-//                guard let self else {return}
-//                if response {
-//                    self.eventSubject.send(.delete)
-//                } else {
-//                    self.eventSubject.send(.failure)
-//                }
-//            }.store(in: &bag)
+        userService.deleteAccount()
+            .sink { _ in
+                
+            } receiveValue: { [weak self] response in
+                guard let self else {return}
+                if response {
+                    self.eventSubject.send(.delete)
+                } else {
+                    self.eventSubject.send(.failure)
+                }
+            }.store(in: &bag)
     }
 }

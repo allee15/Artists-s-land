@@ -47,7 +47,7 @@ struct SearchScreen: View {
                                     ForEach(viewModel.results, id: \.id) { result in
                                         HStack {
                                             Button {
-                                                let vm = ArtistProfileViewModel(artistId: Int64(result.id))
+                                                let vm = ArtistProfileViewModel(artistId: Int64(result.id) ?? 0)
                                                 navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
                                             } label: {
                                                 ChatPicPlaceHolder(name: result.nickname, fontSize: 24, avatarUrl: result.avatarUrl, width: 64)

@@ -26,7 +26,7 @@ struct ProfileScreen: View {
                                                        name: userInfo.nickname) {
                                         self.showChangePhotoBottomSheet = true
                                     }.onChange(of: viewModel.profileImage) { _, _ in
-                                        viewModel.updateProfileImage(id: userInfo.id)
+                                        viewModel.updateProfileImage()
                                         self.showChangePhotoBottomSheet = false
                                     }
                                     .sheet(isPresented: $showChangePhotoBottomSheet) {
@@ -35,7 +35,7 @@ struct ProfileScreen: View {
                                                             selectedImage: $viewModel.profileImage,
                                                             hideBottomSheet: $showChangePhotoBottomSheet) { deleteAvatar in
                                             if deleteAvatar {
-                                                viewModel.updateProfileImage(id: userInfo.id, shouldDeleteAvatar: deleteAvatar)
+                                                viewModel.deleteProfileImage()
                                                 self.showChangePhotoBottomSheet = false
                                             }
                                         }
@@ -46,7 +46,8 @@ struct ProfileScreen: View {
                                 }
                             } else {
                                 AccountSummaryView(profileImage: "",
-                                                   name: "") { }
+                                                   hasProfileImage: false,
+                                                   name: "Log in your account to see your profile") { }
                             }
                             Spacer()
                             
@@ -92,6 +93,12 @@ struct ProfileScreen: View {
                             }.padding(.bottom, 20)
                                 .padding(.horizontal, 16)
                         }
+                    } else {
+                        Spacer()
+                        MainBlueButtonView(text: "Log in") {
+                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                        }.padding(.horizontal, 16)
+                        Spacer()
                     }
                 }
             }

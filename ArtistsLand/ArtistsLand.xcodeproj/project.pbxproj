@@ -363,9 +363,9 @@
 			isa = PBXGroup;
 			children = (
 				0F24D5FF2CC1BE4B00A833E1 /* ErrorInterceptor.swift */,
+				0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */,
 				0F24D6032CC2978600A833E1 /* JSONParsers.swift */,
 				0F24D6072CC2986C00A833E1 /* UserApi.swift */,
-				0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */,
 				0F327EE32CDEB52900EDF536 /* PostsApi.swift */,
 				0F327EE92CDEB94600EDF536 /* ChatApi.swift */,
 			);

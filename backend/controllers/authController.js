@@ -27,6 +27,7 @@ export const register = async (req, res) => {
         username: newUser.username,
         accType: newUser.accType,
         email: newUser.email,
+        token: newUser.jwt,
       });
     } else {
       res.status(400).json({ error: "Invalid user data" });

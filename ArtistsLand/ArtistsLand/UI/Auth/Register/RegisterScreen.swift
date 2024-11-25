@@ -46,6 +46,7 @@ struct RegisterScreen: View {
                         
                         FloatingField(text: $viewModel.email,
                                       placeHolder: "Email address",
+                                      keyboardType: .emailAddress,
                                       leftIcon: .icFieldEmail,
                                       errorMessage: viewModel.errorMessageEmail)
                         .submitLabel(.next)
@@ -127,7 +128,7 @@ struct RegisterScreen: View {
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 case .register:
-                    navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+                    break
                 }
             }
     }

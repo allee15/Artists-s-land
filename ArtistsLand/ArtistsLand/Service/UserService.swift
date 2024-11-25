@@ -12,8 +12,7 @@ class UserService {
     static let shared = UserService()
     private let userApi = UserApi()
     var bag = Set<AnyCancellable>()
-    
-    private init() { }
+    let userDefaultsService = UserDefaultsService.shared
     
     public lazy var userReactiveData = ReactiveData<UserState> { [weak self] in
         guard let self else {return nil}
@@ -44,25 +43,49 @@ class UserService {
         .eraseToAnyPublisher()
     }
     
-    public var isLoggedIn: Bool {
-        if let userState = userReactiveData.currentValue, case .loggedIn(_) = userState {
-            return true
+    public var isLoggedIn: Bool { return authToken != nil }
+    
+    var authToken: String? {
+        set {
+            userDefaultsService.setValue(key: UserDefaultsKeys.token, value: newValue)
         }
-        return false
+        get {
+            return userDefaultsService.getValue(key: UserDefaultsKeys.token)
+        }
     }
     
-    func login(email: String, password: String) -> AnyPublisher<User, Error> {
+    private init() {
+        if !isLoggedIn {
+            self.userReactiveData.pushValue(value: .anonymous)
+        }
+    }
+    
+    func login(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
         return userApi.login(email: email, password: password)
+            .handleEvents(receiveOutput: { [weak self] user in
+                self?.authToken = user.token
+                self?.userReactiveData.pushValue(value: .loggedIn(user.user))
+            })
             .eraseToAnyPublisher()
     }
     
-    func register(nickname: String, email: String, password: String, userType: String) -> AnyPublisher<User, Error> {
+    func register(nickname: String, email: String, password: String, userType: String) -> AnyPublisher<UserResponse, Error> {
         return userApi.register(nickname: nickname, email: email, password: password, userType: userType)
+            .handleEvents(receiveOutput: { [weak self] user in
+                self?.authToken = user.token
+                self?.userReactiveData.pushValue(value: .loggedIn(user.user))
+            })
             .eraseToAnyPublisher()
     }
     
-    func logout() {
-        self.userReactiveData.pushValue(value: .anonymous)
+    func getUser() -> AnyPublisher<User, Error> {
+        self.userApi.getUser()
+            .eraseToAnyPublisher()
+    }
+    
+    func logout() -> AnyPublisher<Bool, Error> {
+        self.userApi.logout()
+            .eraseToAnyPublisher()
     }
     
     func deleteAccount() -> AnyPublisher<Bool, Error> {
@@ -70,23 +93,23 @@ class UserService {
             .eraseToAnyPublisher()
     }
     
-    func changePassword(newPassword: String) -> AnyPublisher<Bool, Error> {
-        return userApi.changePassword(newPassword: newPassword)
+    func changePassword(newPassword: String, currentPassword: String) -> AnyPublisher<Bool, Error> {
+        return userApi.changePassword(newPassword: newPassword, currentPassword: currentPassword)
             .eraseToAnyPublisher()
     }
     
-    func editAccount(nickname: String) -> AnyPublisher<Bool, Error> {
-        return userApi.editAccount(nickname: nickname)
+    func editAccount(nickname: String? = nil, email: String? = nil) -> AnyPublisher<Bool, Error> {
+        return userApi.editAccount(nickname: nickname, email: email)
             .eraseToAnyPublisher()
     }
     
-    func getBalance() -> AnyPublisher<Int64, Error> {
-        return userApi.getBalance()
+    func uploadProfilePicture(imageData: Data) -> AnyPublisher<Bool, Error> {
+        return userApi.uploadProfilePicture(imageData: imageData)
             .eraseToAnyPublisher()
     }
     
-    func updateProfileImage(id: Int, avatar: Data? = nil, shouldDeleteAvatar: Bool? = nil) -> AnyPublisher<Bool, Error> {
-        return userApi.updateProfileImage(id: id, avatar: avatar, shouldDeleteAvatar: shouldDeleteAvatar)
+    func deleteProfilePicture() -> AnyPublisher<Bool, Error> {
+        return userApi.deleteProfilePicture()
             .eraseToAnyPublisher()
     }
     
