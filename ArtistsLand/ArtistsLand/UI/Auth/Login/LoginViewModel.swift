@@ -10,6 +10,7 @@ import Combine
 
 enum LoginCompletion {
     case login
+    case invalidCredentials
     case failure(Error)
 }
 
@@ -56,7 +57,11 @@ class LoginViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] user in
                 guard let self else { return }
-                self.loginCompletion.send(.login)
+                if user.user.email.isEmpty {
+                    self.loginCompletion.send(.invalidCredentials)
+                } else {
+                    self.loginCompletion.send(.login)
+                }
             }
             .store(in: &bag)
     }

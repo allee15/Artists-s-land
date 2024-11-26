@@ -39,6 +39,7 @@ class RootViewModel: BaseViewModel {
         binded = true
         
         userService.userReactiveData.getStateSubject()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure = completion {
                     self?.showBlockingError = true

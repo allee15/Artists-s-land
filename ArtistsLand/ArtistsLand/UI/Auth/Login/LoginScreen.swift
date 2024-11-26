@@ -77,7 +77,7 @@ struct LoginScreen: View {
             }
             .onReceive(viewModel.loginCompletion) { loginCompletion in
             switch loginCompletion {
-            case .failure(_):
+            case .failure(_), .invalidCredentials:
                 let modal = ModalChooseOptionView(title: "Error",
                                       description: "An error has occured. Please try again.",
                                                   topButtonText: "Try again") {

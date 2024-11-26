@@ -27,6 +27,7 @@ class ProfileViewModel: BaseViewModel {
     
     private func getUserInfo() {
         userService.userReactiveData.getStateSubject()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] userState in
@@ -51,6 +52,7 @@ class ProfileViewModel: BaseViewModel {
     func updateProfileImage() {
         if let imageToSend = profileImage?.jpegData(compressionQuality: 0.8) {
             userService.uploadProfilePicture(imageData: imageToSend)
+                .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { _ in
                     
                 }, receiveValue: { [weak self] response in
@@ -68,6 +70,7 @@ class ProfileViewModel: BaseViewModel {
     
     func deleteProfileImage() {
         userService.deleteProfilePicture()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] response in

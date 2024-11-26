@@ -20,14 +20,14 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
     if (newUser) {
-      generateTokenAndSetCookie(newUser._id, res);
+      const token = generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
       res.status(201).json({
         _id: newUser._id,
         username: newUser.username,
         accType: newUser.accType,
         email: newUser.email,
-        token: newUser.jwt,
+        token: token
       });
     } else {
       res.status(400).json({ error: "Invalid user data" });
@@ -51,14 +51,15 @@ export const login = async (req, res) => {
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
 
     res.status(200).json({
       _id: user._id,
       username: user.username,
       accType: user.accType,
       email: user.email,
-      token: user.jwt,
+      profilePic: user.profilePic,
+      token: token
     });
   } catch (error) {
     console.log("Error in login controller.");

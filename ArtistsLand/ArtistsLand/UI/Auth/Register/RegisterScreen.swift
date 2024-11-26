@@ -120,7 +120,7 @@ struct RegisterScreen: View {
             }
             .onReceive(viewModel.registerCompletion) { registerCompletion in
                 switch registerCompletion {
-                case .failure(_):
+                case .failure(_), .invalidCredentials:
                     let modal = ModalChooseOptionView(title: "Error",
                                           description: "An error has occured. Please try again.",
                                                       topButtonText: "Try again") {

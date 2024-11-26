@@ -20,7 +20,8 @@ struct AccountSummaryView: View {
                 Button {
                     action()
                 } label: {
-                    KFImage(URL(string: profileImage ?? ""))
+                    let localPath = profileImage ?? ""
+                    KFImage(URL(string: "file://\(localPath)"))
                         .resizable()
                         .placeholder {
                             Image(.icCamera)

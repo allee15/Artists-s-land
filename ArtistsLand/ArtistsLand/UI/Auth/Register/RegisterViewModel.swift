@@ -11,6 +11,7 @@ import Combine
 enum RegisterCompletion {
     case register
     case failure(Error)
+    case invalidCredentials
 }
 
 enum RegisterField {
@@ -68,7 +69,6 @@ class RegisterViewModel: BaseViewModel {
     
     private func register() {
         userService.register(nickname: name, email: email, password: password, userType: selectedUserType.lowercased())
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
@@ -79,7 +79,11 @@ class RegisterViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] user in
                 guard let self else { return }
-                self.registerCompletion.send(.register)
+                if user.user.email.isEmpty {
+                    self.registerCompletion.send(.invalidCredentials)
+                } else {
+                    self.registerCompletion.send(.register)
+                }
             }
             .store(in: &bag)
     }
