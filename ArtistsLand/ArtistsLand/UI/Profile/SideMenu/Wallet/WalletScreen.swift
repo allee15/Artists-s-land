@@ -10,7 +10,7 @@ import SwiftUI
 struct WalletScreen: View {
     @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
-    @StateObject private var viewModel = WalletViewModel()
+    @StateObject var viewModel: WalletViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,7 +24,7 @@ struct WalletScreen: View {
                         Spacer()
                         VStack(alignment: .center, spacing: 12) {
                             HStack(spacing: 0) {
-                                Text("Your balance: \(viewModel.balance)")
+                                Text("Your balance: \(String(format: "%.1f", viewModel.userInfo.balance))")
                                     .font(.poppinsSemiBold(size: 20))
                                     .foregroundStyle(Color.mainBlack)
                                     .padding(.horizontal, 16)
@@ -36,7 +36,7 @@ struct WalletScreen: View {
                                     .frame(width: 20, height: 20)
                             }
                             
-                            Text("Level: \(viewModel.level)")
+                            Text("Level: \(viewModel.userInfo.level)")
                                 .font(.poppinsSemiBold(size: 16))
                                 .foregroundStyle(Color.mainBlack)
                                 .padding([.bottom, .horizontal], 20)

@@ -72,10 +72,12 @@ struct FloatingField: View {
                             if secureField && secure {
                                 SecureField(text: $text) {
                                 }
+                                .autocapitalization(.none)
                             } else {
                                 TextField(text: $text) {
                                 }
                                 .keyboardType(keyboardType)
+                                .autocapitalization(.none)
                             }
                         }.foregroundColor(isDisabled ? colors.placeholderForeground.opacity(0.5) : .black)
                         .font(.poppinsRegular(size: 14))

@@ -8,10 +8,12 @@ import {
   addProfilePicture,
   deleteProfilePicture,
   deleteAccount,
+  getUser,
 } from "../controllers/userController.js";
 
 const router = express.Router();
 
+router.get("/get-user", authorize, getUser);
 router.get("/get-users", authorize, getUsers);
 router.put("/edit-acc", authorize, editAccount);
 router.put("/change-password", authorize, changePassword);

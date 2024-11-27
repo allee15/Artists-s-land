@@ -11,6 +11,7 @@ import Combine
 enum RegisterCompletion {
     case register
     case failure(Error)
+    case invalidCredentials
 }
 
 enum RegisterField {
@@ -23,7 +24,7 @@ class RegisterViewModel: BaseViewModel {
     @Published var showGreeting: Bool = false
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var userType: [String] = ["Artist", "User"]
+    @Published var userType: [String] = ["Artist", "Regular"]
     @Published var isPickerShown = false
     @Published var selectedUserType: String = ""
     @Published var name: String = ""
@@ -39,6 +40,8 @@ class RegisterViewModel: BaseViewModel {
     func allFieldAreCompleted() {
         if name.isEmpty {
             self.errorMessageName = "This field is required."
+        } else if name.count < 3 {
+            self.errorMessageName = "Name must contain at least 3 characters."
         }
         
         if selectedUserType.isEmpty {
@@ -65,8 +68,7 @@ class RegisterViewModel: BaseViewModel {
     }
     
     private func register() {
-        userService.register(nickname: name, email: email, password: password, userType: selectedUserType)
-            .receive(on: DispatchQueue.main)
+        userService.register(nickname: name, email: email, password: password, userType: selectedUserType.lowercased())
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
@@ -77,7 +79,11 @@ class RegisterViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] user in
                 guard let self else { return }
-                self.registerCompletion.send(.register)
+                if user.user.email.isEmpty {
+                    self.registerCompletion.send(.invalidCredentials)
+                } else {
+                    self.registerCompletion.send(.register)
+                }
             }
             .store(in: &bag)
     }

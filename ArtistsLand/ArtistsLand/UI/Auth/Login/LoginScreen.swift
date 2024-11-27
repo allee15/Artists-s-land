@@ -35,6 +35,7 @@ struct LoginScreen: View {
                     
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email address",
+                                  keyboardType: .emailAddress,
                                   leftIcon: .icFieldEmail,
                                   errorMessage: viewModel.errorMessageEmail)
                     .submitLabel(.next)
@@ -76,7 +77,7 @@ struct LoginScreen: View {
             }
             .onReceive(viewModel.loginCompletion) { loginCompletion in
             switch loginCompletion {
-            case .failure(_):
+            case .failure(_), .invalidCredentials:
                 let modal = ModalChooseOptionView(title: "Error",
                                       description: "An error has occured. Please try again.",
                                                   topButtonText: "Try again") {
@@ -84,7 +85,7 @@ struct LoginScreen: View {
                 }
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
             case .login:
-                navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+                break
             }
         }
     }

@@ -38,7 +38,7 @@ struct EditAccountScreen: View {
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email",
                                   leftIcon: .icFieldEmail,
-                                  isDisabled: true)
+                                  errorMessage: viewModel.errorMessageEmail)
                     
                     FloatingField(text: $viewModel.nickname,
                                   placeHolder: "Username",
@@ -66,6 +66,10 @@ struct EditAccountScreen: View {
             .onChange(of: viewModel.nickname) { _, _ in
                 changesMade = true
                 viewModel.errorMessageName = nil
+            }
+            .onChange(of: viewModel.email) { _, _ in
+                changesMade = true
+                viewModel.errorMessageEmail = nil
             }
             .onReceive(viewModel.eventSubject) { event in
                 switch event {

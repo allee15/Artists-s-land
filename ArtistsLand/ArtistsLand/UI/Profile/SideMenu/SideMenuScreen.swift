@@ -39,7 +39,8 @@ struct SideMenuScreen: View {
                             
                             if user.isArtist {
                                 WidgetView(title: "Wallet", icon: .icWallet) {
-                                    navigation.push(WalletScreen().asDestination(),
+                                    let vm = WalletViewModel(userInfo: user)
+                                    navigation.push(WalletScreen(viewModel: vm).asDestination(),
                                                     animated: true)
                                 }
                             }

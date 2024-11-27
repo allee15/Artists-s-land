@@ -58,6 +58,8 @@ struct PostView: View {
                 Button {
                     mainNavigation?.push(ZoomImageScreen(imageToZoom: post.postUrl).asDestination(), animated: true)
                 } label: {
+//                    let localPath = avatarUrl
+//                    KFImage(URL(string: "file://\(localPath)"))
                     KFImage(URL(string: post.postUrl))
                         .resizable()
                         .placeholder {
