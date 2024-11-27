@@ -3,17 +3,13 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.resolve("uploads/profilePics");
-    console.log("Saving file to: ", uploadPath);
-    cb(null, uploadPath);
+    cb(null, path.resolve("uploads/profilePics"));
   },
   filename: (req, file, cb) => {
-    const filename = `${Date.now()}-${file.originalname}`;
-    console.log("Saving file with name: ", filename);
-    cb(null, filename);
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage }).single("profilePic");
 
 export default upload;

@@ -1,5 +1,6 @@
 import Conversation from "../models/conversationModel.js";
 import Message from "../models/messageModel.js";
+import moment from "moment";
 import { getReceiverSocketId } from "../socket/socket.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -61,7 +62,7 @@ export const getMessages = async (req, res) => {
 
     if (!conversation) return res.status(200).json([]);
 
-    const messagesWithFiles = conversation.messages.map((msg) => {
+    const messages = conversation.messages.map((msg) => {
       return {
         senderId: msg.senderId,
         receiverId: msg.receiverId,
@@ -71,9 +72,43 @@ export const getMessages = async (req, res) => {
       };
     });
 
-    res.status(200).json(messagesWithFiles);
+    res.status(200).json(messages);
   } catch (error) {
     console.log("Error in getMessages controller", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getUserConversations = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+    const conversations = await Conversation.find({
+      participants: loggedInUserId,
+    })
+      .populate("participants", "username")
+      .populate({
+        path: "messages",
+        options: { limit: 1, sort: { createdAt: -1 } },
+      });
+    if (conversations.length === 0) {
+      return res.status(200).json({ message: "No conversations found" });
+    }
+    const conversationData = conversations.map((conversation) => {
+      const lastMessageTime = conversation.messages[0]?.createdAt;
+      const formattedLastMessageTime = lastMessageTime
+        ? moment(lastMessageTime).fromNow()
+        : null;
+
+      return {
+        conversationId: conversation._id,
+        participants: conversation.participants,
+        lastMessage: conversation.messages[0].message,
+        lastMessageTime: formattedLastMessageTime,
+      };
+    });
+    res.status(200).json(conversationData);
+  } catch (error) {
+    console.log("Error in getUserConversation", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
