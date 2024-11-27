@@ -23,10 +23,6 @@ class PostsService {
         postsApi.getPostsForArtist(id: id)
     }
     
-    func getSearchPosts(searchItem: String) {
-        postsApi.getSearchPosts(searchItem: searchItem)
-    }
-    
     func likePost(postId: Int64) {
         postsApi.likePost(postId: postId)
     }

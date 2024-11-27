@@ -10,9 +10,6 @@ import Combine
 import SwiftyJSON
 
 class PostsApi {
-    func getSearchPosts(searchItem: String) { //todo fix returned object
-        
-    }
     
     func getPosts() {
         
