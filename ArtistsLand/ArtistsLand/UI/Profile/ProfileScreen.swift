@@ -26,7 +26,7 @@ struct ProfileScreen: View {
                                                        name: userInfo.nickname) {
                                         self.showChangePhotoBottomSheet = true
                                     }.onChange(of: viewModel.profileImage) { _, _ in
-                                        viewModel.updateProfileImage(id: userInfo.id)
+                                        viewModel.updateProfileImage()
                                         self.showChangePhotoBottomSheet = false
                                     }
                                     .sheet(isPresented: $showChangePhotoBottomSheet) {
@@ -35,7 +35,7 @@ struct ProfileScreen: View {
                                                             selectedImage: $viewModel.profileImage,
                                                             hideBottomSheet: $showChangePhotoBottomSheet) { deleteAvatar in
                                             if deleteAvatar {
-                                                viewModel.updateProfileImage(id: userInfo.id, shouldDeleteAvatar: deleteAvatar)
+                                                viewModel.deleteProfileImage()
                                                 self.showChangePhotoBottomSheet = false
                                             }
                                         }
@@ -46,7 +46,8 @@ struct ProfileScreen: View {
                                 }
                             } else {
                                 AccountSummaryView(profileImage: "",
-                                                   name: "") { }
+                                                   hasProfileImage: false,
+                                                   name: "Log in to your account to see your profile") { }
                             }
                             Spacer()
                             
@@ -62,36 +63,44 @@ struct ProfileScreen: View {
                     if viewModel.isLoading {
                         LoaderView()
                     } else if let user = viewModel.userInfo {
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 20) {
-                                BlueButtonView(text: "Add new post") {
-                                    self.showAddPhotoBottomSheet = true
-                                }.sheet(isPresented: $showAddPhotoBottomSheet) {
-                                    AddProfilePhotoView(title: "Add new post to your account",
-                                                        buttonText: "Add photo",
-                                                        selectedImage: $viewModel.newPostImage,
-                                                        hideBottomSheet: $showAddPhotoBottomSheet) { deleteAvatar in
-                                        viewModel.postImage()
-                                        self.showAddPhotoBottomSheet = false
-                                    }
-                                }
-                                
-                                ForEach(user.posts, id: \.id) { post in
-                                    PostView(post: post, showName: false, canDeletePost: true) { postLiked in
-                                        viewModel.likePost(postId: post.id)
-                                    } commentsAction: { comment in
-                                        viewModel.addCommentToPost(comment: comment, postId: post.id)
-                                    } nameAction: { id in
-                                        
-                                    } deleteAction: { canDelete, post in
-                                        if canDelete {
-                                            viewModel.deletePost(postId: post.id)
+                        if user.isArtist {
+                            ScrollView(showsIndicators: false) {
+                                VStack(spacing: 20) {
+                                    BlueButtonView(text: "Add new post") {
+                                        self.showAddPhotoBottomSheet = true
+                                    }.sheet(isPresented: $showAddPhotoBottomSheet) {
+                                        AddProfilePhotoView(title: "Add new post to your account",
+                                                            buttonText: "Add photo",
+                                                            selectedImage: $viewModel.newPostImage,
+                                                            hideBottomSheet: $showAddPhotoBottomSheet) { deleteAvatar in
+                                            viewModel.postImage()
+                                            self.showAddPhotoBottomSheet = false
                                         }
                                     }
-                                }
-                            }.padding(.bottom, 20)
-                                .padding(.horizontal, 16)
+                                    
+                                    ForEach(user.posts, id: \.id) { post in
+                                        PostView(post: post, showName: false, canDeletePost: true) { postLiked in
+                                            viewModel.likePost(postId: post.id)
+                                        } commentsAction: { comment in
+                                            viewModel.addCommentToPost(comment: comment, postId: post.id)
+                                        } nameAction: { id in
+                                            
+                                        } deleteAction: { canDelete, post in
+                                            if canDelete {
+                                                viewModel.deletePost(postId: post.id)
+                                            }
+                                        }
+                                    }
+                                }.padding(.bottom, 20)
+                                    .padding(.horizontal, 16)
+                            }
                         }
+                    } else {
+                        Spacer()
+                        MainBlueButtonView(text: "Log in") {
+                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                        }.padding(.horizontal, 16)
+                        Spacer()
                     }
                 }
             }

@@ -45,7 +45,7 @@ struct ArtistProfileScreen: View {
                                            name: artistInfo.nickname) { }
                         
                         BlueButtonView(text: "Send message to artist") {
-                            viewModel.createChat(artistId: artistInfo.id)
+                            viewModel.createChat(artistId: 1)
                         }.padding(.vertical, 8)
                         
                         ForEach(artistInfo.posts, id: \.id) { post in

@@ -46,6 +46,7 @@ struct RegisterScreen: View {
                         
                         FloatingField(text: $viewModel.email,
                                       placeHolder: "Email address",
+                                      keyboardType: .emailAddress,
                                       leftIcon: .icFieldEmail,
                                       errorMessage: viewModel.errorMessageEmail)
                         .submitLabel(.next)
@@ -119,7 +120,7 @@ struct RegisterScreen: View {
             }
             .onReceive(viewModel.registerCompletion) { registerCompletion in
                 switch registerCompletion {
-                case .failure(_):
+                case .failure(_), .invalidCredentials:
                     let modal = ModalChooseOptionView(title: "Error",
                                           description: "An error has occured. Please try again.",
                                                       topButtonText: "Try again") {
@@ -127,7 +128,7 @@ struct RegisterScreen: View {
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 case .register:
-                    navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+                    break
                 }
             }
     }

@@ -433,7 +433,11 @@
         }
       }
     },
+    "Your balance: %@" : {
+
+    },
     "Your balance: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "3A5FF72B-97A9-4825-960E-97316205D8C2",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ArtistsLand.xcodeproj",
+      "identifier" : "9B1A69692CC041AA00B19BF1",
+      "name" : "ArtistsLand"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:ArtistsLand.xcodeproj",
+        "identifier" : "0FEBF62D2CF6187800D1B4C5",
+        "name" : "ArtistsLandTests"
+      }
+    }
+  ],
+  "version" : 1
+}
