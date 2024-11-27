@@ -1,0 +1,90 @@
+//
+//  RegisterViewModel.swift
+//  ArtistsLand
+//
+//  Created by Alexia Aldea on 18.10.2024.
+//
+
+import Foundation
+import Combine
+
+enum RegisterCompletion {
+    case register
+    case failure(Error)
+    case invalidCredentials
+}
+
+enum RegisterField {
+    case name
+    case email
+    case password
+}
+
+class RegisterViewModel: BaseViewModel {
+    @Published var showGreeting: Bool = false
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var userType: [String] = ["Artist", "Regular"]
+    @Published var isPickerShown = false
+    @Published var selectedUserType: String = ""
+    @Published var name: String = ""
+    @Published var errorMessageName: String?
+    @Published var errorMessageUserType: String?
+    @Published var errorMessageEmail: String?
+    @Published var errorMessagePassword: String?
+    @Published var errorMessageToggle: String?
+    
+    let registerCompletion = PassthroughSubject<RegisterCompletion, Never>()
+    var userService = UserService.shared
+    
+    func allFieldAreCompleted() {
+        if name.isEmpty {
+            self.errorMessageName = "This field is required."
+        } else if name.count < 3 {
+            self.errorMessageName = "Name must contain at least 3 characters."
+        }
+        
+        if selectedUserType.isEmpty {
+            self.errorMessageUserType = "This field is required."
+        }
+        
+        if !email.isValidEmail() {
+            self.errorMessageEmail = "Please enter a valid email address."
+        }
+        
+        if password.isEmpty {
+            self.errorMessagePassword = "This field is required."
+        } else if password.count < 6 {
+            self.errorMessagePassword = "Password must contain at least 6 characters."
+        }
+        
+        if !showGreeting {
+            self.errorMessageToggle = "Please accept terms."
+        }
+        
+        if showGreeting && errorMessageName == nil && errorMessageUserType == nil && errorMessageEmail == nil, errorMessagePassword == nil {
+            self.register()
+        }
+    }
+    
+    private func register() {
+        userService.register(nickname: name, email: email, password: password, userType: selectedUserType.lowercased())
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.registerCompletion.send(.failure(error))
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] user in
+                guard let self else { return }
+                if user.user.email.isEmpty {
+                    self.registerCompletion.send(.invalidCredentials)
+                } else {
+                    self.registerCompletion.send(.register)
+                }
+            }
+            .store(in: &bag)
+    }
+}
