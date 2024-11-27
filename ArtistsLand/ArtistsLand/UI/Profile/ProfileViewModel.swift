@@ -25,7 +25,7 @@ class ProfileViewModel: BaseViewModel {
         getUserInfo()
     }
     
-    private func getUserInfo() {
+    func getUserInfo() {
         userService.userReactiveData.getStateSubject()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in

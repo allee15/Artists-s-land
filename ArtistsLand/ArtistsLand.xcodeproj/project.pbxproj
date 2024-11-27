@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -113,6 +113,16 @@
 		9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0FEBF6322CF6187800D1B4C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B1A69622CC041A900B19BF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B1A69692CC041AA00B19BF1;
+			remoteInfo = ArtistsLand;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F24D5952CC0F89A00A833E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -204,6 +214,8 @@
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0FD38F1D2CDBB0BD00338FAC /* AccountSummeryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummeryView.swift; sourceTree = "<group>"; };
+		0FEBF62E2CF6187800D1B4C5 /* ArtistsLandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtistsLandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FEBF6372CF6190100D1B4C5 /* ArtistsLand.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ArtistsLand.xctestplan; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistsLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A69712CC041AC00B19BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,7 +224,18 @@
 		9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0FEBF62F2CF6187800D1B4C5 /* ArtistsLandTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ArtistsLandTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		0FEBF62B2CF6187800D1B4C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B1A69672CC041AA00B19BF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -525,8 +548,10 @@
 		9B1A69612CC041A900B19BF1 = {
 			isa = PBXGroup;
 			children = (
+				0FEBF6372CF6190100D1B4C5 /* ArtistsLand.xctestplan */,
 				0FD122402CE4BC8500C3F9E5 /* Localizable.xcstrings */,
 				9B1A696C2CC041AA00B19BF1 /* ArtistsLand */,
+				0FEBF62F2CF6187800D1B4C5 /* ArtistsLandTests */,
 				9B1A696B2CC041AA00B19BF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -535,6 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				9B1A696A2CC041AA00B19BF1 /* ArtistsLand.app */,
+				0FEBF62E2CF6187800D1B4C5 /* ArtistsLandTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -570,6 +596,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0FEBF62D2CF6187800D1B4C5 /* ArtistsLandTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FEBF6362CF6187800D1B4C5 /* Build configuration list for PBXNativeTarget "ArtistsLandTests" */;
+			buildPhases = (
+				0FEBF62A2CF6187800D1B4C5 /* Sources */,
+				0FEBF62B2CF6187800D1B4C5 /* Frameworks */,
+				0FEBF62C2CF6187800D1B4C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FEBF6332CF6187800D1B4C5 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0FEBF62F2CF6187800D1B4C5 /* ArtistsLandTests */,
+			);
+			name = ArtistsLandTests;
+			packageProductDependencies = (
+			);
+			productName = ArtistsLandTests;
+			productReference = 0FEBF62E2CF6187800D1B4C5 /* ArtistsLandTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9B1A69692CC041AA00B19BF1 /* ArtistsLand */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B1A69782CC041AC00B19BF1 /* Build configuration list for PBXNativeTarget "ArtistsLand" */;
@@ -606,9 +655,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					0FEBF62D2CF6187800D1B4C5 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 9B1A69692CC041AA00B19BF1;
+					};
 					9B1A69692CC041AA00B19BF1 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -636,11 +689,19 @@
 			projectRoot = "";
 			targets = (
 				9B1A69692CC041AA00B19BF1 /* ArtistsLand */,
+				0FEBF62D2CF6187800D1B4C5 /* ArtistsLandTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0FEBF62C2CF6187800D1B4C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B1A69682CC041AA00B19BF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -659,6 +720,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0FEBF62A2CF6187800D1B4C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B1A69662CC041AA00B19BF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -754,7 +822,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0FEBF6332CF6187800D1B4C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B1A69692CC041AA00B19BF1 /* ArtistsLand */;
+			targetProxy = 0FEBF6322CF6187800D1B4C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0FEBF6342CF6187800D1B4C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23N7CD7DZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.alexia.ArtistsLandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtistsLand.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArtistsLand";
+			};
+			name = Debug;
+		};
+		0FEBF6352CF6187800D1B4C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23N7CD7DZ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.alexia.ArtistsLandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtistsLand.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArtistsLand";
+			};
+			name = Release;
+		};
 		9B1A69762CC041AC00B19BF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -937,6 +1051,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0FEBF6362CF6187800D1B4C5 /* Build configuration list for PBXNativeTarget "ArtistsLandTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FEBF6342CF6187800D1B4C5 /* Debug */,
+				0FEBF6352CF6187800D1B4C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B1A69652CC041A900B19BF1 /* Build configuration list for PBXProject "ArtistsLand" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
