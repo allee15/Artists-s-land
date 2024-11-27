@@ -322,6 +322,36 @@ class UserApi {
         }.eraseToAnyPublisher()
     }
     
+    func getAllUsers() -> AnyPublisher<[User], Error> {
+        Future { promise in
+            
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/get-users")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "GET"
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        var arrayToReturn = [User]()
+                        let json = try JSON(data: data!)
+                        for (_, item) in json {
+                            let user = JSONParsers.parseJsonUser(json: item)
+                            arrayToReturn.append(user)
+                        }
+                        promise(.success(arrayToReturn))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
     func getArtistInfo(artistId: Int64) {
         
     }

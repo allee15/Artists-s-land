@@ -24,11 +24,11 @@ class ArtistProfileViewModel: BaseViewModel {
     var postsService = PostsService.shared
     var chatService = ChatService.shared
     
-    var artistId: Int64
+    var artistId: String
     @Published var artistInfoState = ArtistInfoState.loading
     let eventSubject = PassthroughSubject<ChatCreationCompletion, Never>()
     
-    init(artistId: Int64) {
+    init(artistId: String) {
         self.artistId = artistId
         super.init()
         getArtistInfo()

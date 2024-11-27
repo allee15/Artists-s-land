@@ -17,9 +17,8 @@ struct ChatPicPlaceHolder: View {
     var body: some View {
         HStack(spacing: 12) {
             if let avatarUrl = avatarUrl {
-//                let localPath = avatarUrl
-//                KFImage(URL(string: "file://\(localPath)"))
-                KFImage(URL(string: avatarUrl))
+                let localPath = avatarUrl
+                KFImage(URL(string: "file://\(localPath)"))
                     .resizable()
                     .placeholder {
                         Circle()

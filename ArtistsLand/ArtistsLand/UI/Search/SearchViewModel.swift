@@ -16,21 +16,19 @@ enum SearchScreenState {
 }
 
 class SearchViewModel: BaseViewModel {
-    var postsService = PostsService.shared
+    var userService = UserService.shared
+    
     @Published var searchText: String = ""
     @Published var searchScreenState: SearchScreenState = .emptyQuery
     @Published var results: [User] = []
-    @Published var page: Int = 1
     @Published var isLoadingFirstTime: Bool = false
     @Published var isLoading: Bool = false
     
     private var searchPostsCancellable: AnyCancellable?
-    private var articlesPerPage = 11
     @Published var hasLoadedInitially = false
     
     func resetForNewSearch() {
         if hasLoadedInitially {
-            self.page = 1
             self.results = []
             self.hasLoadedInitially = false
             self.searchScreenState = .emptyQuery
@@ -56,27 +54,28 @@ class SearchViewModel: BaseViewModel {
             self.isLoading = true
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.isLoadingFirstTime = false
-            self.hasLoadedInitially = true
-            self.results = [userMocked, userMocked, userMocked]
-            self.searchScreenState = .results
-        }
-//        searchPostsCancellable = postsService.getSearchPosts(searchItem: searchText)
-//            .sink(receiveCompletion: { [weak self] _ in
-//                guard let self else {return}
-//                self.isLoadingFirstTime = false
-//                self.hasLoadedInitially = true
-//                self.isLoading = false
-//            }, receiveValue: { [weak self] posts in
-//                guard let self = self else { return }
-//                if posts.isEmpty {
-//                    self.searchScreenState = .noResults
-//                } else {
-//                    self.searchScreenState = .results
-//                    self.results = [posts]
-//                }
-//            })
+        searchPostsCancellable = userService.getAllUsers()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] _ in
+                guard let self else {return}
+                self.isLoadingFirstTime = false
+                self.hasLoadedInitially = true
+                self.isLoading = false
+            }, receiveValue: { [weak self] users in
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                let filteredUsers = users.filter { user in
+                    user.nickname.lowercased().contains(self.searchText.lowercased())
+                }
+                
+                if filteredUsers.isEmpty {
+                    self.searchScreenState = .noResults
+                } else {
+                    self.searchScreenState = .results
+                    self.results = filteredUsers
+                }
+            })
         
         self.searchPostsCancellable?.store(in: &bag)
     }
