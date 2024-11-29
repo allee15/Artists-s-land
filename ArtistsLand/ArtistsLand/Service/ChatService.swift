@@ -15,6 +15,11 @@ class ChatService {
     
     private init() { }
     
+    func getChats() -> AnyPublisher<[Chat], Error> {
+        return chatApi.getChats()
+            .eraseToAnyPublisher()
+    }
+    
     func sendMessage() {
         chatApi.sendMessage()
     }
@@ -25,10 +30,6 @@ class ChatService {
     
     func getMessages() {
         chatApi.getMessages()
-    }
-    
-    func getChats() {
-        chatApi.getChats()
     }
     
     func createChat(artistId: Int) {

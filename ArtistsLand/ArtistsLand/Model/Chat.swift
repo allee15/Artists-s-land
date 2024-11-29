@@ -7,16 +7,17 @@
 
 import Foundation
 
-struct Chat: Codable, Identifiable, Hashable {
-    var id: String = UUID().uuidString
-    var name: String
-    var artistAvatarUrl: String
+struct Chat: Decodable {
+    let conversationId: String
+    let participant: Participant
+    let lastMessage: String?
+    let lastMessageTime: String?
 }
 
-let chatsMocked: [Chat] = [
-    Chat(name: "Alexia", artistAvatarUrl: "https://media.istockphoto.com/id/638756792/photo/beautiful-woman-posing-against-dark-background.jpg?s=612x612&w=0&k=20&c=AanwEr0pmrS-zhkVJEgAwxHKwnx14ywNh5dmzwbpyLk="),
-    Chat(name: "Allee", artistAvatarUrl: "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?s=612x612&w=0&k=20&c=uP9rKidKETywVil0dbvg_vAKyv2wjXMwWJDNPHzc_Ug=")
-]
+struct Participant: Decodable {
+    let username: String
+    let avatarUrl: String
+}
 
 struct Message: Codable, Identifiable {
     var id: String = UUID().uuidString

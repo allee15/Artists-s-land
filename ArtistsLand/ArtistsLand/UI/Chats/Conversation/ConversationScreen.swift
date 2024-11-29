@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConversationScreen: View {
-    @ObservedObject var viewModel: ConversationViewModel
+    @StateObject var viewModel: ConversationViewModel
     @EnvironmentObject private var navigation: Navigation
     
     @State private var showSheet: Bool = false

@@ -19,12 +19,12 @@ class ConversationViewModel: BaseViewModel {
     @Published var message = ""
     @Published var messages: [Message] = []
     @Published var image: UIImage?
-    @Published var chat: Chat
+    @Published var chat: Participant
     
     var chatService = ChatService.shared
     let eventSubject = PassthroughSubject<SendImageCompletion, Never>()
     
-    init(user: User, chat: Chat) {
+    init(user: User, chat: Participant) {
         self.user = user
         self.chat = chat
         super.init()

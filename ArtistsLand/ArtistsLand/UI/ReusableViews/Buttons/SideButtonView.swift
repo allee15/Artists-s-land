@@ -25,12 +25,12 @@ struct SideButtonView: View {
 }
 
 struct LeftRightNavBarView: View {
-    let chat: Chat
+    let chat: Participant
     let action: () -> ()
     var body: some View {
         HStack(spacing: 12) {
             BackButton()
-            ChatPicPlaceHolder(name: chat.name, avatarUrl: chat.artistAvatarUrl)
+            ChatPicPlaceHolder(name: chat.username, avatarUrl: chat.avatarUrl)
             Spacer()
             SideButtonView(icon: .icNavbarDelete) {
                 action()

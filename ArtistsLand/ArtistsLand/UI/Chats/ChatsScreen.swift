@@ -16,34 +16,57 @@ struct ChatsScreen: View {
             LeftNavBarView(title: "Chats", hasBackButton: false) {}
             
             if let user = viewModel.user {
-                if viewModel.userChats.isEmpty {
-                    HStack {
+                switch viewModel.chatsState {
+                case .failure(_):
+                    VStack {
                         Spacer()
-                        VStack {
-                            Spacer()
-                            Text("No chats available. Start a new one!")
-                                .foregroundColor(Color.mainBlueInversat)
-                                .font(.poppinsRegular(size: 16))
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 20)
-                            Spacer()
+                        Text("An error has occured. Please try again!")
+                            .font(.poppinsSemiBold(size: 20))
+                            .foregroundStyle(Color.mainBlack)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 12)
+                        
+                        ClearButton(text: "Try again") {
+                            viewModel.getChats()
                         }
                         Spacer()
                     }
-                } else {
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 16) {
-                            ForEach(viewModel.userChats, id: \.name) { chat in
-                                Button {
-                                    let vm = ConversationViewModel(user: user, chat: chat)
-                                    mainNavigation?.push(ConversationScreen(viewModel: vm).asDestination(),
-                                                         animated: true)
-                                } label: {
-                                    ChatCardView(chat: chat)
+                case .loading:
+                    VStack {
+                        Spacer()
+                        LoaderView()
+                        Spacer()
+                    }
+                case .value(let chats):
+                    if chats.isEmpty {
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Spacer()
+                                Text("No chats available. Start a new one!")
+                                    .foregroundColor(Color.mainBlueInversat)
+                                    .font(.poppinsRegular(size: 16))
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 20)
+                                Spacer()
+                            }
+                            Spacer()
+                        }
+                    } else {
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 16) {
+                                ForEach(chats, id: \.conversationId) { chat in
+                                    Button {
+                                        let vm = ConversationViewModel(user: user, chat: chat.participant)
+                                        mainNavigation?.push(ConversationScreen(viewModel: vm).asDestination(),
+                                                             animated: true)
+                                    } label: {
+                                        ChatCardView(chat: chat)
+                                    }
                                 }
                             }
-                        }
-                    }.padding(.vertical, 20)
+                        }.padding(.vertical, 20)
+                    }
                 }
             } else {
                 UnloggedUserView()
@@ -58,7 +81,7 @@ fileprivate struct ChatCardView: View {
     
     var body: some View {
         HStack {
-            ChatPicPlaceHolder(name: chat.name, avatarUrl: chat.artistAvatarUrl)
+            ChatPicPlaceHolder(name: chat.participant.username, avatarUrl: chat.participant.avatarUrl)
             
             Spacer()
             
