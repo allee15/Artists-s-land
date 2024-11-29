@@ -25,6 +25,10 @@ class UserApi {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "POST"
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             urlRequest.httpBody = jsonData
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -53,7 +57,7 @@ class UserApi {
             
             urlRequest.httpMethod = "GET"
             
-            if let token = UserDefaultsService.shared.getValue(key: Key<String>(value: "jwtToken")) {
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
             
@@ -91,6 +95,11 @@ class UserApi {
             var urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = "POST"
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             urlRequest.httpBody = jsonData
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -116,6 +125,12 @@ class UserApi {
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             urlRequest.httpMethod = "POST"
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -123,7 +138,7 @@ class UserApi {
                     promise(.failure(error))
                 } else {
                     if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                        UserDefaultsService.shared.setValue(key: Key<String>(value: "jwtToken"), value: nil)
+                        UserDefaultsService.shared.setValue(key: UserDefaultsKeys.token, value: nil)
                         
                         promise(.success(true))
                     } else {
@@ -141,6 +156,12 @@ class UserApi {
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/delete-account")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
             
             urlRequest.httpMethod = "DELETE"
             
@@ -181,6 +202,9 @@ class UserApi {
             urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
@@ -208,6 +232,13 @@ class UserApi {
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/edit-acc")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             urlRequest.httpMethod = "PUT"
             
             var body: [String: Any] = [:]
@@ -254,7 +285,11 @@ class UserApi {
 
             let boundary = UUID().uuidString
             urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             var body = Data()
 
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
@@ -297,7 +332,7 @@ class UserApi {
             urlRequest.httpMethod = "DELETE"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            if let token = UserDefaultsService.shared.getValue(key: Key<String>(value: "jwtToken")) {
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
 
@@ -331,6 +366,12 @@ class UserApi {
             
             urlRequest.httpMethod = "GET"
             
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
@@ -352,7 +393,34 @@ class UserApi {
         }.eraseToAnyPublisher()
     }
     
-    func getArtistInfo(artistId: Int64) {
-        
+    func getArtistInfo(artistId: String) -> AnyPublisher<User, Error> {
+        Future { promise in
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/get-user/\(artistId)")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "GET"
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        let user = JSONParsers.parseJsonUser(json: json)
+                        promise(.success(user))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+            
+        }.eraseToAnyPublisher()
     }
 }

@@ -17,6 +17,7 @@ enum ArtistInfoState {
 enum ChatCreationCompletion {
     case created
     case failed
+    case notLoggedIn
 }
 
 class ArtistProfileViewModel: BaseViewModel {
@@ -26,19 +27,55 @@ class ArtistProfileViewModel: BaseViewModel {
     
     var artistId: String
     @Published var artistInfoState = ArtistInfoState.loading
+    @Published var user: User?
     let eventSubject = PassthroughSubject<ChatCreationCompletion, Never>()
     
     init(artistId: String) {
         self.artistId = artistId
         super.init()
         getArtistInfo()
+        getUserInfo()
     }
     
     func getArtistInfo() {
-//        userService.getArtistInfo(artistId: artistId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.artistInfoState = .value(userMocked)
-        }
+        userService.getArtistInfo(artistId: artistId)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.artistInfoState = .failure(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] chats in
+                guard let self else {return}
+                self.artistInfoState = .value(chats)
+            }.store(in: &bag)
+
+    }
+    
+    private func getUserInfo() {
+        userService.userReactiveData.getStateSubject()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] userState in
+                guard let self = self else { return }
+                switch userState {
+                case .failure(_):
+                    break
+                case .loading:
+                    break
+                case .ready(let userState):
+                    switch userState {
+                    case .anonymous:
+                        self.user = nil
+                    case .loggedIn(let user):
+                        self.user = user
+                    }
+                }
+            }).store(in: &bag)
     }
     
     func likePost(postId: Int64) {
@@ -50,11 +87,22 @@ class ArtistProfileViewModel: BaseViewModel {
         postsService.addCommentToPost(comment: commentToSend, postId: postId)
     }
     
-    func createChat(artistId: Int) {
-//        chatService.createChat(artistId: artistId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.eventSubject.send(.created)
-        }
+    func createChat() {
+        let messageToSend = Message(senderId: user?.id ?? "",
+                                    receiverId: artistId,
+                                    message: "Hi",
+                                    fileUrl: nil,
+                                    createdAt: "")
+        chatService.sendMessage(message: messageToSend)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] result in
+                guard let self else {return}
+                if result {
+                    self.eventSubject.send(.created)
+                }
+            }.store(in: &bag)
     }
     
     func deletePost(postId: Int64) {

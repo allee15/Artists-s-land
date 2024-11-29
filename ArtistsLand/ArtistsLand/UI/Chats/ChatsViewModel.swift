@@ -14,14 +14,12 @@ enum ChatsState {
     case value([Chat])
 }
 
-
 class ChatsViewModel: BaseViewModel {
     var userService = UserService.shared
     var chatService = ChatService.shared
     
     @Published var user: User?
     @Published var isLoading: Bool = false
-    
     @Published var chatsState = ChatsState.loading
     
     override init() {

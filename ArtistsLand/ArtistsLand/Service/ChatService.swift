@@ -20,19 +20,18 @@ class ChatService {
             .eraseToAnyPublisher()
     }
     
-    func sendMessage() {
-        chatApi.sendMessage()
+    func sendMessage(message: Message, imageData: Data? = nil) -> AnyPublisher<Bool, Error> {
+        return chatApi.sendMessage(message: message, imageData: imageData)
+            .eraseToAnyPublisher()
     }
     
-    func deleteChat() {
-        chatApi.deleteChat()
+    func deleteChat(conversationId: String) -> AnyPublisher<Bool, Error> {
+        return chatApi.deleteChat(conversationId: conversationId)
+            .eraseToAnyPublisher()
     }
     
-    func getMessages() {
-        chatApi.getMessages()
-    }
-    
-    func createChat(artistId: Int) {
-        chatApi.createChat(artistId: artistId)
+    func getMessages(userId: String) -> AnyPublisher<[Message], Error> {
+        return chatApi.getMessages(userId: userId)
+            .eraseToAnyPublisher()
     }
 }

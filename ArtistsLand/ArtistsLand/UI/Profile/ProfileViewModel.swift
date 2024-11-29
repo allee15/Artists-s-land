@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 import Combine
 
+enum SendImageCompletion {
+    case sent
+    case failed
+}
+
 class ProfileViewModel: BaseViewModel {
     var userService = UserService.shared
     var postsService = PostsService.shared

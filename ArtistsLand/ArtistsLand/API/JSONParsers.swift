@@ -39,4 +39,12 @@ class JSONParsers {
         return Participant(username: json["username"].stringValue,
                            avatarUrl: json["profilePic"].stringValue)
     }
+    
+    static func parseJsonMessage(json: JSON) -> Message {
+        return Message(senderId: json["senderId"].stringValue,
+                       receiverId: json["receiverId"].stringValue,
+                       message: json["message"].stringValue,
+                       fileUrl: json["fileUrl"].stringValue,
+                       createdAt: json["createdAt"].stringValue)
+    }
 }

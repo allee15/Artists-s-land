@@ -148,11 +148,12 @@ class UserService {
     }
     
     func getAllUsers() -> AnyPublisher<[User], Error> {
-        userApi.getAllUsers()
+        return userApi.getAllUsers()
             .eraseToAnyPublisher()
     }
     
-    func getArtistInfo(artistId: Int64) {
-        userApi.getArtistInfo(artistId: artistId)
+    func getArtistInfo(artistId: String) -> AnyPublisher<User, Error> {
+        return userApi.getArtistInfo(artistId: artistId)
+            .eraseToAnyPublisher()
     }
 }

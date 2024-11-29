@@ -10,6 +10,7 @@ import SwiftUI
 struct ArtistProfileScreen: View {
     @StateObject var viewModel: ArtistProfileViewModel
     @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -44,8 +45,12 @@ struct ArtistProfileScreen: View {
                         AccountSummaryView(profileImage: artistInfo.avatarUrl,
                                            name: artistInfo.nickname) { }
                         
-                        BlueButtonView(text: "Send message to artist") {
-                            viewModel.createChat(artistId: 1)
+                        BlueButtonView(text: "Send message") {
+                            if viewModel.user != nil {
+                                viewModel.createChat()
+                            } else {
+                                viewModel.eventSubject.send(.notLoggedIn)
+                            }
                         }.padding(.vertical, 8)
                         
                         ForEach(artistInfo.posts, id: \.id) { post in
@@ -77,6 +82,19 @@ struct ArtistProfileScreen: View {
             case .failed:
                 let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
                 ToastManager.instance.show(toast)
+                
+            case .notLoggedIn:
+                let modal = ModalChooseOptionView(title: "You're not logged in!",
+                                                  description: "In order to start a new chat, or to send a message, you have to log in to your account.",
+                                                  topButtonText: "Login",
+                                                  bottomButtonText: "Close") {
+                    navigation.dismissModal(animated: true, completion: nil)
+                    mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                } onBottomButtonTapped: {
+                    navigation.dismissModal(animated: true, completion: nil)
+                }
+                
+                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
             }
         }
     }

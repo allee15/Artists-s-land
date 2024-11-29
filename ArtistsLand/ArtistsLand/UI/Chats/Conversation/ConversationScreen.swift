@@ -15,14 +15,12 @@ struct ConversationScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftRightNavBarView(chat: viewModel.chat) {
+            LeftRightNavBarView(chat: viewModel.chat.participant) {
                 let modal = ModalChooseOptionView(title: "Are you sure you want to delete this chat?",
                                                   description: "This action will take you out of this chat and you will have to search again this person.",
                                                   topButtonText: "Delete chat",
                                                   bottomButtonText: "Stay") {
                     viewModel.deleteChat()
-                    navigation.dismissModal(animated: true, completion: nil)
-                    navigation.popToRoot(animated: true)
                 } onBottomButtonTapped: {
                     navigation.dismissModal(animated: true, completion: nil)
                 }
@@ -33,9 +31,9 @@ struct ConversationScreen: View {
             
             ScrollViewReader { scrollProxy in
                 ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.messages) { message in
+                    ForEach(viewModel.messages, id: \.message) { message in
                         
-                        let wasSentByMe = message.email == viewModel.user.email
+                        let wasSentByMe = message.senderId == viewModel.user.id
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("\(message.message)")
@@ -43,16 +41,16 @@ struct ConversationScreen: View {
                                 .foregroundColor(Color.mainBlack)
                                 .multilineTextAlignment(.leading)
                             
-                            Text("\(message.date.formatted(.dateTime))")
+                            Text("\(message.createdAt)")//.formatted(.dateTime))")
                                 .font(.poppinsSemiBold(size: 10))
                                 .foregroundColor(Color.contentSecondary)
                         }.padding(.all, 12)
                             .background(wasSentByMe ? Color.simpleBlue.opacity(0.3) : Color.mainGray)
                             .cornerRadius(8, corners: .allCorners)
                             .frame(width: UIScreen.main.bounds.width * 0.8, alignment: wasSentByMe ? .trailing : .leading)
-                            .id(message.id)
+                            .id(message.message)
                             .onChange(of: viewModel.messages.count) { _, _ in
-                                scrollProxy.scrollTo(viewModel.messages.last?.id)
+                                scrollProxy.scrollTo(viewModel.messages.last?.message)
                             }.padding(.bottom, 12)
                     }
                     
@@ -83,21 +81,20 @@ struct ConversationScreen: View {
                                     selectedImage: $viewModel.image,
                                     hideBottomSheet: $showSheet) { deleteAvatar in
                     viewModel.sendMessage()
-                    self.showSheet = false
                 }
             }
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
-                case .sent:
-                    ToastManager.instance.show(
-                        Toast(
-                            text: "Edit successful!",
-                            textColor: Color.lightGreen
-                        ))
+                case .imageSent:
+                    self.showSheet = false
                     
                 case .failed:
                     let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
                     ToastManager.instance.show(toast)
+                    
+                case .chatDeleted:
+                    navigation.dismissModal(animated: true, completion: nil)
+                    navigation.pop(animated: true)
                 }
             }
     }
