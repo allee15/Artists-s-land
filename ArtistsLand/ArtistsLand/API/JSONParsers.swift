@@ -30,7 +30,7 @@ class JSONParsers {
     
     static func parseJsonChat(json: JSON) -> Chat {
         return Chat(conversationId: json["id"].stringValue,
-                    participant: parseJsonParticipant(json: json),
+                    participant: parseJsonParticipant(json: json["participants"]),
                     lastMessage: json["lastMessage"].stringValue,
                     lastMessageTime: json["lastMessageTime"].stringValue)
     }

@@ -34,7 +34,11 @@ struct ChatsScreen: View {
                 case .loading:
                     VStack {
                         Spacer()
-                        LoaderView()
+                        HStack {
+                            Spacer()
+                            LoaderView()
+                            Spacer()
+                        }
                         Spacer()
                     }
                 case .value(let chats):
