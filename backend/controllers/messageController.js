@@ -85,7 +85,7 @@ export const getUserConversations = async (req, res) => {
     const conversations = await Conversation.find({
       participants: loggedInUserId,
     })
-      .populate("participants", "username")
+      .populate("participants", "username profilePic")
       .populate({
         path: "messages",
         options: { limit: 1, sort: { createdAt: -1 } },
@@ -94,21 +94,31 @@ export const getUserConversations = async (req, res) => {
       return res.status(200).json({ message: "No conversations found" });
     }
     const conversationData = conversations.map((conversation) => {
-      const lastMessageTime = conversation.messages[0]?.createdAt;
+      const lastMessage =
+        conversation.messages.length > 0 ? conversation.messages[0] : null;
+      const lastMessageTime = lastMessage ? lastMessage.createdAt : null;
+
       const formattedLastMessageTime = lastMessageTime
         ? moment(lastMessageTime).fromNow()
         : null;
 
+      const secondParticipant = conversation.participants.find(
+        (participant) =>
+          participant._id.toString() !== loggedInUserId.toString()
+      );
+
       return {
         conversationId: conversation._id,
-        participants: conversation.participants,
-        lastMessage: conversation.messages[0].message,
+        secondParticipantId: secondParticipant._id,
+        secondParticipantUsername: secondParticipant.username,
+        secondParticipantProfilePic: secondParticipant.profilePic,
+        lastMessage: lastMessage ? lastMessage.message : "No messages yet",
         lastMessageTime: formattedLastMessageTime,
       };
     });
     res.status(200).json(conversationData);
   } catch (error) {
-    console.log("Error in getUserConversation", error.message);
+    console.log("Error in getUserConversations", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
