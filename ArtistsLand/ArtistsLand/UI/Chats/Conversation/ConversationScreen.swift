@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ConversationScreen: View {
     @StateObject var viewModel: ConversationViewModel
     @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     
     @State private var showSheet: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftRightNavBarView(chat: viewModel.chat.participant) {
+            LeftRightNavBarView(chat: viewModel.chat) {
                 let modal = ModalChooseOptionView(title: "Are you sure you want to delete this chat?",
                                                   description: "This action will take you out of this chat and you will have to search again this person.",
                                                   topButtonText: "Delete chat",
@@ -27,6 +29,9 @@ struct ConversationScreen: View {
                 
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 
+            } chatAction: {
+                let vm = ArtistProfileViewModel(artistId: viewModel.chat.secondParticipantId)
+                navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
             }.padding(.horizontal, 16)
             
             ScrollViewReader { scrollProxy in
@@ -36,12 +41,29 @@ struct ConversationScreen: View {
                         let wasSentByMe = message.senderId == viewModel.user.id
                         
                         VStack(alignment: .leading, spacing: 8) {
+                            if let url = message.fileUrl, !url.isEmpty {
+                                Button {
+                                    mainNavigation?.push(ZoomImageScreen(imageToZoom: url).asDestination(), animated: true)
+                                } label: {
+                                    KFImage(URL(string: "file://\(url)"))
+                                        .resizable()
+                                        .placeholder {
+                                            Image(.imgPlaceholder)
+                                                .resizable()
+                                        }
+                                        .centerCropped()
+                                        .aspectRatio(1, contentMode: .fill)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.bottom, 4)
+                                }
+                            }
+                            
                             Text("\(message.message)")
                                 .font(.poppinsRegular(size: 16))
                                 .foregroundColor(Color.mainBlack)
                                 .multilineTextAlignment(.leading)
                             
-                            Text("\(message.createdAt)")//.formatted(.dateTime))")
+                            Text("\(message.createdAt)")
                                 .font(.poppinsSemiBold(size: 10))
                                 .foregroundColor(Color.contentSecondary)
                         }.padding(.all, 12)
@@ -95,6 +117,7 @@ struct ConversationScreen: View {
                 case .chatDeleted:
                     navigation.dismissModal(animated: true, completion: nil)
                     navigation.pop(animated: true)
+                    TabBarCoordinator.instance.shouldGetChats = true
                 }
             }
     }
@@ -104,8 +127,8 @@ struct SendMessageField: View {
     @Binding var text: String
     let placeHolder: String
     var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.mainWhite, .mainWhite, .mainBlack)
-    let icon: ImageResource
-    var iconSecond: ImageResource?
+    let icon: SwiftUI.ImageResource
+    var iconSecond: SwiftUI.ImageResource?
     let action: () -> ()
     var actionSecond: (() -> ())?
     

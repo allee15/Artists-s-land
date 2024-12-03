@@ -9,14 +9,11 @@ import Foundation
 
 struct Chat {
     let conversationId: String
-    let participant: Participant
     let lastMessage: String?
     let lastMessageTime: String?
-}
-
-struct Participant {
-    let username: String
-    let avatarUrl: String
+    let secondParticipantId: String
+    let secondParticipantName: String
+    let secondParticipantAvatar: String?
 }
 
 struct Message {

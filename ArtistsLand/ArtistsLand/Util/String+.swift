@@ -13,7 +13,16 @@ extension String {
         return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
     }
     
-    func replaceSpacesWithUnderscores() -> String {
-        return self.replacingOccurrences(of: " ", with: "_")
-    }
+    func toFormattedDateString(format: String = "dd/MM/yyyy HH:mm") -> String? {
+            let isoDateFormatter = ISO8601DateFormatter()
+            isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            
+            guard let date = isoDateFormatter.date(from: self) else { return nil }
+            
+            let customFormatter = DateFormatter()
+            customFormatter.dateFormat = format
+            customFormatter.timeZone = TimeZone.current
+            
+            return customFormatter.string(from: date)
+        }
 }

@@ -77,6 +77,11 @@ struct ChatsScreen: View {
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear {
+                if TabBarCoordinator.instance.shouldGetChats {
+                    viewModel.getChats()
+                }
+            }
     }
 }
 
@@ -85,7 +90,19 @@ fileprivate struct ChatCardView: View {
     
     var body: some View {
         HStack {
-            ChatPicPlaceHolder(name: chat.participant.username, avatarUrl: chat.participant.avatarUrl)
+            ChatPicPlaceHolder(name: chat.secondParticipantName, avatarUrl: chat.secondParticipantAvatar)
+            
+            Spacer()
+            
+            HStack(spacing: 4) {
+                Text(chat.lastMessage ?? "")
+                    .font(.poppinsSemiBold(size: 14))
+                    .foregroundStyle(Color.mainBlack)
+                
+                Text(chat.lastMessageTime ?? "")
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundStyle(Color.mainBlack)
+            }
             
             Spacer()
             

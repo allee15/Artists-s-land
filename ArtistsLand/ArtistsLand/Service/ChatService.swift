@@ -20,7 +20,7 @@ class ChatService {
             .eraseToAnyPublisher()
     }
     
-    func sendMessage(message: Message, imageData: Data? = nil) -> AnyPublisher<Bool, Error> {
+    func sendMessage(message: Message, imageData: Data? = nil) -> AnyPublisher<Message, Error> {
         return chatApi.sendMessage(message: message, imageData: imageData)
             .eraseToAnyPublisher()
     }

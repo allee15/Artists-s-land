@@ -27,6 +27,11 @@ struct ChatPicPlaceHolder: View {
                             .overlay(
                                 Circle()
                                     .stroke(Color.black, lineWidth: 2)
+                                    .overlay {
+                                        Text(name.first?.uppercased() ?? "")
+                                            .font(.poppinsSemiBold(size: 12))
+                                            .foregroundStyle(Color.black)
+                                    }
                             )
                     }
                     .centerCropped()

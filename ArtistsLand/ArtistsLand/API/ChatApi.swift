@@ -46,7 +46,7 @@ class ChatApi {
         }.eraseToAnyPublisher()
     }
     
-    func sendMessage(message: Message, imageData: Data?) -> AnyPublisher<Bool, Error> {
+    func sendMessage(message: Message, imageData: Data?) -> AnyPublisher<Message, Error> {
         Future { promise in
             let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/messages/send/\(message.receiverId)")
             
@@ -92,12 +92,8 @@ class ChatApi {
                 } else {
                     do {
                         let json = try JSON(data: data!)
-                        let response = json["message"].stringValue == "Profile picture deleted succesfully"
-                        if response {
-                            promise(.success(true))
-                        } else {
-                            promise(.success(false))
-                        }
+                        let response = JSONParsers.parseJsonMessage(json: json)
+                        promise(.success(response))
                     } catch {
                         promise(.failure(error))
                     }

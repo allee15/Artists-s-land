@@ -34,7 +34,7 @@ class ConversationViewModel: BaseViewModel {
     }
     
     private func getMessages() {
-        chatService.getMessages(userId: user.id)
+        chatService.getMessages(userId: chat.secondParticipantId)
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 
@@ -45,23 +45,33 @@ class ConversationViewModel: BaseViewModel {
     }
     
     func sendMessage() {
-        let messageToSend = Message(senderId: messages.first?.senderId ?? "",
-                                    receiverId: messages.first?.receiverId ?? "",
+        guard !message.isEmpty || image != nil else { return }
+            
+        let messageToSend = Message(senderId: user.id,
+                                    receiverId: chat.secondParticipantId,
                                     message: message,
                                     fileUrl: nil,
                                     createdAt: "")
         let imageToSend = image?.jpegData(compressionQuality: 0.8)
         
+        messages.append(messageToSend)
+        message = ""
+        image = nil
+        
         chatService.sendMessage(message: messageToSend, imageData: imageToSend)
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                guard let self else { return }
+                if case .failure(_) = completion {
+                    self.messages.removeAll { $0.createdAt == messageToSend.createdAt }
+                    self.eventSubject.send(.failed)
+                }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-                if result {
-                    self.messages.append(messageToSend)
-                    self.eventSubject.send(.imageSent)
+                if let index = self.messages.firstIndex(where: { $0.message == messageToSend.message }) {
+                    self.messages[index] = result
                 }
+                self.eventSubject.send(.imageSent)
             }.store(in: &bag)
     }
     

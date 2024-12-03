@@ -29,15 +29,12 @@ class JSONParsers {
     }
     
     static func parseJsonChat(json: JSON) -> Chat {
-        return Chat(conversationId: json["id"].stringValue,
-                    participant: parseJsonParticipant(json: json["participants"]),
+        return Chat(conversationId: json["conversationId"].stringValue,
                     lastMessage: json["lastMessage"].stringValue,
-                    lastMessageTime: json["lastMessageTime"].stringValue)
-    }
-    
-    static func parseJsonParticipant(json: JSON) -> Participant {
-        return Participant(username: json["username"].stringValue,
-                           avatarUrl: json["profilePic"].stringValue)
+                    lastMessageTime: json["lastMessageTime"].stringValue,
+                    secondParticipantId: json["secondParticipantId"].stringValue,
+                    secondParticipantName: json["secondParticipantUsername"].stringValue,
+                    secondParticipantAvatar: json["secondParticipantProfilePic"].stringValue == "" ? nil : json["secondParticipantProfilePic"].stringValue)
     }
     
     static func parseJsonMessage(json: JSON) -> Message {
@@ -45,6 +42,6 @@ class JSONParsers {
                        receiverId: json["receiverId"].stringValue,
                        message: json["message"].stringValue,
                        fileUrl: json["fileUrl"].stringValue,
-                       createdAt: json["createdAt"].stringValue)
+                       createdAt: json["createdAt"].stringValue.toFormattedDateString() ?? "")
     }
 }

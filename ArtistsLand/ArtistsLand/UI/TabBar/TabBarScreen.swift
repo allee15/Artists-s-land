@@ -18,6 +18,7 @@ class TabBarCoordinator: ObservableObject {
     static let instance = TabBarCoordinator()
     @Published var tabBarNavigation: TabBarNavigation?
     @Published var showTabBar: Bool = true
+    @Published var shouldGetChats: Bool = false
 }
 
 struct TabBarScreen: View {

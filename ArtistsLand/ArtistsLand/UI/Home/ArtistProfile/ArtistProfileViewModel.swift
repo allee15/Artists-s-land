@@ -99,7 +99,7 @@ class ArtistProfileViewModel: BaseViewModel {
                 
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-                if result {
+                if !result.senderId.isEmpty {
                     self.eventSubject.send(.created)
                 }
             }.store(in: &bag)

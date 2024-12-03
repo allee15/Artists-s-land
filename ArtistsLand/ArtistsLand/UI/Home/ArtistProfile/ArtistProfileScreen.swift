@@ -77,6 +77,7 @@ struct ArtistProfileScreen: View {
             switch event {
             case .created:
                 navigation.popToRoot(animated: true)
+                TabBarCoordinator.instance.shouldGetChats = true
                 TabBarCoordinator.instance.tabBarNavigation = .chats
                 
             case .failed:
