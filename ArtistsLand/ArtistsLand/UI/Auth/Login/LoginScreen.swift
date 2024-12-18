@@ -55,6 +55,10 @@ struct LoginScreen: View {
                     
                     BlueButtonView(text: "Log in") {
                         viewModel.login()
+//                        let screen = PhoneAuthScreen {
+//                            viewModel.login()
+//                        }
+//                        navigation.push(screen.asDestination(), animated: true)
                     }.padding(.top, 12)
                 }.padding(.top, 24)
                     .padding(.horizontal, 16)

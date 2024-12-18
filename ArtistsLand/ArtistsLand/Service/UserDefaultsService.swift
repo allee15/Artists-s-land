@@ -12,6 +12,7 @@ enum UserDefaultsKeys {
     static let appTheme = "appTheme"
     static let notificationsSubscribed = "notificationsSubscribed"
     static let token = Key<String>(value: "token")
+    static let authVerificationID = Key<String>(value: "authVerificationID")
 }
 
 public struct Key<T> {

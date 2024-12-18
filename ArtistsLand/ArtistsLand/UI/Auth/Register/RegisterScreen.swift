@@ -95,7 +95,12 @@ struct RegisterScreen: View {
                         }
                         
                         BlueButtonView(text: "Create account") {
-                            viewModel.allFieldAreCompleted()
+                            if viewModel.allFieldAreCompleted() {
+//                                let screen = PhoneAuthScreen {
+                                    viewModel.register()
+//                                }
+//                                navigation.push(screen.asDestination(), animated: true)
+                            }
                         }
                     }
                 }.padding(.top, 24)

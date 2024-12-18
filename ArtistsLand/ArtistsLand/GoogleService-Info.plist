@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyC3EuJlfrb2rZtr2WBP2zXssmg7BvaZd3Y</string>
+	<string>AIzaSyCdd_uEKLE7eS250X5_USjxZZF8sMcJAgo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>583305377387</string>
+	<string>1017244440482</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>app.AlexiaAldea.ArtistsLand</string>
 	<key>PROJECT_ID</key>
-	<string>artistsland-d1d5c</string>
+	<string>artistland-f44cc</string>
 	<key>STORAGE_BUCKET</key>
-	<string>artistsland-d1d5c.appspot.com</string>
+	<string>artistland-f44cc.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:583305377387:ios:45f08aaf7c80f2afc1632e</string>
+	<string>1:1017244440482:ios:1739d701bea19bce5944fb</string>
 </dict>
 </plist>

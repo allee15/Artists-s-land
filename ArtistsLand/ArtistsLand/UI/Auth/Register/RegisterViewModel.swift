@@ -37,7 +37,7 @@ class RegisterViewModel: BaseViewModel {
     let registerCompletion = PassthroughSubject<RegisterCompletion, Never>()
     var userService = UserService.shared
     
-    func allFieldAreCompleted() {
+    func allFieldAreCompleted() -> Bool {
         if name.isEmpty {
             self.errorMessageName = "This field is required."
         } else if name.count < 3 {
@@ -63,11 +63,13 @@ class RegisterViewModel: BaseViewModel {
         }
         
         if showGreeting && errorMessageName == nil && errorMessageUserType == nil && errorMessageEmail == nil, errorMessagePassword == nil {
-            self.register()
+            return true
         }
+        
+        return false
     }
     
-    private func register() {
+    func register() {
         userService.register(nickname: name, email: email, password: password, userType: selectedUserType.lowercased())
             .sink { [weak self] completion in
                 guard let self = self else { return }
