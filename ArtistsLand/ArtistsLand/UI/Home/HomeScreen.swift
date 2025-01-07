@@ -41,16 +41,18 @@ struct HomeScreen: View {
                     VStack(spacing: 20) {
                         ForEach(posts, id: \.id) { post in
                             PostView(post: post) { postLiked in
-                                viewModel.likePost(postId: post.id)
+                                if postLiked {
+                                    viewModel.likePost(postId: post.id)
+                                } else {
+                                    viewModel.unlikePost(postId: post.id)
+                                }
                             } commentsAction: { comment in
                                 viewModel.addCommentToPost(comment: comment, postId: post.id)
                             } nameAction: { id in
                                 let vm = ArtistProfileViewModel(artistId: String(id))
                                 navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
                             } deleteAction: { canDelete, post in
-                                if canDelete {
-                                    viewModel.deletePost(postId: post.id)
-                                } else {
+                                if !canDelete {
                                     viewModel.reportPost(postId: post.id)
                                 }
                             }

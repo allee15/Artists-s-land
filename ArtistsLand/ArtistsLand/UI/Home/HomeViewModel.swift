@@ -58,20 +58,52 @@ class HomeViewModel: BaseViewModel {
         }
     }
     
-    func likePost(postId: Int64) {
+    func likePost(postId: String) {
         postsService.likePost(postId: postId)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] result in
+                guard let self else {return}
+                if result {
+                    //TODO
+                } else {
+                    //TODO
+                }
+            }.store(in: &bag)
     }
     
-    func addCommentToPost(comment: String, postId: Int64) {
-        let commentToSend = Comment(id: 3, name: user?.nickname ?? "", description: comment)
-        postsService.addCommentToPost(comment: commentToSend, postId: postId)
+    func unlikePost(postId: String) {
+        postsService.unlikePost(postId: postId)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] result in
+                guard let self else {return}
+                if result {
+                    //TODO
+                } else {
+                    //TODO
+                }
+            }.store(in: &bag)
     }
     
-    func deletePost(postId: Int64) {
-        postsService.deletePost(postId: postId)
+    func addCommentToPost(comment: String, postId: String) {
+        postsService.addCommentToPost(comment: comment, postId: postId)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] result in
+                guard let self else {return}
+                if result {
+                    //TODO
+                } else {
+                    //TODO
+                }
+            }.store(in: &bag)
     }
     
-    func reportPost(postId: Int64) {
+    func reportPost(postId: String) {
         postsService.reportPost(postId: postId)
     }
 }

@@ -8,6 +8,12 @@
 import Foundation
 import Combine
 
+enum ArtistPostsState {
+    case loading
+    case failure(Error)
+    case value([Post])
+}
+
 enum ArtistInfoState {
     case loading
     case failure(Error)
@@ -28,6 +34,7 @@ class ArtistProfileViewModel: BaseViewModel {
     var artistId: String
     @Published var artistInfoState = ArtistInfoState.loading
     @Published var user: User?
+    @Published var artistPostState = ArtistPostsState.loading
     let eventSubject = PassthroughSubject<ChatCreationCompletion, Never>()
     
     init(artistId: String) {
@@ -35,6 +42,7 @@ class ArtistProfileViewModel: BaseViewModel {
         super.init()
         getArtistInfo()
         getUserInfo()
+        getArtistPosts() 
     }
     
     func getArtistInfo() {
@@ -53,6 +61,23 @@ class ArtistProfileViewModel: BaseViewModel {
                 self.artistInfoState = .value(chats)
             }.store(in: &bag)
 
+    }
+    
+    func getArtistPosts() {
+        postsService.getArtistPosts(artistId: artistId)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.artistPostState = .failure(error)
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] posts in
+                guard let self = self else { return }
+                self.artistPostState = .value(posts)
+            }).store(in: &bag)
     }
     
     private func getUserInfo() {
@@ -78,13 +103,59 @@ class ArtistProfileViewModel: BaseViewModel {
             }).store(in: &bag)
     }
     
-    func likePost(postId: Int64) {
-        postsService.likePost(postId: postId)
+    func addCommentToPost(comment: String, postId: String, artistName: String) {
+        guard case .value(var posts) = artistPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            let newComment = Comment(id: UUID().uuidString, name: artistName, description: comment)
+            posts[index].comments.append(newComment)
+            artistPostState = .value(posts)
+            
+            postsService.addCommentToPost(comment: comment, postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].comments.removeAll { $0.id == newComment.id }
+                        self.artistPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
+    }
+
+    func likePost(postId: String) {
+        guard case .value(var posts) = artistPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            posts[index].nbOfLikes += 1
+            artistPostState = .value(posts)
+            
+            postsService.likePost(postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].nbOfLikes -= 1
+                        self.artistPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
     }
     
-    func addCommentToPost(comment: String, postId: Int64) {
-        let commentToSend = Comment(id: 3, name: userMocked.nickname, description: comment)
-        postsService.addCommentToPost(comment: commentToSend, postId: postId)
+    func unlikePost(postId: String) {
+        guard case .value(var posts) = artistPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            posts[index].nbOfLikes -= 1
+            artistPostState = .value(posts)
+            
+            postsService.unlikePost(postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].nbOfLikes += 1
+                        self.artistPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
     }
     
     func createChat() {
@@ -105,11 +176,7 @@ class ArtistProfileViewModel: BaseViewModel {
             }.store(in: &bag)
     }
     
-    func deletePost(postId: Int64) {
-        postsService.deletePost(postId: postId)
-    }
-    
-    func reportPost(postId: Int64) {
+    func reportPost(postId: String) {
         postsService.reportPost(postId: postId)
     }
 }

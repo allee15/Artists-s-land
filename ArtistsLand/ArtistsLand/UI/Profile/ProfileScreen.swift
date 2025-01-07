@@ -32,6 +32,9 @@ struct ProfileScreen: View {
                                     .sheet(isPresented: $showChangePhotoBottomSheet) {
                                         AddProfilePhotoView(title: "Add profile photo", 
                                                             buttonText: "Delete avatar",
+                                                            isPost: false,
+                                                            postDescription: $viewModel.newPostDescription,
+                                                            errorMessageDescription: $viewModel.errorPostDescription,
                                                             selectedImage: $viewModel.profileImage,
                                                             hideBottomSheet: $showChangePhotoBottomSheet) { deleteAvatar in
                                             if deleteAvatar {
@@ -71,6 +74,8 @@ struct ProfileScreen: View {
                                     }.sheet(isPresented: $showAddPhotoBottomSheet) {
                                         AddProfilePhotoView(title: "Add new post to your account",
                                                             buttonText: "Add photo",
+                                                            postDescription: $viewModel.newPostDescription,
+                                                            errorMessageDescription: $viewModel.errorPostDescription,
                                                             selectedImage: $viewModel.newPostImage,
                                                             hideBottomSheet: $showAddPhotoBottomSheet) { deleteAvatar in
                                             viewModel.postImage()
@@ -78,16 +83,47 @@ struct ProfileScreen: View {
                                         }
                                     }
                                     
-                                    ForEach(user.posts, id: \.id) { post in
-                                        PostView(post: post, showName: false, canDeletePost: true) { postLiked in
-                                            viewModel.likePost(postId: post.id)
-                                        } commentsAction: { comment in
-                                            viewModel.addCommentToPost(comment: comment, postId: post.id)
-                                        } nameAction: { id in
+                                    switch viewModel.userPostState {
+                                    case .failure(_):
+                                        VStack {
+                                            Spacer()
+                                            Text("An error has occured. Please try again!")
+                                                .font(.poppinsSemiBold(size: 20))
+                                                .foregroundStyle(Color.mainBlack)
+                                                .multilineTextAlignment(.center)
+                                                .padding(.bottom, 12)
                                             
-                                        } deleteAction: { canDelete, post in
-                                            if canDelete {
-                                                viewModel.deletePost(postId: post.id)
+                                            ClearButton(text: "Try again") {
+                                                viewModel.getUserPosts()
+                                            }
+                                            Spacer()
+                                        }
+                                    case .loading:
+                                        VStack {
+                                            Spacer()
+                                            HStack {
+                                                Spacer()
+                                                LoaderView()
+                                                Spacer()
+                                            }
+                                            Spacer()
+                                        }
+                                    case .value(let posts):
+                                        ForEach(posts, id: \.id) { post in
+                                            PostView(post: post, showName: false, canDeletePost: true) { postLiked in
+                                                if postLiked {
+                                                    viewModel.likePost(postId: post.id)
+                                                } else {
+                                                    viewModel.unlikePost(postId: post.id)
+                                                }
+                                            } commentsAction: { comment in
+                                                viewModel.addCommentToPost(comment: comment, postId: post.id)
+                                            } nameAction: { id in
+                                                
+                                            } deleteAction: { canDelete, post in
+                                                if canDelete {
+                                                    viewModel.deletePost(postId: post.id)
+                                                }
                                             }
                                         }
                                     }
@@ -129,7 +165,7 @@ struct ProfileScreen: View {
                 case .sent:
                     ToastManager.instance.show(
                         Toast(
-                            text: "Edit successful!",
+                            text: "Photo upload successful!",
                             textColor: Color.lightGreen
                         ))
                     

@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 import Combine
 
+enum UserPostsState {
+    case loading
+    case failure(Error)
+    case value([Post])
+}
+
 enum SendImageCompletion {
     case sent
     case failed
@@ -19,15 +25,20 @@ class ProfileViewModel: BaseViewModel {
     var postsService = PostsService.shared
     
     @Published var userInfo: User?
+    @Published var userPostState = UserPostsState.loading
     @Published var profileImage: UIImage?
     @Published var newPostImage: UIImage?
     @Published var isLoading: Bool = false
+    @Published var newPostDescription: String = ""
+    @Published var errorPostDescription: String?
+    
     let eventSubject = PassthroughSubject<EditAccountCompletion, Never>()
     let eventSubjectForImages = PassthroughSubject<SendImageCompletion, Never>()
     
     override init() {
         super.init()
         getUserInfo()
+        getUserPosts() 
     }
     
     func getUserInfo() {
@@ -51,6 +62,23 @@ class ProfileViewModel: BaseViewModel {
                         self.userInfo = user
                     }
                 }
+            }).store(in: &bag)
+    }
+    
+    func getUserPosts() {
+        postsService.getUserPosts()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(let error):
+                    self.userPostState = .failure(error)
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] posts in
+                guard let self = self else { return }
+                self.userPostState = .value(posts)
             }).store(in: &bag)
     }
     
@@ -88,22 +116,106 @@ class ProfileViewModel: BaseViewModel {
             }).store(in: &bag)
     }
     
-    func addCommentToPost(comment: String, postId: Int64) {
-        let commentToSend = Comment(id: 3, name: userMocked.nickname, description: comment)
-        postsService.addCommentToPost(comment: commentToSend, postId: postId)
+    func addCommentToPost(comment: String, postId: String) {
+        guard case .value(var posts) = userPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            let newComment = Comment(id: UUID().uuidString, name: userInfo?.nickname ?? "Anonymous", description: comment)
+            posts[index].comments.append(newComment)
+            userPostState = .value(posts)
+            
+            postsService.addCommentToPost(comment: comment, postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].comments.removeAll { $0.id == newComment.id }
+                        self.userPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
+    }
+
+    func likePost(postId: String) {
+        guard case .value(var posts) = userPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            posts[index].nbOfLikes += 1
+            userPostState = .value(posts)
+            
+            postsService.likePost(postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].nbOfLikes -= 1
+                        self.userPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
     }
     
-    func likePost(postId: Int64) {
-        postsService.likePost(postId: postId)
+    func unlikePost(postId: String) {
+        guard case .value(var posts) = userPostState else { return }
+        if let index = posts.firstIndex(where: { $0.id == postId }) {
+            posts[index].nbOfLikes -= 1
+            userPostState = .value(posts)
+            
+            postsService.unlikePost(postId: postId)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] success in
+                    guard let self else { return }
+                    if !success {
+                        posts[index].nbOfLikes += 1
+                        self.userPostState = .value(posts)
+                    }
+                }).store(in: &bag)
+        }
     }
-    
+
     func postImage() {
-        postsService.postImage()
-        self.eventSubjectForImages.send(.sent)
+        if newPostDescription.isEmpty {
+            self.errorPostDescription = "Please add a description."
+        } else {
+            self.userPostState = .loading
+            if let imageToSend = newPostImage?.jpegData(compressionQuality: 0.8) {
+                postsService.uploadPost(imageData: imageToSend, description: newPostDescription)
+                    .receive(on: DispatchQueue.main)
+                    .sink(receiveCompletion: { [weak self] completion in
+                        guard let self else { return }
+                        switch completion {
+                        case .failure:
+                            self.eventSubjectForImages.send(.failed)
+                        case .finished:
+                            break
+                        }
+                    }, receiveValue: { [weak self] response in
+                        guard let self else { return }
+                        if response {
+                            self.eventSubjectForImages.send(.sent)
+                            self.getUserPosts()
+                            self.newPostDescription = ""
+                        } else {
+                            self.eventSubjectForImages.send(.failed)
+                        }
+                    }).store(in: &bag)
+            } else {
+                self.eventSubjectForImages.send(.failed)
+            }
+        }
     }
-    
-    func deletePost(postId: Int64) {
+
+    func deletePost(postId: String) {
+        self.userPostState = .loading
         postsService.deletePost(postId: postId)
-        self.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] response in
+                guard let self else {return}
+                if response {
+                    self.getUserPosts()
+                } else {
+                    self.eventSubject.send(.error)
+                }
+            }).store(in: &bag)
     }
 }

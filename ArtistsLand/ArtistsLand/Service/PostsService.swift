@@ -15,31 +15,41 @@ class PostsService {
     
     private init() { }
     
-    func getPosts() {
-        postsApi.getPosts()
+    func getUserPosts() -> AnyPublisher<[Post], Error> {
+        postsApi.getUserPosts()
+            .eraseToAnyPublisher()
     }
     
-    func getPostsForArtist(id: Int64) {
-        postsApi.getPostsForArtist(id: id)
+    func uploadPost(imageData: Data, description: String) -> AnyPublisher<Bool, Error> {
+        postsApi.uploadPost(imageData: imageData, description: description)
+            .eraseToAnyPublisher()
     }
     
-    func likePost(postId: Int64) {
+    func deletePost(postId: String) -> AnyPublisher<Bool, Error> {
+        postsApi.deletePost(postId: postId)
+            .eraseToAnyPublisher()
+    }
+    
+    func getArtistPosts(artistId: String) -> AnyPublisher<[Post], Error> {
+        postsApi.getArtistPosts(artistId: artistId)
+            .eraseToAnyPublisher()
+    }
+    
+    func likePost(postId: String) -> AnyPublisher<Bool, Error> {
         postsApi.likePost(postId: postId)
+            .eraseToAnyPublisher()
     }
     
-    func addCommentToPost(comment: Comment, postId: Int64) {
+    func unlikePost(postId: String) -> AnyPublisher<Bool, Error> {
+        postsApi.unlikePost(postId: postId)
+            .eraseToAnyPublisher()
+    }
+    
+    func addCommentToPost(comment: String, postId: String) -> AnyPublisher<Bool, Error> {
         postsApi.addCommentToPost(comment: comment, postId: postId)
     }
     
-    func postImage() {
-        postsApi.postImage()
-    }
-    
-    func deletePost(postId: Int64) {
-        postsApi.deletePost(postId: postId)
-    }
-    
-    func reportPost(postId: Int64) {
+    func reportPost(postId: String) {
         postsApi.reportPost(postId: postId)
     }
 }

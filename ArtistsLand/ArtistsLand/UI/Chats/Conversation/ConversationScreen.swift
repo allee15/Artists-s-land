@@ -14,6 +14,8 @@ struct ConversationScreen: View {
     private let mainNavigation = EnvironmentObjects.navigation
     
     @State private var showSheet: Bool = false
+    @State private var description: String = ""
+    @State private var errorDescription: String? 
     
     var body: some View {
         VStack(spacing: 0) {
@@ -100,6 +102,9 @@ struct ConversationScreen: View {
             .sheet(isPresented: $showSheet) {
                 AddProfilePhotoView(title: "Send image in chat",
                                     buttonText: "Send image",
+                                    isPost: false,
+                                    postDescription: $description,
+                                    errorMessageDescription: $errorDescription,
                                     selectedImage: $viewModel.image,
                                     hideBottomSheet: $showSheet) { deleteAvatar in
                     viewModel.sendMessage()

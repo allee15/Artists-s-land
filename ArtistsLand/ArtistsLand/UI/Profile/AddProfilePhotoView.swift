@@ -13,6 +13,9 @@ struct AddProfilePhotoView: View {
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
     @State private var pickPhoto = false
     
+    var isPost: Bool = true
+    @Binding var postDescription: String
+    @Binding var errorMessageDescription: String?
     @Binding var selectedImage: UIImage?
     @Binding var hideBottomSheet: Bool
     let deleteAvatarAction: (Bool)->()
@@ -45,11 +48,22 @@ struct AddProfilePhotoView: View {
             }.frame(maxWidth: .infinity)
                 .padding(.horizontal, 20)
             
+            if isPost {
+                FloatingField(text: $postDescription,
+                              placeHolder: "Add a description",
+                              errorMessage: errorMessageDescription)
+                .padding(.horizontal, 20)
+            }
+            
             Spacer()
             
             VStack(spacing: 8) {
                 BlueButtonView(text: buttonText) {
-                    self.deleteAvatarAction(true)
+                    if self.errorMessageDescription == nil && !postDescription.isEmpty {
+                        self.deleteAvatarAction(true)
+                    } else {
+                        self.errorMessageDescription = "Please add a description."
+                    }
                 }
                 
                 ClearButton(text: "Close") {
@@ -64,6 +78,9 @@ struct AddProfilePhotoView: View {
                     selectedImage = image
                 }
                 .ignoresSafeArea()
+            }
+            .onChange(of: postDescription) { _, _ in
+                errorMessageDescription = nil
             }
     }
 }

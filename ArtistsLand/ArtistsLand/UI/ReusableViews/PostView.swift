@@ -16,7 +16,7 @@ struct PostView: View {
     var canDeletePost: Bool = false
     let action: (Bool) -> ()
     let commentsAction: (String) -> ()
-    let nameAction: (Int64) -> ()
+    let nameAction: (String) -> ()
     let deleteAction: (Bool, Post) -> ()
     @State private var isLiked: Bool = false
     @State private var showComments: Bool = false
@@ -58,9 +58,8 @@ struct PostView: View {
                 Button {
                     mainNavigation?.push(ZoomImageScreen(imageToZoom: post.postUrl).asDestination(), animated: true)
                 } label: {
-//                    let localPath = avatarUrl
-//                    KFImage(URL(string: "file://\(localPath)"))
-                    KFImage(URL(string: post.postUrl))
+                    let localPath = post.postUrl
+                    KFImage(URL(string: "file://\(localPath)"))
                         .resizable()
                         .placeholder {
                             Image(.imgPlaceholder)

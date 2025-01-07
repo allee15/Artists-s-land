@@ -22,10 +22,32 @@ class JSONParsers {
             avatarUrl: json["profilePic"].stringValue,
             isArtist: json["accType"].stringValue == "artist" ? true : false,
             balance: json["balance"].doubleValue,
-            level: json["level"].intValue,
-            createdAt: Date(),
-            posts: [] //todo fixme
+            level: json["level"].intValue
         )
+    }
+    
+    static func parseJsonPosts(json: JSON) -> [Post] {
+        return json.arrayValue.map { postJson in
+            Post(
+                id: postJson["_id"].stringValue,
+                description: postJson["description"].stringValue,
+                date: postJson["createdAt"].stringValue,
+                artistName: "", //TODO fix
+                artistId: postJson["artistId"].stringValue,
+                artistAvatarUrl: "", //TODO fix
+                nbOfLikes: postJson["likes"].arrayValue.count,
+                postUrl: postJson["postUrl"].stringValue,
+                comments: postJson["comments"].arrayValue.map { subJson in
+                    parseJsonComments(json: subJson)
+                }
+            )
+        }
+    }
+    
+    static func parseJsonComments(json: JSON) -> Comment {
+        return Comment(id: json["_id"].stringValue,
+                       name: "", //TODO fix
+                       description: json["message"].stringValue)
     }
     
     static func parseJsonChat(json: JSON) -> Chat {

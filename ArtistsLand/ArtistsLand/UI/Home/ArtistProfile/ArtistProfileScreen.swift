@@ -53,21 +53,50 @@ struct ArtistProfileScreen: View {
                             }
                         }.padding(.vertical, 8)
                         
-                        ForEach(artistInfo.posts, id: \.id) { post in
-                            PostView(post: post, showName: false) { postLiked in
-                                viewModel.likePost(postId: post.id)
-                            } commentsAction: { comment in
-                                viewModel.addCommentToPost(comment: comment, postId: post.id)
-                            } nameAction: { id in
+                        switch viewModel.artistPostState {
+                        case .failure(_):
+                            VStack {
+                                Spacer()
+                                Text("An error has occured. Please try again!")
+                                    .font(.poppinsSemiBold(size: 20))
+                                    .foregroundStyle(Color.mainBlack)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.bottom, 12)
                                 
-                            } deleteAction: { canDelete, post in
-                                if canDelete {
-                                    viewModel.deletePost(postId: post.id)
-                                } else {
-                                    viewModel.reportPost(postId: post.id)
+                                ClearButton(text: "Try again") {
+                                    viewModel.getArtistPosts()
+                                }
+                                Spacer()
+                            }
+                        case .loading:
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    LoaderView()
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                        case .value(let posts):
+                            ForEach(posts, id: \.id) { post in
+                                PostView(post: post, showName: false, canDeletePost: true) { postLiked in
+                                    if postLiked {
+                                        viewModel.likePost(postId: post.id)
+                                    } else {
+                                        viewModel.unlikePost(postId: post.id)
+                                    }
+                                } commentsAction: { comment in
+                                    viewModel.addCommentToPost(comment: comment, postId: post.id,
+                                                               artistName: artistInfo.nickname)
+                                } nameAction: { id in
+                                    
+                                } deleteAction: { canDelete, post in
+                                    if !canDelete {
+                                        viewModel.reportPost(postId: post.id)
+                                    }
                                 }
                             }
-
                         }
                     }.padding(.vertical, 20)
                         .padding(.horizontal, 16)
