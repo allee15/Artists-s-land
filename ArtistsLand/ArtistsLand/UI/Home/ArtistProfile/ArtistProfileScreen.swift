@@ -125,6 +125,16 @@ struct ArtistProfileScreen: View {
                 }
                 
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                
+            case .reportSent:
+                let modal = ModalChooseOptionView(title: "Report sent",
+                                                  description: "Thank you for your report! We will look into it as soon as possible.",
+                                                  topButtonText: "Close",
+                                                  onTopButtonTapped: {
+                    navigation.dismissModal(animated: true, completion: nil)
+                })
+                
+                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
             }
         }
     }

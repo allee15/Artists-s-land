@@ -24,6 +24,7 @@ enum ChatCreationCompletion {
     case created
     case failed
     case notLoggedIn
+    case reportSent
 }
 
 class ArtistProfileViewModel: BaseViewModel {
@@ -178,5 +179,12 @@ class ArtistProfileViewModel: BaseViewModel {
     
     func reportPost(postId: String) {
         postsService.reportPost(postId: postId)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] success in
+                guard let self else { return }
+                self.eventSubject.send(.reportSent)
+            }).store(in: &bag)
     }
 }
