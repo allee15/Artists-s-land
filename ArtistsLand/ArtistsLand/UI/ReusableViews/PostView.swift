@@ -166,11 +166,11 @@ struct SingleCommentView: View {
         HStack {
             VStack(alignment: .leading, spacing: 12) {
                 Text(comment.name)
-                    .font(.poppinsSemiBold(size: 12))
+                    .font(.poppinsSemiBold(size: 14))
                     .foregroundStyle(Color.simpleBlue)
                 
                 Text(comment.description)
-                    .font(.poppinsRegular(size: 14))
+                    .font(.poppinsRegular(size: 16))
                     .foregroundStyle(Color.mainBlack)
             }.padding(.all, 12)
                 .background(Color.simpleBlue.opacity(0.3))

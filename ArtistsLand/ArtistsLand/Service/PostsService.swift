@@ -15,6 +15,11 @@ class PostsService {
     
     private init() { }
     
+    func getPosts() -> AnyPublisher<[Post], Error> {
+        postsApi.getPosts()
+            .eraseToAnyPublisher()
+    }
+    
     func getUserPosts() -> AnyPublisher<[Post], Error> {
         postsApi.getUserPosts()
             .eraseToAnyPublisher()
@@ -47,9 +52,11 @@ class PostsService {
     
     func addCommentToPost(comment: String, postId: String) -> AnyPublisher<Bool, Error> {
         postsApi.addCommentToPost(comment: comment, postId: postId)
+            .eraseToAnyPublisher()
     }
     
-    func reportPost(postId: String) {
+    func reportPost(postId: String) -> AnyPublisher<Bool, Error> {
         postsApi.reportPost(postId: postId)
+            .eraseToAnyPublisher()
     }
 }

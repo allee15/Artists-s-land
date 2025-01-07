@@ -32,21 +32,21 @@ class JSONParsers {
                 id: postJson["_id"].stringValue,
                 description: postJson["description"].stringValue,
                 date: postJson["createdAt"].stringValue,
-                artistName: "", //TODO fix
+                artistName: postJson["artistId"]["username"].stringValue,
                 artistId: postJson["artistId"].stringValue,
-                artistAvatarUrl: "", //TODO fix
+                artistAvatarUrl: postJson["artistId"]["profilePic"].stringValue,
                 nbOfLikes: postJson["likes"].arrayValue.count,
                 postUrl: postJson["postUrl"].stringValue,
                 comments: postJson["comments"].arrayValue.map { subJson in
-                    parseJsonComments(json: subJson)
+                    parseJsonComment(json: subJson)
                 }
             )
         }
     }
     
-    static func parseJsonComments(json: JSON) -> Comment {
+    static func parseJsonComment(json: JSON) -> Comment {
         return Comment(id: json["_id"].stringValue,
-                       name: "", //TODO fix
+                       name: json["userId"]["username"].stringValue,
                        description: json["message"].stringValue)
     }
     

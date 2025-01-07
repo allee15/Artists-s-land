@@ -11,10 +11,39 @@ import SwiftyJSON
 
 class PostsApi {
     
+    func getPosts() -> AnyPublisher<[Post], Error> {
+        Future { promise in
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/get-posts")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "GET"
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        let posts = JSONParsers.parseJsonPosts(json: json)
+                        promise(.success(posts))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
     func getUserPosts() -> AnyPublisher<[Post], Error> {
         Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/get-user-posts")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/get-user-posts")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
@@ -44,7 +73,7 @@ class PostsApi {
     func uploadPost(imageData: Data, description: String) -> AnyPublisher<Bool, Error> {
         Future { promise in
             
-            let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/user/add-post")
+            let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/posts/add-post")
             
             var urlRequest = URLRequest(url: url!)
             urlRequest.httpMethod = "POST"
@@ -96,7 +125,7 @@ class PostsApi {
     
     func deletePost(postId: String) -> AnyPublisher<Bool, Error> {
         Future { promise in
-            let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/user/delete-post/\(postId)")
+            let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/posts/delete-post/\(postId)")
             
             var urlRequest = URLRequest(url: url!)
             
@@ -131,7 +160,7 @@ class PostsApi {
     func getArtistPosts(artistId: String) -> AnyPublisher<[Post], Error> {
         Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/get-user/posts/\(artistId)")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/get-user/posts/\(artistId)")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
@@ -162,7 +191,7 @@ class PostsApi {
     func likePost(postId: String) -> AnyPublisher<Bool, Error> {
         return Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/like-post/\(postId)")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/like-post/\(postId)")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
@@ -196,7 +225,7 @@ class PostsApi {
     func unlikePost(postId: String) -> AnyPublisher<Bool, Error> {
         return Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/delete-like-post/\(postId)")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/delete-like-post/\(postId)")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
@@ -230,7 +259,7 @@ class PostsApi {
     func addCommentToPost(comment: String, postId: String) -> AnyPublisher<Bool, Error> {
         return Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user/add-comment-post/\(postId)")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/posts/add-comment-post/\(postId)")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
@@ -238,7 +267,8 @@ class PostsApi {
             let jsonData = try? JSONSerialization.data(withJSONObject: body)
             
             urlRequest.httpMethod = "POST"
-            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
@@ -266,7 +296,11 @@ class PostsApi {
         }.eraseToAnyPublisher()
     }
     
-    func reportPost(postId: String) {
-        
+    func reportPost(postId: String) -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                promise(.success(true))
+            }
+        }.eraseToAnyPublisher()
     }
 }
