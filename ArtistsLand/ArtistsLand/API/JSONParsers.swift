@@ -33,7 +33,7 @@ class JSONParsers {
                 description: postJson["description"].stringValue,
                 date: postJson["createdAt"].stringValue,
                 artistName: postJson["artistId"]["username"].stringValue,
-                artistId: postJson["artistId"].stringValue,
+                artistId: postJson["artistId"]["_id"].stringValue,
                 artistAvatarUrl: postJson["artistId"]["profilePic"].stringValue,
                 nbOfLikes: postJson["likes"].arrayValue.count,
                 postUrl: postJson["postUrl"].stringValue,

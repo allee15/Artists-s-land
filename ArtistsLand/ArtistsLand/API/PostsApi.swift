@@ -165,7 +165,8 @@ class PostsApi {
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
             urlRequest.httpMethod = "GET"
-            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }

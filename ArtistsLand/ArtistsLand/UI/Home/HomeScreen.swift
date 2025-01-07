@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     @StateObject private var viewModel = HomeViewModel()
     @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -49,8 +50,8 @@ struct HomeScreen: View {
                             } commentsAction: { comment in
                                 viewModel.addCommentToPost(comment: comment, postId: post.id)
                             } nameAction: { id in
-                                let vm = ArtistProfileViewModel(artistId: String(id))
-                                navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
+                                let vm = ArtistProfileViewModel(artistId: id)
+                                mainNavigation?.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
                             } deleteAction: { canDelete, post in
                                 if !canDelete {
                                     viewModel.reportPost(postId: post.id)

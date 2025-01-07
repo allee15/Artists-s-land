@@ -80,7 +80,7 @@ struct ArtistProfileScreen: View {
                             }
                         case .value(let posts):
                             ForEach(posts, id: \.id) { post in
-                                PostView(post: post, showName: false, canDeletePost: true) { postLiked in
+                                PostView(post: post, showName: false) { postLiked in
                                     if postLiked {
                                         viewModel.likePost(postId: post.id)
                                     } else {
