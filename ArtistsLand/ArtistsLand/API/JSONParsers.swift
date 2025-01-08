@@ -66,4 +66,8 @@ class JSONParsers {
                        fileUrl: json["fileUrl"].stringValue,
                        createdAt: json["createdAt"].stringValue.toFormattedDateString() ?? "")
     }
+    
+    static func parseJsonStripe(json: JSON) -> String {
+        return json["clientSecret"].stringValue
+    }
 }

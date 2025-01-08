@@ -55,7 +55,7 @@ struct WalletScreen: View {
                             HStack(spacing: 12) {
                                 ForEach(viewModel.amounts, id: \.self) { amount in
                                     TokenCardTypeView(amount: amount) {
-                                        viewModel.startStripe()
+                                        viewModel.startStripe(amount: amount)
                                     }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                 }
                             }.padding(.horizontal, 16)

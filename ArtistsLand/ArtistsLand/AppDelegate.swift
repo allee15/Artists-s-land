@@ -7,12 +7,14 @@
 
 import SwiftUI
 import netfox
+import Stripe
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         NFX.sharedInstance().start()
+        StripeAPI.defaultPublishableKey = "pk_test_51NzPkBFsUJrHtrhWcN5jFB7GhTh92ru5Sh3UV7HQHCYaZFqvqdjzsvGkBf8iWPGDn9JspOFoFDtoJWxsLxaDw0HI00tiz22bSk"
         return true
     }
     
