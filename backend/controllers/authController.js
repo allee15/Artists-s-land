@@ -112,7 +112,7 @@ export const enable2FA = async (req, res) => {
 
     res.status(200).json({ message: "2FA enabled successfully!" });
   } catch (error) {
-    console.log("Error in enable 2FA controller.");
+    console.log("Error in enable 2FA controller.", error.message);
     res.status(500).json({ error: "Internal Server Error." });
   }
 };
@@ -130,7 +130,7 @@ export const disable2FA = async (req, res) => {
 
     res.status(200).json({ message: "2FA disabled successfully!" });
   } catch (error) {
-    console.log("Error in disable 2FA controller.");
+    console.log("Error in disable 2FA controller.", error.message);
     res.status(500).json({ error: "Internal Server Error." });
   }
 };

@@ -15,8 +15,8 @@ class StripeService {
     
     private init() { }
     
-    func createPaymentIntent(amount: Int64, currency: String) -> AnyPublisher<String, Error> {
-        return stripeApi.createPaymentIntent(amount: amount, currency: currency)
+    func createPaymentIntent(amount: Int64, currency: String, userId: String) -> AnyPublisher<String, Error> {
+        return stripeApi.createPaymentIntent(amount: amount, currency: currency, userId: userId)
             .eraseToAnyPublisher()
     }
 }

@@ -423,4 +423,76 @@ class UserApi {
             
         }.eraseToAnyPublisher()
     }
+    
+    func enable2fa() -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/auth/enable-2fa")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            urlRequest.httpMethod = "POST"
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        let response = json["message"].stringValue == "2FA enabled successfully!"
+                        if response {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
+    func disable2fa() -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/auth/disable-2fa")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            urlRequest.httpMethod = "POST"
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        let response = json["message"].stringValue == "2FA disabled successfully!"
+                        if response {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
 }

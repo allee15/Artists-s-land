@@ -97,6 +97,22 @@
         }
       }
     },
+    "Activate two factor authentication" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activate two factor authentication"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activează autentificarea în doi pași."
+          }
+        }
+      }
+    },
     "An error has occured. Please try again!" : {
       "localizations" : {
         "en" : {
@@ -173,6 +189,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "da"
+          }
+        }
+      }
+    },
+    "Deactivate two factor authentication" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deactivate two factor authentication"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dezactivează autentificarea în doi pași."
           }
         }
       }
@@ -338,7 +370,20 @@
       }
     },
     "Please enter a phone number in order to activate 2 factor-authentication. Note that we will not share your phone number with anyone else." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a phone number in order to activate 2 factor-authentication. Note that we will not share your phone number with anyone else."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te rugăm să introduci un număr de telefon pentru a activa autentificarea în doi pași. Ține cont că nu vom împărtăși numărul tău de telefon cu nimeni altcineva."
+          }
+        }
+      }
     },
     "Please enter your details below" : {
       "localizations" : {
@@ -437,7 +482,20 @@
       }
     },
     "Your balance: %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your balance: %@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soldul tău: %@"
+          }
+        }
+      }
     },
     "Your balance: %lld" : {
       "extractionState" : "stale",

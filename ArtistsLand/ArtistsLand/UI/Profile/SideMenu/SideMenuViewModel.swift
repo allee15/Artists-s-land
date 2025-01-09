@@ -33,6 +33,7 @@ class SideMenuViewModel: BaseViewModel {
     
     private func getUserInfo() {
         userService.userReactiveData.getStateSubject()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] userState in

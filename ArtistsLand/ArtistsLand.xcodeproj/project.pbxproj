@@ -19,6 +19,8 @@
 		0F0CBA552D2EA65B0018FD86 /* Stripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA542D2EA65B0018FD86 /* Stripe.swift */; };
 		0F0CBA592D2EC3F80018FD86 /* StripeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA582D2EC3F80018FD86 /* StripeApi.swift */; };
 		0F0CBA5B2D2EC4DE0018FD86 /* StripeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA5A2D2EC4DE0018FD86 /* StripeService.swift */; };
+		0F0CBA5E2D2FBEDB0018FD86 /* 2FactorAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA5D2D2FBEDB0018FD86 /* 2FactorAuthViewModel.swift */; };
+		0F0CBA602D2FBEF60018FD86 /* 2FactorAuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA5F2D2FBEF60018FD86 /* 2FactorAuthScreen.swift */; };
 		0F24D5942CC0F85500A833E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */; };
 		0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5952CC0F89A00A833E1 /* RootView.swift */; };
 		0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5992CC0F8D600A833E1 /* TabBarItem.swift */; };
@@ -135,6 +137,8 @@
 		0F0CBA542D2EA65B0018FD86 /* Stripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stripe.swift; sourceTree = "<group>"; };
 		0F0CBA582D2EC3F80018FD86 /* StripeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeApi.swift; sourceTree = "<group>"; };
 		0F0CBA5A2D2EC4DE0018FD86 /* StripeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeService.swift; sourceTree = "<group>"; };
+		0F0CBA5D2D2FBEDB0018FD86 /* 2FactorAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2FactorAuthViewModel.swift; sourceTree = "<group>"; };
+		0F0CBA5F2D2FBEF60018FD86 /* 2FactorAuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2FactorAuthScreen.swift; sourceTree = "<group>"; };
 		0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F24D5952CC0F89A00A833E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0F24D5992CC0F8D600A833E1 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -272,6 +276,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F0CBA5C2D2FBEBE0018FD86 /* 2FactorAuth */ = {
+			isa = PBXGroup;
+			children = (
+				0F0CBA5F2D2FBEF60018FD86 /* 2FactorAuthScreen.swift */,
+				0F0CBA5D2D2FBEDB0018FD86 /* 2FactorAuthViewModel.swift */,
+			);
+			path = 2FactorAuth;
+			sourceTree = "<group>";
+		};
 		0F24D5972CC0F8B100A833E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +528,7 @@
 				0F327EC62CDBC78B00EDF536 /* ChangePassword */,
 				0F327EC32CDBC4B600EDF536 /* EditAccount */,
 				0F24D5FA2CC1BD2E00A833E1 /* ThemeSettingsScreen */,
+				0F0CBA5C2D2FBEBE0018FD86 /* 2FactorAuth */,
 				0F327ECB2CDBCAB200EDF536 /* Wallet */,
 			);
 			path = SideMenu;
@@ -779,7 +793,9 @@
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
+				0F0CBA5E2D2FBEDB0018FD86 /* 2FactorAuthViewModel.swift in Sources */,
 				0F327EE22CDEB4F900EDF536 /* PostsService.swift in Sources */,
+				0F0CBA602D2FBEF60018FD86 /* 2FactorAuthScreen.swift in Sources */,
 				0F327ECF2CDBCAC900EDF536 /* WalletScreen.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				0F24D6172CC2A6CD00A833E1 /* String+.swift in Sources */,

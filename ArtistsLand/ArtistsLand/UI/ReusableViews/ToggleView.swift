@@ -12,14 +12,13 @@ struct ToggleView: View {
     let action: () -> ()
     
     var body: some View {
-        Button {
-            action()
-        } label: {
-            Toggle(isOn: $isOn) { }
-                .toggleStyle(.switch)
-                .labelsHidden()
-                .tint(Color.secondaryBlueInversat)
-                .frame(width: 64, height: 32)
-        }
+        Toggle(isOn: $isOn) { }
+            .toggleStyle(.switch)
+            .labelsHidden()
+            .tint(Color.secondaryBlueInversat)
+            .frame(width: 64, height: 32)
+            .onChange(of: isOn) { _, _ in
+                action()
+            }
     }
 }

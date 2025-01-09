@@ -10,7 +10,8 @@ import Stripe
 import StripePaymentSheet
 
 class PaymentController {
-    static func presentPaymentSheet(clientSecret: String) {
+    static func presentPaymentSheet(clientSecret: String,
+                                    completion: @escaping (PaymentSheetResult) -> ()) {
         var configuration = PaymentSheet.Configuration()
         configuration.merchantDisplayName = "ArtistsLand"
         
@@ -22,10 +23,13 @@ class PaymentController {
                     switch result {
                     case .completed:
                         print("Plată completată!")
+                        completion(.completed)
                     case .canceled:
                         print("Plata a fost anulată!")
+                        completion(.canceled)
                     case .failed(let error):
                         print("Eroare la plată: \(error.localizedDescription)")
+                        completion(.failed(error: error))
                     }
                 }
             }

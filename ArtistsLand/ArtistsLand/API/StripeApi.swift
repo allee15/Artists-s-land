@@ -10,7 +10,7 @@ import Combine
 import SwiftyJSON
 
 class StripeApi {
-    func createPaymentIntent(amount: Int64, currency: String) -> AnyPublisher<String, Error> {
+    func createPaymentIntent(amount: Int64, currency: String, userId: String) -> AnyPublisher<String, Error> {
         Future { promise in
             
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/stripe/create-payment-intent")
@@ -22,7 +22,8 @@ class StripeApi {
             
             let body: [String: Any] = [
                 "amount": amount * 100,
-                "currency": currency
+                "currency": currency,
+                "userId": userId
             ]
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {

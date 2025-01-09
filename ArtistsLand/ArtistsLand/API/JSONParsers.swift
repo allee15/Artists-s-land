@@ -22,7 +22,9 @@ class JSONParsers {
             avatarUrl: json["profilePic"].stringValue,
             isArtist: json["accType"].stringValue == "artist" ? true : false,
             balance: json["balance"].doubleValue,
-            level: json["level"].intValue
+            level: json["level"].intValue,
+            isTwoFactorEnabled: json["twoFactorEnabled"].boolValue,
+            twoFactorSecret: json["twoFactorSecret"].stringValue
         )
     }
     

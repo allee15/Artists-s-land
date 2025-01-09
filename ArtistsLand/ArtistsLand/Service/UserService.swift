@@ -65,6 +65,10 @@ class UserService {
         }
     }
     
+    func reloadUser() {
+        self.userReactiveData.reload()
+    }
+    
     func login(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
         return userApi.login(email: email, password: password)
             .handleEvents(receiveOutput: { [weak self] user in
@@ -154,6 +158,16 @@ class UserService {
     
     func getArtistInfo(artistId: String) -> AnyPublisher<User, Error> {
         return userApi.getArtistInfo(artistId: artistId)
+            .eraseToAnyPublisher()
+    }
+    
+    func enable2fa() -> AnyPublisher<Bool, Error> {
+        return userApi.enable2fa()
+            .eraseToAnyPublisher()
+    }
+    
+    func disable2fa() -> AnyPublisher<Bool, Error> {
+        return userApi.disable2fa()
             .eraseToAnyPublisher()
     }
 }
