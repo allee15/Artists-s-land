@@ -11,6 +11,7 @@ import SwiftyJSON
 class JSONParsers {
     static func parseJsonUserResponse(json: JSON) -> UserResponse {
         return UserResponse(token: json["token"].stringValue,
+                            authKey: json["qr_code"].stringValue,
                             user: parseJsonUser(json: json))
     }
     

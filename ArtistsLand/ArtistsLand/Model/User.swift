@@ -9,6 +9,7 @@ import Foundation
 
 struct UserResponse {
     let token: String
+    let authKey: String
     let user: User
 }
 

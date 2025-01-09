@@ -57,6 +57,7 @@ class SideMenuViewModel: BaseViewModel {
     
     func logOut() {
         userService.logout()
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] response in
@@ -71,6 +72,7 @@ class SideMenuViewModel: BaseViewModel {
     
     func deleteAccount() {
         userService.deleteAccount()
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] response in

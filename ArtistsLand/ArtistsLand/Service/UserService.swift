@@ -59,6 +59,15 @@ class UserService {
         }
     }
     
+    var towFaToken: String? {
+        set {
+            userDefaultsService.setValue(key: UserDefaultsKeys.authVerificationID, value: newValue)
+        }
+        get {
+            return userDefaultsService.getValue(key: UserDefaultsKeys.authVerificationID)
+        }
+    }
+    
     private init() {
         if !isLoggedIn {
             self.userReactiveData.pushValue(value: .anonymous)
@@ -74,6 +83,7 @@ class UserService {
             .handleEvents(receiveOutput: { [weak self] user in
                 if !user.user.email.isEmpty {
                     self?.authToken = user.token
+                    self?.towFaToken = user.authKey
                     self?.userReactiveData.pushValue(value: .loggedIn(user.user))
                 }
             })
@@ -85,6 +95,7 @@ class UserService {
             .handleEvents(receiveOutput: { [weak self] user in
                 if !user.user.email.isEmpty {
                     self?.authToken = user.token
+                    self?.towFaToken = user.authKey
                     self?.userReactiveData.pushValue(value: .loggedIn(user.user))
                 }
             })

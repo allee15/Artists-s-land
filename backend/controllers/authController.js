@@ -29,18 +29,13 @@ export const register = async (req, res) => {
       const token = generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
 
-      qrcode.toDataURL(secret.otpauth_url, (err, data_url) => {
-        if (err) {
-          return res.status(500).json({ error: "Error generating QR code" });
-        }
-        res.status(201).json({
-          _id: newUser._id,
-          username: newUser.username,
-          accType: newUser.accType,
-          email: newUser.email,
-          token: token,
-          qr_code: data_url,
-        });
+      res.status(201).json({
+        _id: newUser._id,
+        username: newUser.username,
+        accType: newUser.accType,
+        email: newUser.email,
+        token: token,
+        qr_code: secret.otpauth_url,
       });
     } else {
       res.status(400).json({ error: "Invalid user data" });

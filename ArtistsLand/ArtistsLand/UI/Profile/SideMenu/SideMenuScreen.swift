@@ -37,6 +37,11 @@ struct SideMenuScreen: View {
                                                 animated: true)
                             }
                             
+                            WidgetView(title: "Two Factor Authentication", icon: .ic2Fa) {
+                                let vm = FactorAuthViewModel(userInfo: user)
+                                navigation.push(FactorAuthScreen(viewModel: vm).asDestination(), animated: true)
+                            }
+                            
                             if user.isArtist {
                                 WidgetView(title: "Wallet", icon: .icWallet) {
                                     let vm = WalletViewModel(userInfo: user)
