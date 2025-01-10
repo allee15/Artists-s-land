@@ -13,7 +13,7 @@ struct SideMenuScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Profile menu") {
+            LeftNavBarView(title: "Menu") {
                 navigation.pop(animated: true)
             }
             

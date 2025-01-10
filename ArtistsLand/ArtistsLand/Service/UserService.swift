@@ -181,4 +181,9 @@ class UserService {
         return userApi.disable2fa()
             .eraseToAnyPublisher()
     }
+    
+    func verifyCode(code: String, id: String) -> AnyPublisher<Bool, Error> {
+        return userApi.verifyCode(code: code, id: id)
+            .eraseToAnyPublisher()
+    }
 }

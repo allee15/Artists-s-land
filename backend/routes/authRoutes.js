@@ -6,6 +6,7 @@ import {
   logout,
   enable2FA,
   disable2FA,
+  verify2FA,
 } from "../controllers/authController.js";
 
 const router = express.Router();
@@ -19,5 +20,7 @@ router.post("/logout", logout);
 router.post("/enable-2fa", authorize, enable2FA);
 
 router.post("/disable-2fa", authorize, disable2FA);
+
+router.post("/verify-code", authorize, verify2FA);
 
 export default router;

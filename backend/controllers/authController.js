@@ -54,6 +54,7 @@ export const login = async (req, res) => {
       password,
       user?.password || ""
     );
+    const secret = speakeasy.generateSecret({ length: 20 });
 
     if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid credentials" });
@@ -64,10 +65,6 @@ export const login = async (req, res) => {
         encoding: "base32",
         verificationToken,
       });
-
-      if (!isVerified) {
-        return res.status(400).json({ error: "Invalid 2FA token" });
-      }
     }
     const token = generateTokenAndSetCookie(user._id, res);
 
@@ -78,9 +75,11 @@ export const login = async (req, res) => {
       email: user.email,
       profilePic: user.profilePic,
       token: token,
+      twoFactorEnabled: user.twoFactorEnabled,
+      qr_code: secret.otpauth_url,
     });
   } catch (error) {
-    console.log("Error in login controller.");
+    console.log("Error in login controller.", error.message);
     res.status(500).json({ error: "Internal Server Error." });
   }
 };
@@ -126,6 +125,24 @@ export const disable2FA = async (req, res) => {
     res.status(200).json({ message: "2FA disabled successfully!" });
   } catch (error) {
     console.log("Error in disable 2FA controller.", error.message);
+    res.status(500).json({ error: "Internal Server Error." });
+  }
+};
+
+export const verify2FA = async (req, res) => {
+  try {
+    const { userId, otpCode } = req.body;
+
+    const user = await User.findById(userId);
+    const verified = speakeasy.totp.verify({
+      secret: user.twoFactorSecret,
+      encoding: "base32",
+      token: otpCode,
+    });
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.log("Error in verify2FA controller.", error.message);
     res.status(500).json({ error: "Internal Server Error." });
   }
 };

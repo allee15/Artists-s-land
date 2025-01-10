@@ -55,10 +55,6 @@ struct LoginScreen: View {
                     
                     BlueButtonView(text: "Log in") {
                         viewModel.login()
-//                        let screen = PhoneAuthScreen {
-//                            viewModel.login()
-//                        }
-//                        navigation.push(screen.asDestination(), animated: true)
                     }.padding(.top, 12)
                 }.padding(.top, 24)
                     .padding(.horizontal, 16)
@@ -88,8 +84,13 @@ struct LoginScreen: View {
                     navigation.dismissModal(animated: true, completion: nil)
                 }
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-            case .login:
-                break
+            case .login(let url, let id, let isTwoFactorEnabled):
+                if isTwoFactorEnabled {
+                    let vm = PhoneAuthViewModel(otpauthURL: url, id: id)
+                    navigation.push(PhoneAuthScreen(viewModel: vm).asDestination(), animated: true)
+                } else {
+                    break
+                }
             }
         }
     }
