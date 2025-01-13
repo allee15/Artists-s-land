@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum LoginCompletion {
-    case login
+    case login(String, String, Bool)
     case invalidCredentials
     case failure(Error)
 }
@@ -60,7 +60,7 @@ class LoginViewModel: BaseViewModel {
                 if user.user.email.isEmpty {
                     self.loginCompletion.send(.invalidCredentials)
                 } else {
-                    self.loginCompletion.send(.login)
+                    self.loginCompletion.send(.login(user.authKey, user.user.id, user.user.isTwoFactorEnabled))
                 }
             }
             .store(in: &bag)

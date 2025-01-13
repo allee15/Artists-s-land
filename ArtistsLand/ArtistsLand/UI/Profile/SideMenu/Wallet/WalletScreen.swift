@@ -55,7 +55,7 @@ struct WalletScreen: View {
                             HStack(spacing: 12) {
                                 ForEach(viewModel.amounts, id: \.self) { amount in
                                     TokenCardTypeView(amount: amount) {
-                                        viewModel.startStripe()
+                                        viewModel.startStripe(amount: amount)
                                     }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                 }
                             }.padding(.horizontal, 16)
@@ -68,6 +68,24 @@ struct WalletScreen: View {
         }.background(Color.mainWhite)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .completed:
+                    navigation.pop(animated: true)
+                    ToastManager.instance.show(
+                        Toast(
+                            text: "Payment successful!",
+                            textColor: Color.lightGreen
+                        ))
+                case .error:
+                    let modal = ModalChooseOptionView(title: "Something went wrong",
+                                                      description: "An error has occured and we couldn't complete the action. Please try again later.",
+                                                      topButtonText: "Back") {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    }
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                }
+            }
     }
 }
 

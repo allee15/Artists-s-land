@@ -1,5 +1,4 @@
 import User from "../models/userModel.js";
-import Post from "../models/postModel.js";
 import bcrypt from "bcryptjs";
 import fs from "fs";
 import { fileURLToPath } from "url";

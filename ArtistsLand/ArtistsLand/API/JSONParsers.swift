@@ -11,6 +11,7 @@ import SwiftyJSON
 class JSONParsers {
     static func parseJsonUserResponse(json: JSON) -> UserResponse {
         return UserResponse(token: json["token"].stringValue,
+                            authKey: json["qr_code"].stringValue,
                             user: parseJsonUser(json: json))
     }
     
@@ -22,7 +23,9 @@ class JSONParsers {
             avatarUrl: json["profilePic"].stringValue,
             isArtist: json["accType"].stringValue == "artist" ? true : false,
             balance: json["balance"].doubleValue,
-            level: json["level"].intValue
+            level: json["level"].intValue,
+            isTwoFactorEnabled: json["twoFactorEnabled"].boolValue,
+            twoFactorSecret: json["twoFactorSecret"].stringValue
         )
     }
     
@@ -33,7 +36,7 @@ class JSONParsers {
                 description: postJson["description"].stringValue,
                 date: postJson["createdAt"].stringValue,
                 artistName: postJson["artistId"]["username"].stringValue,
-                artistId: postJson["artistId"].stringValue,
+                artistId: postJson["artistId"]["_id"].stringValue,
                 artistAvatarUrl: postJson["artistId"]["profilePic"].stringValue,
                 nbOfLikes: postJson["likes"].arrayValue.count,
                 postUrl: postJson["postUrl"].stringValue,
@@ -65,5 +68,9 @@ class JSONParsers {
                        message: json["message"].stringValue,
                        fileUrl: json["fileUrl"].stringValue,
                        createdAt: json["createdAt"].stringValue.toFormattedDateString() ?? "")
+    }
+    
+    static func parseJsonStripe(json: JSON) -> String {
+        return json["clientSecret"].stringValue
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct UserResponse {
     let token: String
+    let authKey: String
     let user: User
 }
 
@@ -20,4 +21,6 @@ struct User {
     let isArtist: Bool
     let balance: Double
     let level: Int
+    let isTwoFactorEnabled: Bool
+    let twoFactorSecret: String
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     @StateObject private var viewModel = HomeViewModel()
     @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -49,8 +50,8 @@ struct HomeScreen: View {
                             } commentsAction: { comment in
                                 viewModel.addCommentToPost(comment: comment, postId: post.id)
                             } nameAction: { id in
-                                let vm = ArtistProfileViewModel(artistId: String(id))
-                                navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
+                                let vm = ArtistProfileViewModel(artistId: id)
+                                mainNavigation?.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
                             } deleteAction: { canDelete, post in
                                 if !canDelete {
                                     viewModel.reportPost(postId: post.id)
@@ -65,5 +66,18 @@ struct HomeScreen: View {
         }.ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.mainWhite)
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .sent:
+                    let modal = ModalChooseOptionView(title: "Report sent",
+                                                      description: "Thank you for your report! We will look into it as soon as possible.",
+                                                      topButtonText: "Close",
+                                                      onTopButtonTapped: {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    })
+                    
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                }
+            }
     }
 }

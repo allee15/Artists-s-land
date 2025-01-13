@@ -8,34 +8,52 @@
 import SwiftUI
 import Combine
 
-enum OtpCompletion {
-    case codeSend
-    case codeVerified
-}
-
 enum OtpField {
     case codeSend
-    case codeVerified
+}
+
+enum VerifyCodeCompletion {
+    case completed
+    case error
 }
 
 class PhoneAuthViewModel: BaseViewModel {
-    var userService = UserService.shared
+    private var userService = UserService.shared
     
-    @Published var phoneNumber: String = ""
+    @Published var otpauthURL: String?
+    @Published var id: String
     @Published var otpCode: String = ""
-    @Published var isCodeSent: Bool = false
-    @Published var errorMessage: String?
+
+    let verifyCodeCompletion = PassthroughSubject<VerifyCodeCompletion, Never>()
     
-    private var verificationID: String?
+    init(otpauthURL: String?, id: String) {
+        self.otpauthURL = otpauthURL
+        self.id = id
+    }
     
-    let eventSubject = PassthroughSubject<OtpCompletion, Never>()
-    
-    func sendVerificationCode() {
-        errorMessage = nil
-        isCodeSent = false
+    func openGoogleAuthApp() {
+        guard let otpauthURL = otpauthURL, let url = URL(string: otpauthURL) else {
+            print("Invalid OTPAUTH URL")
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     func verifyCode() {
-        
+        userService.verifyCode(code: otpCode, id: id)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] result in
+                guard let self else { return }
+                if result {
+                    self.verifyCodeCompletion.send(.completed)
+                } else {
+                    self.verifyCodeCompletion.send(.error)
+                }
+            }.store(in: &bag)
     }
 }

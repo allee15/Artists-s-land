@@ -33,6 +33,7 @@ class SideMenuViewModel: BaseViewModel {
     
     private func getUserInfo() {
         userService.userReactiveData.getStateSubject()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] userState in
@@ -56,6 +57,7 @@ class SideMenuViewModel: BaseViewModel {
     
     func logOut() {
         userService.logout()
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] response in
@@ -70,6 +72,7 @@ class SideMenuViewModel: BaseViewModel {
     
     func deleteAccount() {
         userService.deleteAccount()
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] response in

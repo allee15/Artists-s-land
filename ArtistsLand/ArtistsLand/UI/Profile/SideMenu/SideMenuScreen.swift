@@ -13,7 +13,7 @@ struct SideMenuScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Profile menu") {
+            LeftNavBarView(title: "Menu") {
                 navigation.pop(animated: true)
             }
             
@@ -35,6 +35,11 @@ struct SideMenuScreen: View {
                             WidgetView(title: "Change password", icon: .icChangePassword) {
                                 navigation.push(ChangePasswordScreen().asDestination(),
                                                 animated: true)
+                            }
+                            
+                            WidgetView(title: "Two Factor Authentication", icon: .ic2Fa) {
+                                let vm = FactorAuthViewModel(userInfo: user)
+                                navigation.push(FactorAuthScreen(viewModel: vm).asDestination(), animated: true)
                             }
                             
                             if user.isArtist {

@@ -96,10 +96,7 @@ struct RegisterScreen: View {
                         
                         BlueButtonView(text: "Create account") {
                             if viewModel.allFieldAreCompleted() {
-//                                let screen = PhoneAuthScreen {
-                                    viewModel.register()
-//                                }
-//                                navigation.push(screen.asDestination(), animated: true)
+                                viewModel.register()
                             }
                         }
                     }
@@ -132,8 +129,9 @@ struct RegisterScreen: View {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                case .register:
-                    break
+                case .register(let url, let id):
+                    let vm = PhoneAuthViewModel(otpauthURL: url, id: id)
+                    navigation.push(PhoneAuthScreen(viewModel: vm).asDestination(), animated: true)
                 }
             }
     }

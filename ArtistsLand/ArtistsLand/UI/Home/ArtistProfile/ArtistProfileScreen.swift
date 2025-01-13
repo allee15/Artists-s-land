@@ -80,7 +80,7 @@ struct ArtistProfileScreen: View {
                             }
                         case .value(let posts):
                             ForEach(posts, id: \.id) { post in
-                                PostView(post: post, showName: false, canDeletePost: true) { postLiked in
+                                PostView(post: post, showName: false) { postLiked in
                                     if postLiked {
                                         viewModel.likePost(postId: post.id)
                                     } else {
@@ -123,6 +123,16 @@ struct ArtistProfileScreen: View {
                 } onBottomButtonTapped: {
                     navigation.dismissModal(animated: true, completion: nil)
                 }
+                
+                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                
+            case .reportSent:
+                let modal = ModalChooseOptionView(title: "Report sent",
+                                                  description: "Thank you for your report! We will look into it as soon as possible.",
+                                                  topButtonText: "Close",
+                                                  onTopButtonTapped: {
+                    navigation.dismissModal(animated: true, completion: nil)
+                })
                 
                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
             }

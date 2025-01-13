@@ -59,10 +59,23 @@ class UserService {
         }
     }
     
+    var towFaToken: String? {
+        set {
+            userDefaultsService.setValue(key: UserDefaultsKeys.authVerificationID, value: newValue)
+        }
+        get {
+            return userDefaultsService.getValue(key: UserDefaultsKeys.authVerificationID)
+        }
+    }
+    
     private init() {
         if !isLoggedIn {
             self.userReactiveData.pushValue(value: .anonymous)
         }
+    }
+    
+    func reloadUser() {
+        self.userReactiveData.reload()
     }
     
     func login(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
@@ -70,6 +83,7 @@ class UserService {
             .handleEvents(receiveOutput: { [weak self] user in
                 if !user.user.email.isEmpty {
                     self?.authToken = user.token
+                    self?.towFaToken = user.authKey
                     self?.userReactiveData.pushValue(value: .loggedIn(user.user))
                 }
             })
@@ -81,6 +95,7 @@ class UserService {
             .handleEvents(receiveOutput: { [weak self] user in
                 if !user.user.email.isEmpty {
                     self?.authToken = user.token
+                    self?.towFaToken = user.authKey
                     self?.userReactiveData.pushValue(value: .loggedIn(user.user))
                 }
             })
@@ -154,6 +169,21 @@ class UserService {
     
     func getArtistInfo(artistId: String) -> AnyPublisher<User, Error> {
         return userApi.getArtistInfo(artistId: artistId)
+            .eraseToAnyPublisher()
+    }
+    
+    func enable2fa() -> AnyPublisher<Bool, Error> {
+        return userApi.enable2fa()
+            .eraseToAnyPublisher()
+    }
+    
+    func disable2fa() -> AnyPublisher<Bool, Error> {
+        return userApi.disable2fa()
+            .eraseToAnyPublisher()
+    }
+    
+    func verifyCode(code: String, id: String) -> AnyPublisher<Bool, Error> {
+        return userApi.verifyCode(code: code, id: id)
             .eraseToAnyPublisher()
     }
 }
