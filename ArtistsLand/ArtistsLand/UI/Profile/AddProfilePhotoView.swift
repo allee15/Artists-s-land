@@ -59,7 +59,8 @@ struct AddProfilePhotoView: View {
             
             VStack(spacing: 8) {
                 BlueButtonView(text: buttonText) {
-                    if self.errorMessageDescription == nil && !postDescription.isEmpty {
+                    if self.errorMessageDescription == nil //&& !postDescription.isEmpty
+                    {
                         self.deleteAvatarAction(true)
                     } else {
                         self.errorMessageDescription = "Please add a description."
