@@ -13,7 +13,7 @@ struct ThemeSettingsScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "App settings") {
+            LeftNavBarView(title: "App theme") {
                 navigation.pop(animated: true)
             }
             
@@ -61,8 +61,8 @@ fileprivate struct ThemeWidgetView: View {
                     Image(image)
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundStyle(Color.secondaryBlueInversat)
-                        .frame(width: 50, height: 50)
+                        .foregroundStyle(Color.pink5Custom)
+                        .frame(width: 56, height: 56)
                     
                     Text(title)
                         .font(.poppinsRegular(size: 14))
@@ -72,13 +72,13 @@ fileprivate struct ThemeWidgetView: View {
                         Image(isSelected ? .icOn : .icOff)
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundStyle(Color.secondaryBlueInversat)
-                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.pink5Custom)
+                            .frame(width: 24, height: 24)
                     }
                 }
                 Spacer()
             }.padding(.vertical, 20)
-                .background(Color.mainGray)
+                .background(Color.lightPinkCustom)
                 .cornerRadius(4, corners: .allCorners)
         }
     }

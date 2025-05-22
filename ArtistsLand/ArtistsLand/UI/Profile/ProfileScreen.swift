@@ -19,7 +19,7 @@ struct ProfileScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 28) {
                     VStack(spacing: 20) {
-                        HStack(alignment: .top) {
+                        HStack {
                             if let userInfo = viewModel.userInfo {
                                 if !viewModel.isLoading {
                                     AccountSummaryView(profileImage: userInfo.avatarUrl,

@@ -58,13 +58,13 @@ struct TabBarItemView: View {
                 Image(tabBarItem.imageName)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(isSelected ? Color.secondaryBlueInversat : Color.mainBlack)
+                    .foregroundStyle(isSelected ? Color.pink5Custom : Color.mainBlack)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 18, height: 18)
+                    .frame(width: 24, height: 24)
                 
                 Text(tabBarItem.title)
-                    .font(.system(size: 12))
-                    .foregroundColor(isSelected ? .secondaryBlueInversat : Color.mainBlack)
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundColor(isSelected ? .pink5Custom : Color.mainBlack)
                     .frame(height: 14)
             }
         }

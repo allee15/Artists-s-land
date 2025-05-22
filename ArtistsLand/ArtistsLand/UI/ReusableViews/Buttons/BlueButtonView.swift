@@ -21,7 +21,7 @@ struct BlueButtonView: View {
                 .padding(.all, 12)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .background(Color.simpleBlue)
+                .background(Color.pink3Custom)
                 .cornerRadius(4, corners: .allCorners)
         }.disabled(isDisabled)
     }

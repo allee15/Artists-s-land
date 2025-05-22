@@ -20,18 +20,11 @@ struct LoginScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Access your Artist's land account")
-                        .font(.poppinsBold(size: 28))
-                        .foregroundStyle(Color.mainBlueButton)
+                        .font(.poppinsBold(size: 32))
+                        .foregroundStyle(Color.mainBlack)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.leading)
-                        .padding(.bottom, 20)
-                    
-                    Text("Glad to see you! 👋 Enter your details below and access your account.")
-                        .font(.poppinsRegular(size: 14))
-                        .foregroundStyle(Color.mainBlueButton)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.leading)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 38)
                     
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email address",
@@ -60,7 +53,7 @@ struct LoginScreen: View {
                     .padding(.horizontal, 16)
             }
             
-        }.background(Color.mainBlue)
+        }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.horizontal, .bottom])
             .safeAreaInset(edge: .bottom, content: {

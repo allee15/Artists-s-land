@@ -61,15 +61,15 @@ struct ConversationScreen: View {
                             }
                             
                             Text("\(message.message)")
-                                .font(.poppinsRegular(size: 16))
-                                .foregroundColor(Color.mainBlack)
+                                .font(.poppinsRegular(size: 12))
+                                .foregroundColor(Color.black)
                                 .multilineTextAlignment(.leading)
                             
                             Text("\(message.createdAt)")
-                                .font(.poppinsSemiBold(size: 10))
-                                .foregroundColor(Color.contentSecondary)
+                                .font(.poppinsRegular(size: 10))
+                                .foregroundColor(Color.black)
                         }.padding(.all, 12)
-                            .background(wasSentByMe ? Color.simpleBlue.opacity(0.3) : Color.mainGray)
+                            .background(wasSentByMe ? Color.lightPinkCustom : Color.pink1Custom)
                             .cornerRadius(8, corners: .allCorners)
                             .frame(width: UIScreen.main.bounds.width * 0.8, alignment: wasSentByMe ? .trailing : .leading)
                             .id(message.message)

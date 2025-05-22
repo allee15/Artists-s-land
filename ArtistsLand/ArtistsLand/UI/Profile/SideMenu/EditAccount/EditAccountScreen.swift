@@ -37,11 +37,17 @@ struct EditAccountScreen: View {
                 VStack(spacing: 12) {
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email",
+                                  colors: (bgColor: Color.lightPinkCustom,
+                                           borderColor: Color.pink5Custom,
+                                           placeholderForeground: Color.black),
                                   leftIcon: .icFieldEmail,
                                   errorMessage: viewModel.errorMessageEmail)
                     
                     FloatingField(text: $viewModel.nickname,
                                   placeHolder: "Username",
+                                  colors: (bgColor: Color.lightPinkCustom,
+                                           borderColor: Color.pink5Custom,
+                                           placeholderForeground: Color.black),
                                   leftIcon: .icFieldAccount,
                                   errorMessage: viewModel.errorMessageName)
                     
@@ -51,7 +57,7 @@ struct EditAccountScreen: View {
                 
                 Spacer(minLength: 80)
                 
-                MainBlueButtonView(text: "Save Changes", isDisabled: changesMade ? false : true) {
+                BlueButtonView(text: "Save Changes", isDisabled: changesMade ? false : true) {
                     viewModel.editInfo()
                 }.padding(.horizontal, 16)
                     .padding(.bottom, 32)

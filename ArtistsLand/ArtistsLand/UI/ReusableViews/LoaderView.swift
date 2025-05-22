@@ -19,7 +19,7 @@ struct LoaderView: View {
         VStack {
             Circle()
                 .trim(from: animateStrokeStart ? 1/3 : 1/9, to: animateStrokeEnd ? 2/5 : 1)
-                .stroke(AngularGradient(colors: color ?? [Color.simpleBlue], center: .center), style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                .stroke(AngularGradient(colors: color ?? [Color.pink5Custom], center: .center), style: StrokeStyle(lineWidth: 5, lineCap: .round))
                 .frame(width: width, height: height)
                 .rotationEffect(Angle(degrees: animated ? 360 : 0))
         }.onAppear {

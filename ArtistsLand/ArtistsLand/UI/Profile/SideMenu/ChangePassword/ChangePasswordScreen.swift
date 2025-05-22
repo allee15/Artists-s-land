@@ -22,7 +22,10 @@ struct ChangePasswordScreen: View {
                 VStack(alignment: .leading, spacing: 8) {
                     FloatingField(text: $viewModel.actualPassword,
                                   placeHolder: "Actual password",
-                                  secureField: true)
+                                  secureField: true,
+                                  colors: (bgColor: Color.lightPinkCustom,
+                                           borderColor: Color.pink5Custom,
+                                           placeholderForeground: Color.black))
                     .submitLabel(.next)
                     .focused($focusedField, equals: .currentPassword)
                     .onSubmit {
@@ -32,6 +35,9 @@ struct ChangePasswordScreen: View {
                     FloatingField(text: $viewModel.newPassword,
                                   placeHolder: "New password",
                                   secureField: true,
+                                  colors: (bgColor: Color.lightPinkCustom,
+                                           borderColor: Color.pink5Custom,
+                                           placeholderForeground: Color.black),
                                   errorMessage: viewModel.errorMessagePassword)
                     .submitLabel(.next)
                     .focused($focusedField, equals: .newPassword)
@@ -42,6 +48,9 @@ struct ChangePasswordScreen: View {
                     FloatingField(text: $viewModel.confirmNewPassword,
                                   placeHolder: "Confirm new password",
                                   secureField: true,
+                                  colors: (bgColor: Color.lightPinkCustom,
+                                           borderColor: Color.pink5Custom,
+                                           placeholderForeground: Color.black),
                                   errorMessage: viewModel.errorMessageConfirmNewPassword)
                     .focused($focusedField, equals: .confirmNewPassword)
                     
@@ -57,7 +66,7 @@ struct ChangePasswordScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom, content: {
                 VStack(spacing: 8) {
-                    MainBlueButtonView(text: "Save new password") {
+                    BlueButtonView(text: "Save") {
                         viewModel.changePassword()
                     }
                     

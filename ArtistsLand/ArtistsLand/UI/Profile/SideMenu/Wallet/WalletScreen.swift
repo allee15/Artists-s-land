@@ -24,7 +24,7 @@ struct WalletScreen: View {
                         Spacer()
                         VStack(alignment: .center, spacing: 12) {
                             HStack(spacing: 0) {
-                                Text("Your balance: \(String(format: "%.1f", viewModel.userInfo.balance))")
+                                Text("Balance: \(String(format: "%.1f", viewModel.userInfo.balance))")
                                     .font(.poppinsSemiBold(size: 20))
                                     .foregroundStyle(Color.mainBlack)
                                     .padding(.horizontal, 16)
@@ -37,7 +37,7 @@ struct WalletScreen: View {
                             }
                             
                             Text("Level: \(viewModel.userInfo.level)")
-                                .font(.poppinsSemiBold(size: 16))
+                                .font(.poppinsRegular(size: 16))
                                 .foregroundStyle(Color.mainBlack)
                                 .padding([.bottom, .horizontal], 20)
                         }
@@ -45,24 +45,21 @@ struct WalletScreen: View {
                     }
                     
                     Text("Buy tokens, level up and increase the chances for your posts to appear the firsts on feed.")
-                        .font(.poppinsRegular(size: 16))
+                        .font(.poppinsSemiBold(size: 12))
                         .foregroundStyle(Color.mainBlack)
                         .multilineTextAlignment(.leading)
                         .padding([.bottom, .horizontal], 16)
                     
-                    VStack(spacing: 0) {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 12) {
-                                ForEach(viewModel.amounts, id: \.self) { amount in
-                                    TokenCardTypeView(amount: amount) {
-                                        viewModel.startStripe(amount: amount)
-                                    }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 12) {
+                            ForEach(viewModel.amounts, id: \.self) { amount in
+                                TokenCardTypeView(amount: amount) {
+                                    viewModel.startStripe(amount: amount)
                                 }
-                            }.padding(.horizontal, 16)
-                                .padding(.top, 12)
-                            
-                        }.padding(.bottom, 32)
-                    }
+                            }
+                        }.padding(.horizontal, 16)
+                            .padding(.top, 12)
+                    }.padding(.bottom, 32)
                 }.padding(.top, 16)
             }
         }.background(Color.mainWhite)
@@ -94,29 +91,28 @@ fileprivate struct TokenCardTypeView: View {
     let action: () -> ()
     
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Tokens:")
-                .font(.poppinsRegular(size: 16))
-                .foregroundStyle(Color.mainBlack)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 16)
+        HStack {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Tokens: \(amount) €")
+                    .font(.poppinsRegular(size: 16))
+                    .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.center)
+                
+                Text("For each 5 tokens bought, you'll advance 10 points in level.")
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.leading)
+            }
             
-            Text("\(amount) €")
-                .font(.poppinsSemiBold(size: 32))
-                .foregroundStyle(Color.mainBlack)
-                .padding(.bottom, 4)
+            Spacer()
             
-            Text("For each 5 tokens bought, you'll advance 10 points in level.")
-                .font(.poppinsRegular(size: 12))
-                .foregroundStyle(Color.mainBlack)
-                .multilineTextAlignment(.center)
-            
-            BlueButtonView(text: "Buy") {
+            SmallClearButton(text: "Buy",
+                        colorText: Color.mainWhite,
+                        bgColor: Color.pink5Custom) {
                 action()
             }.padding(.top, 16)
         }.padding(.all, 20)
-            .background(Color.mainGray)
-            .border(Color.mainGray, width: 1, cornerRadius: 8)
-            .padding(.bottom, 4)
+            .background(Color.mainWhite)
+            .border(Color.pink5Custom, width: 1, cornerRadius: 4)
     }
 }

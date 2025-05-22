@@ -14,7 +14,7 @@ struct ArtistProfileScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Posts") {
+            LeftNavBarView(title: "Artist's page") {
                 navigation.pop(animated: true)
             }
             
@@ -102,7 +102,11 @@ struct ArtistProfileScreen: View {
                         .padding(.horizontal, 16)
                 }
             }
-        }.onReceive(viewModel.eventSubject) { event in
+        }
+        .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.mainWhite)
+        .onReceive(viewModel.eventSubject) { event in
             switch event {
             case .created:
                 navigation.popToRoot(animated: true)

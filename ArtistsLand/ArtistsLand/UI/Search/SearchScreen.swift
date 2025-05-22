@@ -18,6 +18,9 @@ struct SearchScreen: View {
             VStack(spacing: 0) {
                 FloatingField(text: $viewModel.searchText,
                               placeHolder: "Search in app users",
+                              colors: (bgColor: Color.lightPinkCustom,
+                                       borderColor: Color.pink5Custom,
+                                       placeholderForeground: Color.black),
                               icon: .icNavClose,
                               leftIcon: .icSearch,
                               leftIconHeight: 16)
@@ -50,7 +53,7 @@ struct SearchScreen: View {
                                                 let vm = ArtistProfileViewModel(artistId: result.id)
                                                 navigation.push(ArtistProfileScreen(viewModel: vm).asDestination(), animated: true)
                                             } label: {
-                                                ChatPicPlaceHolder(name: result.nickname, fontSize: 24, avatarUrl: result.avatarUrl, width: 64)
+                                                ChatPicPlaceHolder(name: result.nickname, avatarUrl: result.avatarUrl)
                                             }
                                             Spacer()
                                         }
@@ -62,9 +65,9 @@ struct SearchScreen: View {
                             Spacer()
                         }
                     case .noResults:
-                        NoSearchResultsView(title: "No results according to your search")
+                        NoSearchResultsView(title: "No results according to your search", image: .icNoResults2)
                     case .notEnoughCharacters:
-                        NoSearchResultsView(title: "You must type at least 3 characters")
+                        NoSearchResultsView(title: "You must type at least 3 characters", image: .icNoResults)
                     }
                 }
             }
@@ -83,6 +86,7 @@ struct SearchScreen: View {
 
 fileprivate struct NoSearchResultsView: View {
     let title: String
+    let image: ImageResource
     
     var body: some View {
         HStack {
@@ -90,15 +94,15 @@ fileprivate struct NoSearchResultsView: View {
             VStack(spacing: 24) {
                 Spacer()
                 
-                Image(.icNoResults)
+                Image(image)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(Color.mainBlueInversat)
+                    .foregroundStyle(Color.mainBlack)
                     .aspectRatio(contentMode: .fit)
                     .frame(height: UIScreen.main.bounds.height * 0.15)
                 
                 Text(title)
-                    .font(.poppinsBold(size: 16))
+                    .font(.poppinsRegular(size: 16))
                     .foregroundStyle(Color.mainBlack)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 16)

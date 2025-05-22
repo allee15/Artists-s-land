@@ -34,13 +34,13 @@ struct AccountSummaryView: View {
                         }
                         .centerCropped()
                         .clipShape(Circle())
-                        .frame(width: 84, height: 84)
+                        .frame(width: 60, height: 60)
                 }
             }
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(name)
-                    .font(.poppinsBold(size: 28))
+                    .font(.poppinsBold(size: 20))
                     .foregroundStyle(Color.mainBlack)
                     .multilineTextAlignment(.leading)
             }

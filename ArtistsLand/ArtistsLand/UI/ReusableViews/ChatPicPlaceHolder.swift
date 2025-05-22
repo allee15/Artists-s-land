@@ -22,15 +22,15 @@ struct ChatPicPlaceHolder: View {
                     .resizable()
                     .placeholder {
                         Circle()
-                            .fill(Color.white)
+                            .fill(Color.mainWhite)
                             .frame(width: width, height: width)
                             .overlay(
                                 Circle()
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(Color.mainBlack, lineWidth: 2)
                                     .overlay {
                                         Text(name.first?.uppercased() ?? "")
                                             .font(.poppinsSemiBold(size: 12))
-                                            .foregroundStyle(Color.black)
+                                            .foregroundStyle(Color.mainBlack)
                                     }
                             )
                     }
@@ -40,15 +40,15 @@ struct ChatPicPlaceHolder: View {
             } else {
                 ZStack {
                     Circle()
-                        .fill(Color.white)
+                        .fill(Color.mainWhite)
                         .frame(width: width, height: width)
                         .overlay(
                             Circle()
-                                .stroke(Color.black, lineWidth: 2)
+                                .stroke(Color.mainBlack, lineWidth: 2)
                         )
                     Text(name.first?.uppercased() ?? "A")
                         .font(.poppinsSemiBold(size: fontSize))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.mainBlack)
                 }
             }
             

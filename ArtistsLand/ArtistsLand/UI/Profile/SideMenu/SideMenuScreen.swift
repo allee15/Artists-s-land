@@ -22,7 +22,7 @@ struct SideMenuScreen: View {
                     if let user = viewModel.userInfo {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Account")
-                                .font(.poppinsSemiBold(size: 16))
+                                .font(.poppinsSemiBold(size: 20))
                                 .foregroundStyle(Color.mainBlack)
                                 .padding(.horizontal, 16)
                             
@@ -82,7 +82,7 @@ struct SideMenuScreen: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Settings")
-                            .font(.poppinsSemiBold(size: 16))
+                            .font(.poppinsSemiBold(size: 20))
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
@@ -93,7 +93,7 @@ struct SideMenuScreen: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Legal")
-                            .font(.poppinsSemiBold(size: 16))
+                            .font(.poppinsSemiBold(size: 20))
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
@@ -119,7 +119,7 @@ struct SideMenuScreen: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Language")
-                            .font(.poppinsSemiBold(size: 16))
+                            .font(.poppinsSemiBold(size: 20))
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
@@ -134,7 +134,7 @@ struct SideMenuScreen: View {
                     
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Version")
-                            .font(.poppinsSemiBold(size: 16))
+                            .font(.poppinsSemiBold(size: 20))
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
@@ -187,12 +187,12 @@ fileprivate struct WidgetView: View {
                 Image(icon)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(Color.mainBlack)
-                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color.black)
+                    .frame(width: 24, height: 24)
                 
                 Text(title)
                     .font(.poppinsRegular(size: 16))
-                    .foregroundColor(.mainBlack)
+                    .foregroundColor(.black)
                 
                 Spacer()
                 
@@ -201,11 +201,11 @@ fileprivate struct WidgetView: View {
                         .resizable()
                         .renderingMode(.template)
                         .frame(width: 24, height: 24)
-                        .foregroundStyle(Color.mainBlack)
+                        .foregroundStyle(Color.black)
                 }
             }.padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                .background(Color.mainGray)
+                .background(Color.lightPinkCustom)
                 .padding(.horizontal, 16)
         }
     }

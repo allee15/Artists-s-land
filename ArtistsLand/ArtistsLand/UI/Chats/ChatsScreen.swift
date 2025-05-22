@@ -48,7 +48,7 @@ struct ChatsScreen: View {
                             VStack {
                                 Spacer()
                                 Text("No chats available. Start a new one!")
-                                    .foregroundColor(Color.mainBlueInversat)
+                                    .foregroundColor(Color.pink3Custom)
                                     .font(.poppinsRegular(size: 16))
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 20)
@@ -90,18 +90,19 @@ fileprivate struct ChatCardView: View {
     
     var body: some View {
         HStack {
-            ChatPicPlaceHolder(name: chat.secondParticipantName, avatarUrl: chat.secondParticipantAvatar)
+            ChatPicPlaceHolder(name: chat.secondParticipantName, fontSize: 18,
+                               avatarUrl: chat.secondParticipantAvatar, width: 44)
             
             Spacer()
             
             HStack(spacing: 4) {
                 Text(chat.lastMessage ?? "")
-                    .font(.poppinsSemiBold(size: 14))
-                    .foregroundStyle(Color.mainBlack)
+                    .font(.poppinsBold(size: 12))
+                    .foregroundStyle(Color.black)
                 
                 Text(chat.lastMessageTime ?? "")
                     .font(.poppinsRegular(size: 12))
-                    .foregroundStyle(Color.mainBlack)
+                    .foregroundStyle(Color.white)
             }
             
             Spacer()
@@ -110,11 +111,11 @@ fileprivate struct ChatCardView: View {
                 .resizable()
                 .renderingMode(.template)
                 .frame(width: 24, height: 24)
-                .foregroundStyle(Color.mainBlack)
+                .foregroundStyle(Color.black)
             
         }.padding(.all, 16)
-            .background(Color.mainBlue.opacity(0.5))
-            .border(Color.mainBlue.opacity(0.5), width: 2, cornerRadius: 8)
+            .background(Color.lightPinkCustom)
+            .border(Color.lightPinkCustom, width: 2, cornerRadius: 8)
             .padding(.horizontal, 16)
     }
 }

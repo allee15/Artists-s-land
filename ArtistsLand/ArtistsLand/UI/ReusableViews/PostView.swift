@@ -72,8 +72,8 @@ struct PostView: View {
                 }
                 
                 Text(post.description)
-                    .font(.poppinsRegular(size: 16))
-                    .foregroundStyle(Color.mainBlueInversat)
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundStyle(Color.mainBlack)
                     .multilineTextAlignment(.leading)
             }
             
@@ -85,13 +85,13 @@ struct PostView: View {
                     Image(isLiked ? .icFavorite : .icNotFavorite)
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundStyle(Color.simpleBlue)
+                        .foregroundStyle(Color.pink5Custom)
                         .scaledToFit()
                         .frame(width: 24, height: 24)
                 }
                 
                 Text("\(post.nbOfLikes)")
-                    .foregroundStyle(Color.simpleBlue)
+                    .foregroundStyle(Color.mainBlack)
                     .font(.poppinsSemiBold(size: 16))
                 
                 Spacer()
@@ -102,7 +102,7 @@ struct PostView: View {
                     Image(.icComments)
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundStyle(Color.simpleBlue)
+                        .foregroundStyle(Color.pink5Custom)
                         .scaledToFit()
                         .frame(width: 24, height: 24)
                 }
@@ -130,11 +130,6 @@ struct CommentsView: View {
                 Spacer()
             }.padding(.horizontal, 16)
             
-            Text("Comments section")
-                .foregroundStyle(Color.mainBlack)
-                .font(.poppinsSemiBold(size: 16))
-                .padding([.horizontal, .top], 16)
-            
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(comments, id: \.id) { comment in
@@ -146,7 +141,7 @@ struct CommentsView: View {
             Rectangle()
                 .frame(height: 1)
                 .padding(.horizontal, 2)
-                .foregroundColor(Color.contentSecondary)
+                .foregroundColor(Color.mainBlack)
             
             SendMessageField(text: $message,
                              placeHolder: "Type your message",
@@ -166,14 +161,14 @@ struct SingleCommentView: View {
         HStack {
             VStack(alignment: .leading, spacing: 12) {
                 Text(comment.name)
-                    .font(.poppinsSemiBold(size: 14))
-                    .foregroundStyle(Color.simpleBlue)
+                    .font(.poppinsBold(size: 14))
+                    .foregroundStyle(Color(hex: "#6E054C"))
                 
                 Text(comment.description)
-                    .font(.poppinsRegular(size: 16))
-                    .foregroundStyle(Color.mainBlack)
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundStyle(Color.black)
             }.padding(.all, 12)
-                .background(Color.simpleBlue.opacity(0.3))
+                .background(Color.lightPinkCustom.opacity(0.3))
                 .cornerRadius(4, corners: .allCorners)
             Spacer()
         }

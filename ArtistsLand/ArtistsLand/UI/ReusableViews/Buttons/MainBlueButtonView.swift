@@ -26,9 +26,9 @@ struct MainBlueButtonView: View {
                 }
             }.font(.poppinsSemiBold(size: 14))
                 .padding(.all, 12)
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
-                .background(isDisabled ? Color.mainBlueButton.opacity(0.5) : Color.mainBlueButton)
+                .background(isDisabled ? Color.lightPinkCustom.opacity(0.5) : Color.lightPinkCustom)
                 .cornerRadius(4, corners: .allCorners)
         }.disabled(isDisabled)
     }

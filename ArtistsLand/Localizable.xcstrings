@@ -34,6 +34,7 @@
       }
     },
     "%lld €" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -129,6 +130,9 @@
         }
       }
     },
+    "Balance: %@" : {
+
+    },
     "Buy tokens, level up and increase the chances for your posts to appear the firsts on feed." : {
       "localizations" : {
         "en" : {
@@ -162,6 +166,7 @@
       }
     },
     "Comments section" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -242,6 +247,7 @@
       }
     },
     "Glad to see you! 👋 Enter your details below and access your account." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -386,6 +392,7 @@
       }
     },
     "Please enter your details below" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -433,6 +440,9 @@
         }
       }
     },
+    "Skip" : {
+
+    },
     "The Terms and Conditions" : {
       "localizations" : {
         "en" : {
@@ -450,6 +460,7 @@
       }
     },
     "Tokens:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -464,6 +475,9 @@
           }
         }
       }
+    },
+    "Tokens: %lld €" : {
+
     },
     "Version" : {
       "localizations" : {
@@ -482,6 +496,7 @@
       }
     },
     "Your balance: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

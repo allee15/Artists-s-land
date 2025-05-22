@@ -15,7 +15,7 @@ struct ToggleView: View {
         Toggle(isOn: $isOn) { }
             .toggleStyle(.switch)
             .labelsHidden()
-            .tint(Color.secondaryBlueInversat)
+            .tint(Color.pink5Custom)
             .frame(width: 64, height: 32)
             .onChange(of: isOn) { _, _ in
                 action()

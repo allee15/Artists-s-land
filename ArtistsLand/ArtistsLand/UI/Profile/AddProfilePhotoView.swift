@@ -27,7 +27,7 @@ struct AddProfilePhotoView: View {
                 
                 HStack {
                     Text(title)
-                        .font(.poppinsBold(size: 28))
+                        .font(.poppinsBold(size: 20))
                         .foregroundStyle(Color.mainBlack)
                         .padding(.horizontal, 20)
                     Spacer()
@@ -51,6 +51,9 @@ struct AddProfilePhotoView: View {
             if isPost {
                 FloatingField(text: $postDescription,
                               placeHolder: "Add a description",
+                              colors: (bgColor: Color.lightPinkCustom,
+                                       borderColor: Color.pink5Custom,
+                                       placeholderForeground: Color.black),
                               errorMessage: errorMessageDescription)
                 .padding(.horizontal, 20)
             }
@@ -67,7 +70,9 @@ struct AddProfilePhotoView: View {
                     }
                 }
                 
-                ClearButton(text: "Close") {
+                ClearButton(text: "Close",
+                            colorText: Color.black,
+                            bgColor: Color.lightPinkCustom) {
                     self.hideBottomSheet = false
                 }
             }.padding([.horizontal, .bottom], 20)
@@ -100,12 +105,12 @@ fileprivate struct AddPhotoWidgetView: View {
                 Image(icon)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(Color.mainBlack)
+                    .foregroundStyle(Color.pink5Custom)
                     .frame(width: 24, height: 24)
                 
                 Text(title)
                     .font(.poppinsRegular(size: 14))
-                    .foregroundStyle(Color.mainBlack)
+                    .foregroundStyle(Color.pink5Custom)
                     .lineLimit(1)
                 Spacer()
                 

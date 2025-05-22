@@ -15,7 +15,7 @@ struct UnloggedUserView: View {
         VStack(spacing: 48) {
             Spacer()
             Text("Please login to enjoy the full experience of ArtistsLand app!")
-                .foregroundColor(.black)
+                .foregroundColor(.mainBlack)
                 .font(.poppinsRegular(size: 16))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)

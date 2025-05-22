@@ -21,16 +21,10 @@ struct RegisterScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Let’s create your account")
-                        .font(.poppinsBold(size: 28))
-                        .foregroundStyle(Color.mainBlueButton)
+                        .font(.poppinsBold(size: 32))
+                        .foregroundStyle(Color.mainBlack)
                         .multilineTextAlignment(.leading)
-                        .padding(.bottom, 20)
-                    
-                    Text("Please enter your details below")
-                        .font(.poppinsRegular(size: 14))
-                        .foregroundStyle(Color.mainBlueButton)
-                        .multilineTextAlignment(.leading)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 38)
                     
                     VStack(spacing: 12) {
                         FloatingField(text: $viewModel.name,
@@ -67,10 +61,10 @@ struct RegisterScreen: View {
                             Toggle(isOn: $viewModel.showGreeting) {
                                 Group {
                                     Text("I read and agree to ")
-                                        .foregroundColor(Color.mainBlueButton)
+                                        .foregroundColor(Color.mainBlack)
                                     + Text("The Terms and Conditions")
                                         .underline()
-                                        .foregroundColor(Color.mainBlueButton)
+                                        .foregroundColor(Color.pink5Custom)
                                     
                                 }.font(.poppinsRegular(size: 14))
                                     .onTapGesture {
@@ -103,7 +97,7 @@ struct RegisterScreen: View {
                 }.padding(.top, 24)
                     .padding(.horizontal, 16)
             }
-        }.background(Color.mainBlue)
+        }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onChange(of: viewModel.name) { _, newValue in
                 viewModel.errorMessageName = nil
@@ -143,7 +137,7 @@ fileprivate struct CheckboxToggleStyle: ToggleStyle {
             Image(configuration.isOn ? "ic_checked_on" : "ic_checked_off")
                 .resizable()
                 .renderingMode(.template)
-                .foregroundStyle(Color.simpleBlue)
+                .foregroundStyle(Color.pink5Custom)
                 .frame(width: 28, height: 28)
                 .onTapGesture { configuration.isOn.toggle() }
             configuration.label

@@ -40,7 +40,7 @@ struct PhoneAuthScreen: View {
                 }.padding(.top, 12)
                     .padding(.horizontal, 16)
             }
-        }.background(Color.mainBlue)
+        }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(viewModel.verifyCodeCompletion) { event in
                 switch event {

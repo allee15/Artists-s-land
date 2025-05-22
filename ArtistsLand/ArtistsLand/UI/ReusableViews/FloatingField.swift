@@ -12,7 +12,7 @@ struct FloatingField: View {
     var placeHolder: String
     var secureField: Bool = false
     var keyboardType: UIKeyboardType = .default
-    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.white, .black.opacity(0.5), .black)
+    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.mainWhite, .mainBlack.opacity(0.5), .mainBlack)
     var icon: ImageResource?
     var leftIcon: ImageResource?
     var leftIconHeight: CGFloat? = 28
